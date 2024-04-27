@@ -1,16 +1,38 @@
-# greenhouse
+<p align="center">
+  <a>
+    <img alt="Greenhouse logo" src="" width="250" />
+  </a>
+</p>
 
-A new Flutter project.
+<h1 align="center">
+  Greenhouse
+</h1>
 
-## Getting Started
+Mobile application aimed at accelerating digitalization within mushroom factories. Greenhouse facilitates communication and monitoring between technical supervisors and company administrators by allowing remote access to real-time data regarding various stages of mushroom cultivation.
 
-This project is a starting point for a Flutter application.
+## Technologies used
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter](https://flutter.dev/): Open source framework for building multi-platform applications
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Getting started
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Open the command prompt and clone the repository:
+
+```
+git clone https://github.com/greenhouse-mobile/greenhouse_flutter.git
+```
+
+2. Navigate to the project directory.
+
+3. Run the following command to install the necessary dependencies:
+
+```
+flutter pub get
+```
+
+4. Run the project with:
+```
+flutter run
+```
+
+## Project structure
