@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -69,7 +70,8 @@ class _DashboardState extends State<Dashboard> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
               ],
-            )));
+            )),
+        bottomNavigationBar: MyTabBar());
   }
 }
 

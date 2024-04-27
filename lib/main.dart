@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Greenhouse',
       theme: ThemeData(
         fontFamily: 'Nunito',
+        splashColor: Colors.transparent,
       ),
       home: Dashboard(),
     );
