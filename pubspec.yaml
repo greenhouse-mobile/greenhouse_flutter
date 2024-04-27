@@ -33,3 +33,6 @@ flutter:
   assets:
     - assets/logo.svg
     - assets/logo_white.svg
+    - assets/clock.svg
+    - assets/archive.svg
+    - assets/statistics.svg

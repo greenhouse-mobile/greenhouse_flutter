@@ -14,20 +14,24 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
         appBar: AppBar(
           title: Row(children: [
-            SvgPicture.asset('assets/logo.svg', width: 30, height: 30,),
+            SvgPicture.asset(
+              'assets/logo.svg',
+              width: 30,
+              height: 30,
+            ),
             SizedBox(width: 5),
             Text('Greenhouse',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ]),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.notifications),
+              icon: Icon(Icons.notifications_outlined),
               onPressed: () {},
             ),
           ],
         ),
         body: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -38,51 +42,25 @@ class _DashboardState extends State<Dashboard> {
                 Text('Dashboard',
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Column(
-                      children: [
-                        ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              fixedSize: Size(100, 100),
-                            ),
-                            child: SvgPicture.asset('assets/logo.svg',)),
-                        Text('Crops in\nProgress', style: TextStyle(fontSize: 16))
-                      ],
+                    DashboardButton(
+                      onPressed: () {},
+                      svgAsset: 'assets/clock.svg',
+                      buttonText: 'Crops in\nProgress',
                     ),
-                    Column(
-                      children: [
-                        ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              fixedSize: Size(100, 100),
-                            ),
-                            child: SvgPicture.asset('assets/logo.svg',)),
-                        Text('Crops\nArchive', style: TextStyle(fontSize: 16))
-                      ],
+                    DashboardButton(
+                      onPressed: () {},
+                      svgAsset: 'assets/archive.svg',
+                      buttonText: 'Crops\nArchive',
                     ),
-                    Column(
-                      children: [
-                        ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              fixedSize: Size(100, 100),
-                            ),
-                            child: SvgPicture.asset('assets/logo.svg',)),
-                        Text('Statistical\nReports', style: TextStyle(fontSize: 16))
-                      ],
-                    )
+                    DashboardButton(
+                      onPressed: () {},
+                      svgAsset: 'assets/statistics.svg',
+                      buttonText: 'Statistical\nReports',
+                    ),
                   ],
                 ),
                 SizedBox(height: 16.0),
@@ -92,5 +70,41 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ],
             )));
+  }
+}
+
+class DashboardButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final String svgAsset;
+  final String buttonText;
+
+  DashboardButton({
+    required this.onPressed,
+    required this.svgAsset,
+    required this.buttonText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFF67864A),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            fixedSize: Size(100, 100),
+          ),
+          child: SvgPicture.asset(svgAsset),
+        ),
+        Text(
+          buttonText,
+          style: TextStyle(fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
   }
 }
