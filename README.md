@@ -1,6 +1,6 @@
 <p align="center">
   <a>
-    <img alt="Greenhouse logo" src="assets/logo.svg" width="200" />
+    <img alt="Greenhouse logo" src="assets/images/logo.svg" width="200" />
   </a>
 </p>
 
