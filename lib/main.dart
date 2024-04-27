@@ -11,9 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Greenhouse',
-      theme: ThemeData(
-
-      ),
+      theme: ThemeData(),
       home: Container(),
     );
   }

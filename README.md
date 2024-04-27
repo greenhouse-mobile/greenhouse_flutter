@@ -1,6 +1,6 @@
 <p align="center">
   <a>
-    <img alt="Greenhouse logo" src="" width="250" />
+    <img alt="Greenhouse logo" src="assets/logo.svg" width="200" />
   </a>
 </p>
 
@@ -12,7 +12,7 @@ Mobile application aimed at accelerating digitalization within mushroom factorie
 
 ## Technologies used
 
-- [Flutter](https://flutter.dev/): Open source framework for building multi-platform applications
+- [Flutter](https://flutter.dev/): Open source framework for building multi-platform applications.
 
 ## Getting started
 
@@ -36,3 +36,21 @@ flutter run
 ```
 
 ## Project structure
+
+```
+.
+└── lib
+    ├── database
+    |
+    ├── models
+    |
+    ├── repositories
+    |
+    ├── screens
+    |
+    ├── services
+    |
+    ├── utils
+    |
+    └── widgets
+```
