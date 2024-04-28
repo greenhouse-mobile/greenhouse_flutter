@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Stack(children: [
-            Positioned(top: 80, right: 50, left: 50, child: _buildTop()),
+            Positioned(top: 60, right: 50, left: 50, child: _buildTop()),
             Positioned(bottom: 0, child: _buildBottom(context)),
           ]),
         )
@@ -40,7 +40,7 @@ class LoginScreen extends StatelessWidget {
   Widget _buildTop(){
     return Center(
       child: Container(
-          height: 150,
+          height: 100,
           child: Image.network("https://github.com/greenhouse-mobile/greenhouse-jcompose/blob/feat/authorization/app/src/main/res/drawable/logo.png?raw=true")
       ),
     );
@@ -72,11 +72,11 @@ class LoginScreen extends StatelessWidget {
       child: Column(
         children: [
           _loginSignUpButton(context),
-          SizedBox(height: 40),
+          SizedBox(height: 20),
           _inputField("Username", Icons.person),
           SizedBox(height: 20),
           _inputField("Password", Icons.lock),
-          SizedBox(height: 150),
+          SizedBox(height: 315),
           _button("Login"),
         ],
       ),
@@ -94,7 +94,7 @@ class LoginScreen extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {},
-              child: Text("LOG IN", style: TextStyle(color: Color(0xFF7DA257))),
+              child: Text("LOG IN", style: TextStyle(color: Color(0xFF7DA257), fontSize: 12)),
             ),
             SizedBox(height: 5),
             Container(
@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
               },
-              child: Text("SIGN UP", style: TextStyle(color: Colors.grey)),
+              child: Text("SIGN UP", style: TextStyle(color: Colors.grey, fontSize: 12)),
             ),
             SizedBox(height: 5),
             Container(
@@ -135,26 +135,26 @@ class LoginScreen extends StatelessWidget {
         return null;
       },
       decoration: InputDecoration(
-        labelText: hintText,
-        labelStyle: TextStyle(color: Color(0xFF727272)),
-        hintText: 'Enter $hintText',
-        hintStyle: TextStyle(color: Color(0xFF727272)),
-        fillColor: Color(0xFFECECEC),
-        filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.transparent),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.transparent),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Color(0xFF67864A)),
-        ),
-
-          prefixIcon: Icon(icon, color: Colors.grey)
+          labelText: hintText,
+          labelStyle: TextStyle(color: Color(0xFF727272), fontSize: 12),
+          hintText: 'Enter $hintText',
+          hintStyle: TextStyle(color: Color(0xFF727272), fontSize: 12),
+          fillColor: Color(0xFFECECEC),
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.transparent),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.transparent),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Color(0xFF67864A)),
+          ),
+          prefixIcon: Icon(icon, color: Colors.grey),
+          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20)
       ),
     );
   }
