@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/signup.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -9,44 +10,44 @@ class LoginScreen extends StatelessWidget {
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage("https://cdn.bioguia.com/embed/6f2a4f61c912d23c0a874b9a33377c8c31684724081/alimentacion-saludable-hongos.jpeg?imagick=1&size=750"),
+            image: AssetImage('assets/champis.png'),
             fit: BoxFit.cover,
-            colorFilter:
-            ColorFilter.mode(Colors.black38, BlendMode.darken),
+            colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
           ),
         ),
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.center,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black12,
-                Colors.black87,
-              ],
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.center,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black12,
+                  Colors.black87,
+                ],
+              ),
             ),
-          ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Stack(children: [
-            Positioned(top: 60, right: 50, left: 50, child: _buildTop()),
-            Positioned(bottom: 0, child: _buildBottom(context)),
-          ]),
-        )
-      )
-    );
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Stack(children: [
+                Positioned(top: 80, right: 50, left: 50, child: _buildTop()),
+                Positioned(bottom: 0, child: _buildBottom(context)),
+              ]),
+            )));
   }
 
-  Widget _buildTop(){
+  Widget _buildTop() {
     return Center(
       child: Container(
-          height: 100,
-          child: Image.network("https://github.com/greenhouse-mobile/greenhouse-jcompose/blob/feat/authorization/app/src/main/res/drawable/logo.png?raw=true")
+        child: SvgPicture.asset(
+          'assets/logo_white.svg',
+          width: 200,
+          height: 200,
+        ),
       ),
     );
   }
 
-  Widget _buildBottom(BuildContext context){
+  Widget _buildBottom(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 100.0),
       child: SingleChildScrollView(
@@ -65,7 +66,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _loginForm(BuildContext context){
+  Widget _loginForm(BuildContext context) {
     return Container(
       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
       padding: const EdgeInsets.all(32.0),
@@ -83,7 +84,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _loginSignUpButton(BuildContext context){
+  Widget _loginSignUpButton(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final containerWidth = (screenWidth - 100) / 2;
 
@@ -94,7 +95,8 @@ class LoginScreen extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {},
-              child: Text("LOG IN", style: TextStyle(color: Color(0xFF7DA257), fontSize: 12)),
+              child: Text("LOG IN",
+                  style: TextStyle(color: Color(0xFF7DA257), fontSize: 12)),
             ),
             SizedBox(height: 5),
             Container(
@@ -109,9 +111,11 @@ class LoginScreen extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SignUpScreen()));
               },
-              child: Text("SIGN UP", style: TextStyle(color: Colors.grey, fontSize: 12)),
+              child: Text("SIGN UP",
+                  style: TextStyle(color: Colors.grey, fontSize: 12)),
             ),
             SizedBox(height: 5),
             Container(
@@ -126,10 +130,10 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _inputField(String hintText, IconData icon){
+  Widget _inputField(String hintText, IconData icon) {
     return TextFormField(
-      validator: (value){
-        if(value == null || value.isEmpty){
+      validator: (value) {
+        if (value == null || value.isEmpty) {
           return 'Please enter your $hintText';
         }
         return null;
@@ -154,12 +158,11 @@ class LoginScreen extends StatelessWidget {
             borderSide: BorderSide(color: Color(0xFF67864A)),
           ),
           prefixIcon: Icon(icon, color: Colors.grey),
-          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20)
-      ),
+          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
     );
   }
 
-  Widget _button(String buttonText){
+  Widget _button(String buttonText) {
     return Container(
       width: double.maxFinite,
       child: ElevatedButton(
@@ -167,8 +170,7 @@ class LoginScreen extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
         ),
-        child: Text("$buttonText", style: TextStyle(color: Colors.white)
-        ),
+        child: Text("$buttonText", style: TextStyle(color: Colors.white)),
       ),
     );
   }
