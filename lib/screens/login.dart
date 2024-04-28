@@ -76,16 +76,45 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _loginSignUpButton(BuildContext context){
+    final screenWidth = MediaQuery.of(context).size.width;
+    final containerWidth = (screenWidth - 100) / 2;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("LOG IN", style: TextStyle(color: Colors.green)),
-        SizedBox(width: 100),
-        Text("SIGN UP", style: TextStyle(color: Colors.grey)),
-      ]
+        Column(
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: Text("LOG IN", style: TextStyle(color: Colors.green)),
+            ),
+            SizedBox(height: 5),
+            Container(
+              width: containerWidth,
+              margin: EdgeInsets.only(left: 10),
+              height: 2,
+              color: Colors.green,
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: Text("SIGN UP", style: TextStyle(color: Colors.grey)),
+            ),
+            SizedBox(height: 5),
+            Container(
+              width: containerWidth,
+              margin: EdgeInsets.only(right: 10),
+              height: 2,
+              color: Colors.grey,
+            ),
+          ],
+        ),
+      ],
     );
   }
-
 
 /*
   Widget _inputField(String hint){
