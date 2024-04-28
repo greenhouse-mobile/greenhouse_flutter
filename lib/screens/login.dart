@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/screens/signup.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,7 +71,13 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.all(32.0),
       child: Column(
         children: [
-          _loginSignUpButton(context)
+          _loginSignUpButton(context),
+          SizedBox(height: 40),
+          _inputField("Username", Icons.person),
+          SizedBox(height: 20),
+          _inputField("Password", Icons.lock),
+          SizedBox(height: 150),
+          _button("Login"),
         ],
       ),
     );
@@ -86,21 +94,23 @@ class LoginScreen extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {},
-              child: Text("LOG IN", style: TextStyle(color: Colors.green)),
+              child: Text("LOG IN", style: TextStyle(color: Color(0xFF67864A))),
             ),
             SizedBox(height: 5),
             Container(
               width: containerWidth,
               margin: EdgeInsets.only(left: 10),
               height: 2,
-              color: Colors.green,
+              color: Color(0xFF67864A),
             ),
           ],
         ),
         Column(
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+              },
               child: Text("SIGN UP", style: TextStyle(color: Colors.grey)),
             ),
             SizedBox(height: 5),
@@ -116,21 +126,49 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-/*
-  Widget _inputField(String hint){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextField(
-          decoration: InputDecoration(
-            hintText: hint,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        )
-      ],
+  Widget _inputField(String hintText, IconData icon){
+    return TextFormField(
+      validator: (value){
+        if(value == null || value.isEmpty){
+          return 'Please enter your $hintText';
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: hintText,
+        labelStyle: TextStyle(color: Color(0xFF727272)),
+        hintText: 'Enter $hintText',
+        hintStyle: TextStyle(color: Color(0xFF727272)),
+        fillColor: Color(0xFFECECEC),
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Color(0xFF67864A)),
+        ),
+
+          prefixIcon: Icon(icon, color: Colors.grey)
+      ),
     );
   }
-  */
+
+  Widget _button(String buttonText){
+    return Container(
+      width: double.maxFinite,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
+        ),
+        child: Text("$buttonText", style: TextStyle(color: Colors.white)
+        ),
+      ),
+    );
+  }
 }
