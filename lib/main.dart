@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/crops_in_progress.dart';
-import 'package:greenhouse/screens/home.dart';
+import 'package:greenhouse/screens/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'My App',
       initialRoute: '/',
       routes: {
-        '/': (context) => MainScreen(),
+        '/': (context) => Dashboard(),
         '/crops-in-progress': (context) => CropsInProgress(),
       },
     );
