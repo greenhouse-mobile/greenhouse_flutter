@@ -94,14 +94,14 @@ class LoginScreen extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {},
-              child: Text("LOG IN", style: TextStyle(color: Color(0xFF67864A))),
+              child: Text("LOG IN", style: TextStyle(color: Color(0xFF7DA257))),
             ),
             SizedBox(height: 5),
             Container(
               width: containerWidth,
               margin: EdgeInsets.only(left: 10),
               height: 2,
-              color: Color(0xFF67864A),
+              color: Color(0xFF7DA257),
             ),
           ],
         ),
@@ -163,6 +163,7 @@ class LoginScreen extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       child: ElevatedButton(
+        onPressed: () {},
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
         ),
