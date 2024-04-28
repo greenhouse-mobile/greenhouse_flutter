@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
+import 'crops_in_progress.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -48,7 +49,14 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     DashboardButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CropsInProgress(),
+                          ),
+                        );
+                      },
                       svgAsset: 'assets/clock.svg',
                       buttonText: 'Crops in\nProgress',
                     ),
