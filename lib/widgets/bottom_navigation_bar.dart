@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class GreenhouseBottomNavigationBar extends StatefulWidget {
-  const GreenhouseBottomNavigationBar({super.key});
+  final Function(int) onTap;
+  final int currentIndex;
+
+  const GreenhouseBottomNavigationBar({super.key, required this.onTap, required this.currentIndex});
 
   @override
   State<GreenhouseBottomNavigationBar> createState() =>
@@ -10,24 +13,9 @@ class GreenhouseBottomNavigationBar extends StatefulWidget {
 
 class _GreenhouseBottomNavigationBarState
     extends State<GreenhouseBottomNavigationBar> {
-  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.pushNamed(context, '/crops-in-progress');
-        break;
-      case 1:
-        Navigator.pushNamed(context, '/');
-        break;
-      case 2:
-        Navigator.pushNamed(context, '/crops-in-progress');
-        break;
-    }
+    widget.onTap(index);
   }
 
   @override
@@ -46,11 +34,11 @@ class _GreenhouseBottomNavigationBarState
           showSelectedLabels: false,
           showUnselectedLabels: false,
           onTap: _onItemTapped,
-          currentIndex: _selectedIndex,
+          currentIndex: widget.currentIndex,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Calendar',
+              label: 'Profile',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
