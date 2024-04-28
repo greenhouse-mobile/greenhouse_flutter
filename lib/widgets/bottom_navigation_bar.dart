@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyTabBar extends StatelessWidget {
+class GreenhouseBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

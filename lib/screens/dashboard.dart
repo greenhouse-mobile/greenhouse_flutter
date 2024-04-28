@@ -71,7 +71,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ],
             )),
-        bottomNavigationBar: MyTabBar());
+        bottomNavigationBar: GreenhouseBottomNavigationBar());
   }
 }
 
