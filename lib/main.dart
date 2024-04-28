@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:greenhouse/screens/login.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,8 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Greenhouse',
-      theme: ThemeData(),
-      home: Container(),
+      theme: ThemeData(
+        fontFamily: ('inter'),
+        useMaterial3: true,
+      ),
+      home: const LoginScreen(),
     );
   }
 }
