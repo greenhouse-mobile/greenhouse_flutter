@@ -50,12 +50,7 @@ class _DashboardState extends State<Dashboard> {
                   children: <Widget>[
                     DashboardButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CropsInProgress(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/crops-in-progress');
                       },
                       svgAsset: 'assets/clock.svg',
                       buttonText: 'Crops in\nProgress',
