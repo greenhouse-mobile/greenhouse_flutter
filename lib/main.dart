@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:greenhouse/screens/dashboard.dart';
 import 'package:greenhouse/screens/login.dart';
 
 void main() {
@@ -14,10 +14,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Greenhouse',
       theme: ThemeData(
-        fontFamily: ('inter'),
-        useMaterial3: true,
+        fontFamily: 'Nunito',
+        splashColor: Colors.transparent,
       ),
-      home: const LoginScreen(),
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginScreen(),
+        '/dashboard': (context) => Dashboard(),
+      },
     );
   }
 }
