@@ -48,17 +48,23 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     DashboardButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/crops-in-progress');
+                      },
                       svgAsset: 'assets/clock.svg',
                       buttonText: 'Crops in\nProgress',
                     ),
                     DashboardButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/crops-archive');
+                      },
                       svgAsset: 'assets/archive.svg',
                       buttonText: 'Crops\nArchive',
                     ),
                     DashboardButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/statistics');
+                      },
                       svgAsset: 'assets/statistics.svg',
                       buttonText: 'Statistical\nReports',
                     ),

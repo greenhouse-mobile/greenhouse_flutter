@@ -16,7 +16,11 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Nunito',
         splashColor: Colors.transparent,
       ),
-      home: Dashboard(),
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Dashboard(),
+      },
     );
   }
 }

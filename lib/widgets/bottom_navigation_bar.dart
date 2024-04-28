@@ -1,6 +1,35 @@
 import 'package:flutter/material.dart';
 
-class GreenhouseBottomNavigationBar extends StatelessWidget {
+class GreenhouseBottomNavigationBar extends StatefulWidget {
+  const GreenhouseBottomNavigationBar({super.key});
+
+  @override
+  State<GreenhouseBottomNavigationBar> createState() =>
+      _GreenhouseBottomNavigationBarState();
+}
+
+class _GreenhouseBottomNavigationBarState
+    extends State<GreenhouseBottomNavigationBar> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/crops-in-progress');
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/');
+        break;
+      case 2:
+        Navigator.pushNamed(context, '/crops-in-progress');
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -16,6 +45,8 @@ class GreenhouseBottomNavigationBar extends StatelessWidget {
           selectedItemColor: Colors.white,
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          onTap: _onItemTapped,
+          currentIndex: _selectedIndex,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
