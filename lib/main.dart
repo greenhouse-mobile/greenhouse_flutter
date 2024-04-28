@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/dashboard.dart';
 import 'package:greenhouse/screens/login.dart';
+import 'package:greenhouse/screens/signup.dart';
+import 'package:greenhouse/screens/stepper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,8 +22,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(),
+        '/': (context) => StepperWidget(),
         '/dashboard': (context) => Dashboard(),
+        '/login': (context) => LoginScreen(),
+        '/signup': (context) => SignUpScreen(),
+        '/stepper': (context) => StepperWidget(),
       },
     );
   }
