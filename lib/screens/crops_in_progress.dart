@@ -26,6 +26,38 @@ class _CropsInProgressState extends State<CropsInProgress> {
         ),
         body: ListView(
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'CROPS IN PROGRESS',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search crops...',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.calendar_today),
+                    onPressed: () => showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2021),
+                      lastDate: DateTime(2022),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             CropCard(
               startDate: '2021-08-01',
               currentPhase: 'Phase 1',

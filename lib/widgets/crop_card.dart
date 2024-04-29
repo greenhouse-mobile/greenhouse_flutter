@@ -25,7 +25,7 @@ class _CropCardState extends State<CropCard> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              margin: EdgeInsets.all(30),
+              margin: EdgeInsets.fromLTRB(30,15,30,15),
               child: Column(
                 children: [
                   Image.asset('assets/crops_in_progress_images/mushroom.jpeg'),
