@@ -15,8 +15,8 @@ class CropCard extends StatefulWidget {
 class _CropCardState extends State<CropCard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return SingleChildScrollView(
+      child: Center(
         child: Column(
           children: <Widget>[
             Card(
@@ -25,7 +25,6 @@ class _CropCardState extends State<CropCard> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-
               margin: EdgeInsets.all(30),
               child: Column(
                 children: [

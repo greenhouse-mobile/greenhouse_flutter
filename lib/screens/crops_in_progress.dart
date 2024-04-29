@@ -13,13 +13,35 @@ class _CropsInProgressState extends State<CropsInProgress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-          child: CropCard(
-            startDate: '2021-09-01',
-            currentPhase: 'Phase 1',
-            cropId: '1',
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back), // Arrow pointing to the left
+            onPressed: () {
+              // Add your button tap code here
+            },
           ),
-
+          title: Text('Go Back'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: ListView(
+          children: <Widget>[
+            CropCard(
+              startDate: '2021-08-01',
+              currentPhase: 'Phase 1',
+              cropId: '123456', // Add the crop ID
+            ),
+            CropCard(
+              startDate: '2021-08-01',
+              currentPhase: 'Phase 1',
+              cropId: '123457', // Add the crop ID
+            ),
+            CropCard(
+              startDate: '2021-08-01',
+              currentPhase: 'Phase 1',
+              cropId: '123458', // Add the crop ID
+            ),
+          ],
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }
