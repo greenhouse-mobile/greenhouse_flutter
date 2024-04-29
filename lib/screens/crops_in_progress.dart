@@ -10,6 +10,25 @@ class CropsInProgress extends StatefulWidget {
 }
 
 class _CropsInProgressState extends State<CropsInProgress> {
+  String searchQuery = '';
+  List<CropCard> cropCards = [
+    CropCard(
+      startDate: '2021-08-01',
+      currentPhase: 'Phase 1',
+      cropId: '964234',
+    ),
+    CropCard(
+      startDate: '2021-08-01',
+      currentPhase: 'Phase 1',
+      cropId: '123457',
+    ),
+    CropCard(
+      startDate: '2021-08-01',
+      currentPhase: 'Phase 1',
+      cropId: '123458',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +59,11 @@ class _CropsInProgressState extends State<CropsInProgress> {
                 children: [
                   Expanded(
                     child: TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          searchQuery = value;
+                        });
+                      },
                       decoration: InputDecoration(
                         hintText: 'Search crops...',
                         border: OutlineInputBorder(),
@@ -58,21 +82,9 @@ class _CropsInProgressState extends State<CropsInProgress> {
                 ],
               ),
             ),
-            CropCard(
-              startDate: '2021-08-01',
-              currentPhase: 'Phase 1',
-              cropId: '123456', // Add the crop ID
-            ),
-            CropCard(
-              startDate: '2021-08-01',
-              currentPhase: 'Phase 1',
-              cropId: '123457', // Add the crop ID
-            ),
-            CropCard(
-              startDate: '2021-08-01',
-              currentPhase: 'Phase 1',
-              cropId: '123458', // Add the crop ID
-            ),
+            ...cropCards
+                .where((cropCard) => cropCard.cropId.contains(searchQuery))
+                .toList(),
           ],
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
