@@ -10,6 +10,7 @@ class CropsInProgress extends StatefulWidget {
 }
 
 class _CropsInProgressState extends State<CropsInProgress> {
+  DateTime selectedDate = DateTime.now();
   String searchQuery = '';
   List<CropCard> cropCards = [
     CropCard(
@@ -72,19 +73,36 @@ class _CropsInProgressState extends State<CropsInProgress> {
                   ),
                   IconButton(
                     icon: Icon(Icons.calendar_today),
-                    onPressed: () => showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2021),
-                      lastDate: DateTime(2022),
-                    ),
+                    onPressed: () async {
+                      final DateTime? datetime = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2050),
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                            data: ThemeData(
+                              colorScheme: ThemeData().colorScheme.copyWith(
+                                primary: Color(0xFF465B3F),
+                              ),
+                            ),
+                            child: child!,
+                          );
+                        },
+                      );
+                      if (datetime != null) {
+                        setState(() {
+                          selectedDate = datetime;
+                        });
+                      }
+                    },
                   ),
                 ],
               ),
             ),
             ...cropCards
                 .where((cropCard) => cropCard.cropId.contains(searchQuery))
-                .toList(),
+                ,
           ],
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
