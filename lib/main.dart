@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Dashboard(),
-        '/crops-in-progress': (context) => CropsInProgress(),
+        '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
       },
     );
   }
