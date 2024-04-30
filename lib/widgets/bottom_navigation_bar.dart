@@ -22,7 +22,7 @@ class _GreenhouseBottomNavigationBarState
         Navigator.pushNamed(context, '/crops-in-progress');
         break;
       case 1:
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(context, '/dashboard');
         break;
       case 2:
         Navigator.pushNamed(context, '/crops-in-progress');

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
+import 'package:greenhouse/widgets/record_card.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -10,6 +11,27 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  List<RecordCard> recordCards = [
+    RecordCard(
+      startDate: '2021-08-01',
+      recordId: '124234',
+      author: 'Winston Smith',
+      currentPhase: 'Preparation area',
+    ),
+    RecordCard(
+      startDate: '2021-08-01',
+      recordId: '124235',
+      author: 'Winston Smith',
+      currentPhase: 'Induction',
+    ),
+    RecordCard(
+      startDate: '2021-08-01',
+      recordId: '124236',
+      author: 'Winston Smith',
+      currentPhase: 'Tunnel',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,51 +54,51 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
         body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Welcome,',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                SizedBox(height: 16.0),
-                Text('Dashboard',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-                SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    DashboardButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/crops-in-progress');
-                      },
-                      svgAsset: 'assets/clock.svg',
-                      buttonText: 'Crops in\nProgress',
-                    ),
-                    DashboardButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/crops-archive');
-                      },
-                      svgAsset: 'assets/archive.svg',
-                      buttonText: 'Crops\nArchive',
-                    ),
-                    DashboardButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/statistics');
-                      },
-                      svgAsset: 'assets/statistics.svg',
-                      buttonText: 'Statistical\nReports',
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Recent records',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                ),
-              ],
-            )),
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Welcome,',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              SizedBox(height: 16.0),
+              Text('Dashboard',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+              SizedBox(height: 16.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  DashboardButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/crops-in-progress');
+                    },
+                    svgAsset: 'assets/clock.svg',
+                    buttonText: 'Crops in\nProgress',
+                  ),
+                  DashboardButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/crops-archive');
+                    },
+                    svgAsset: 'assets/archive.svg',
+                    buttonText: 'Crops\nArchive',
+                  ),
+                  DashboardButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/statistics');
+                    },
+                    svgAsset: 'assets/statistics.svg',
+                    buttonText: 'Statistical\nReports',
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.0),
+              Text(
+                'Recent records',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              ),
+              ...recordCards,
+            ],
+          ),
+        ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }
 }
