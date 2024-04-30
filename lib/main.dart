@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/screens/crops_in_progress.dart';
 import 'package:greenhouse/screens/dashboard.dart';
 import 'package:greenhouse/screens/login.dart';
 
@@ -7,7 +8,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginScreen(),
         '/dashboard': (context) => Dashboard(),
+        '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
       },
     );
   }

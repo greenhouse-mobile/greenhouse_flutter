@@ -36,4 +36,6 @@ flutter:
     - assets/clock.svg
     - assets/archive.svg
     - assets/statistics.svg
+    - assets/crops_in_progress_images/mushroom.jpeg
+    - assets/crops_in_progress_images/plant.svg
     - assets/champis.png
