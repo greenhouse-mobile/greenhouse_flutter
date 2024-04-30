@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/crops_in_progress.dart';
 import 'package:greenhouse/screens/dashboard.dart';
 import 'package:greenhouse/screens/login.dart';
+import 'package:greenhouse/screens/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginScreen(),
         '/dashboard': (context) => Dashboard(),
+        'login': (context) => LoginScreen(),
+        'sign-up': (context) => SignUpScreen(),
         '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
       },
     );

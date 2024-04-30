@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: 20),
           _inputField("Password", Icons.lock),
           SizedBox(height: 315),
-          _button("Login"),
+          _button(context, "Login"),
         ],
       ),
     );
@@ -96,7 +96,7 @@ class LoginScreen extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: Text("LOG IN",
-                  style: TextStyle(color: Color(0xFF7DA257), fontSize: 12)),
+                  style: TextStyle(color: Color(0xFF7DA257), fontSize: 14, fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 5),
             Container(
@@ -115,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => SignUpScreen()));
               },
               child: Text("SIGN UP",
-                  style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  style: TextStyle(color: Colors.grey, fontSize: 14)),
             ),
             SizedBox(height: 5),
             Container(
@@ -162,11 +162,13 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _button(String buttonText) {
+  Widget _button(BuildContext context, String buttonText) {
     return Container(
       width: double.maxFinite,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/dashboard');
+        },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
         ),
