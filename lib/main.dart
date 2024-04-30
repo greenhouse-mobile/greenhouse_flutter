@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/crops_in_progress.dart';
 import 'package:greenhouse/screens/dashboard.dart';
+import 'package:greenhouse/screens/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +13,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My App',
+      title: 'Greenhouse',
+      theme: ThemeData(
+        fontFamily: 'Nunito',
+        splashColor: Colors.transparent,
+      ),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => Dashboard(),
+        '/': (context) => LoginScreen(),
+        '/dashboard': (context) => Dashboard(),
         '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
       },
     );

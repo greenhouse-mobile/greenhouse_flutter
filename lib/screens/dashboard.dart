@@ -55,12 +55,16 @@ class _DashboardState extends State<Dashboard> {
                       buttonText: 'Crops in\nProgress',
                     ),
                     DashboardButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/crops-archive');
+                      },
                       svgAsset: 'assets/archive.svg',
                       buttonText: 'Crops\nArchive',
                     ),
                     DashboardButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/statistics');
+                      },
                       svgAsset: 'assets/statistics.svg',
                       buttonText: 'Statistical\nReports',
                     ),
