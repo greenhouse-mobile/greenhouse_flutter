@@ -108,7 +108,7 @@ class SignUpScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               child: Text("LOG IN",
-                  style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  style: TextStyle(color: Colors.grey, fontSize: 14)),
             ),
             SizedBox(height: 5),
             Container(
@@ -124,7 +124,7 @@ class SignUpScreen extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: Text("SIGN UP",
-                  style: TextStyle(color: Color(0xFF7DA257), fontSize: 12)),
+                  style: TextStyle(color: Color(0xFF7DA257), fontSize: 14, fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 5),
             Container(

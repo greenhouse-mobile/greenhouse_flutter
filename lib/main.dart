@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/screens/crops_in_progress.dart';
 import 'package:greenhouse/screens/dashboard.dart';
 import 'package:greenhouse/screens/login.dart';
 import 'package:greenhouse/screens/signup.dart';
@@ -9,7 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => StepperWidget(),
-        '/dashboard': (context) => Dashboard(),
+        '/': (context) => LoginScreen(),
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignUpScreen(),
+        '/dashboard': (context) => Dashboard(),
+        '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
         '/stepper': (context) => StepperWidget(),
       },
     );
