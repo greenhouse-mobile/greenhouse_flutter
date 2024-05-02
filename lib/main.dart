@@ -3,6 +3,7 @@ import 'package:greenhouse/screens/crops_in_progress.dart';
 import 'package:greenhouse/screens/dashboard.dart';
 import 'package:greenhouse/screens/login.dart';
 import 'package:greenhouse/screens/signup.dart';
+import 'package:greenhouse/screens/stepper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,10 +24,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginScreen(),
+        '/login': (context) => LoginScreen(),
+        '/signup': (context) => SignUpScreen(),
         '/dashboard': (context) => Dashboard(),
-        'login': (context) => LoginScreen(),
-        'sign-up': (context) => SignUpScreen(),
         '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
+        '/stepper': (context) => StepperWidget(),
       },
     );
   }
