@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/crops_in_progress.dart';
 import 'package:greenhouse/screens/dashboard.dart';
 import 'package:greenhouse/screens/login.dart';
+import 'package:greenhouse/screens/records.dart';
 import 'package:greenhouse/screens/signup.dart';
 import 'package:greenhouse/screens/stepper.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Greenhouse',
       theme: ThemeData(
-        fontFamily: 'Nunito',
+        fontFamily: 'Inter',
         splashColor: Colors.transparent,
       ),
       debugShowCheckedModeBanner: false,
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => Dashboard(),
         '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
         '/stepper': (context) => StepperWidget(),
+        '/records': (context) => RecordsScreen(),
       },
     );
   }
