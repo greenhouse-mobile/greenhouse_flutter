@@ -37,12 +37,10 @@ class SignUpScreen extends StatelessWidget {
 
   Widget _buildTop() {
     return Center(
-        child: Container(
-      child: SvgPicture.asset(
-        'assets/logo_white.svg',
-        width: 200,
-        height: 200,
-      ),
+        child: SvgPicture.asset(
+      'assets/logo_white.svg',
+      width: 200,
+      height: 200,
     ));
   }
 
@@ -124,7 +122,10 @@ class SignUpScreen extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: Text("SIGN UP",
-                  style: TextStyle(color: Color(0xFF7DA257), fontSize: 14, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                      color: Color(0xFF7DA257),
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 5),
             Container(
@@ -172,42 +173,41 @@ class SignUpScreen extends StatelessWidget {
   }
 
   Widget _button(String buttonText) {
-    return Container(
+    return SizedBox(
       width: double.maxFinite,
       child: ElevatedButton(
         onPressed: () {},
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
         ),
-        child: Text("$buttonText", style: TextStyle(color: Colors.white)),
+        child: Text(buttonText,
+            style: TextStyle(fontSize: 12, color: Colors.white)),
       ),
     );
   }
 
   Widget _termsAndConditions() {
-    return Container(
-      child: Row(
-        children: [
-          Checkbox(value: false, onChanged: (value) {}),
-          Text.rich(
-            TextSpan(
-              text: "I've read and accept the ",
-              style: TextStyle(fontSize: 12),
-              children: [
-                TextSpan(
-                  text: "Terms and \n Conditions",
-                  style: TextStyle(color: Color(0xFF67864A)),
-                ),
-                TextSpan(text: " and "),
-                TextSpan(
-                  text: "Privacy Policy",
-                  style: TextStyle(color: Color(0xFF67864A)),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+    return Row(
+      children: [
+        Checkbox(value: false, onChanged: (value) {}),
+        Text.rich(
+          TextSpan(
+            text: "I've read and accept the ",
+            style: TextStyle(fontSize: 12),
+            children: [
+              TextSpan(
+                text: "Terms and \n Conditions",
+                style: TextStyle(color: Color(0xFF67864A)),
+              ),
+              TextSpan(text: " and "),
+              TextSpan(
+                text: "Privacy Policy",
+                style: TextStyle(color: Color(0xFF67864A)),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
