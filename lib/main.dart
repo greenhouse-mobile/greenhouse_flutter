@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/screens/home.dart';
 import 'package:greenhouse/screens/crops_in_progress.dart';
 import 'package:greenhouse/screens/dashboard.dart';
 import 'package:greenhouse/screens/login.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(),
+        '/': (context) => HomeScreen(),
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignUpScreen(),
         '/dashboard': (context) => Dashboard(),
