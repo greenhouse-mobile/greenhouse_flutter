@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class RecordCard extends StatefulWidget {
-  final String startDate;
+  final String entryDate;
   final String recordId;
   final String author;
   final String currentPhase;
 
   const RecordCard(
       {super.key,
-      required this.startDate,
+      required this.entryDate,
       required this.recordId,
       required this.author,
       required this.currentPhase});
@@ -39,20 +39,7 @@ class _RecordCardState extends State<RecordCard> {
                   alignment: Alignment.centerLeft,
                   child: Text('Record ID: ${widget.recordId}',
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Text('View Logs',
-                            style: TextStyle(color: Color(0xFF67864A))),
-                        Icon(Icons.arrow_forward, color: Color(0xFF67864A),),
-                      ],
-                    ),
-                  ),
-                ),
+                )
               ],
             ),
             Align(
@@ -62,13 +49,24 @@ class _RecordCardState extends State<RecordCard> {
                 children: [
                   Row(
                     children: [
+                      Icon(Icons.person_outline,
+                          color: Color(0xFF465B3F)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text('Author: '),
+                      ),
+                      Text(widget.author),
+                    ],
+                  ),
+                  Row(
+                    children: [
                       Icon(Icons.watch_later_outlined,
                           color: Color(0xFF465B3F)),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
-                        child: Text('Start Date: '),
+                        child: Text('Entry Date: '),
                       ),
-                      Text(widget.startDate),
+                      Text(widget.entryDate),
                     ],
                   ),
                   Row(

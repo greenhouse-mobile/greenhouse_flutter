@@ -48,9 +48,7 @@ class _StepperWidgetState extends State<StepperWidget> {
                         : Container(),
                   ),
                   Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical:
-                              20.0), // Add vertical padding to increase the space between each circle
+                      padding: EdgeInsets.symmetric(vertical: 20.0),
                       child: ListTile(
                         leading: CircleAvatar(
                           radius: 30,
@@ -64,28 +62,28 @@ class _StepperWidgetState extends State<StepperWidget> {
                         onTap: () {
                           switch (index) {
                             case 0:
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/records');
                               break;
                             case 1:
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/records');
                               break;
                             case 2:
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/records');
                               break;
                             case 3:
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/records');
                               break;
                             case 4:
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/records');
                               break;
                             case 5:
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/records');
                               break;
                             case 6:
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/records');
                               break;
                             case 7:
-                              Navigator.pushNamed(context, '/');
+                              Navigator.pushNamed(context, '/records');
                               break;
                           }
                         },
