@@ -19,7 +19,7 @@ class _GreenhouseBottomNavigationBarState
 
     switch (index) {
       case 0:
-        Navigator.pushNamed(context, '/crops-in-progress');
+        Navigator.pushNamed(context, '/user-profile');
         break;
       case 1:
         Navigator.pushNamed(context, '/dashboard');
@@ -50,7 +50,7 @@ class _GreenhouseBottomNavigationBarState
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Calendar',
+              label: 'User profile',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.home),

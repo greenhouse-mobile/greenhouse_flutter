@@ -38,7 +38,7 @@ class _DashboardState extends State<Dashboard> {
         appBar: AppBar(
           title: Row(children: [
             SvgPicture.asset(
-              'assets/logo.svg',
+              'assets/logo/logo.svg',
               width: 30,
               height: 30,
             ),
@@ -74,21 +74,21 @@ class _DashboardState extends State<Dashboard> {
                       onPressed: () {
                         Navigator.pushNamed(context, '/crops-in-progress');
                       },
-                      svgAsset: 'assets/clock.svg',
+                      svgAsset: 'assets/icons/clock.svg',
                       buttonText: 'Crops in\nProgress',
                     ),
                     DashboardButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/crops-archive');
                       },
-                      svgAsset: 'assets/archive.svg',
+                      svgAsset: 'assets/icons/archive.svg',
                       buttonText: 'Crops\nArchive',
                     ),
                     DashboardButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/statistics');
                       },
-                      svgAsset: 'assets/statistics.svg',
+                      svgAsset: 'assets/icons/statistics.svg',
                       buttonText: 'Statistical\nReports',
                     ),
                   ],

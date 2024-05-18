@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/champis.png'),
+            image: AssetImage('assets/mushroom_images/champis.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
           ),
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildTop() {
     return Center(
       child: SvgPicture.asset(
-        'assets/logo_white.svg',
+        'assets/logo/logo_white.svg',
         width: 200,
         height: 200,
       ),
