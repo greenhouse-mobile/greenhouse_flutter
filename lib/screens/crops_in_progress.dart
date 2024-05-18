@@ -34,7 +34,7 @@ class _CropsInProgressState extends State<CropsInProgress> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Go Back'),
+          title: Text('Go Back', style: TextStyle(fontSize: 16)),
         ),
         body: ListView(
           children: <Widget>[
