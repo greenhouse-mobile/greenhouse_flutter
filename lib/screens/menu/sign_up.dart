@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenhouse/screens/login.dart';
+import 'package:greenhouse/screens/menu/login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUpScreen extends StatelessWidget {
