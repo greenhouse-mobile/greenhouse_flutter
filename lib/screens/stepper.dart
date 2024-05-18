@@ -25,7 +25,7 @@ class _StepperWidgetState extends State<StepperWidget> {
   final Crop chosenCrop = Crop(
     id: '1',
     startDate: '2021-10-01',
-    phase: CropPhase.incubation,
+    phase: CropPhase.tunnel,
     state: 'In progress',
   );
 
@@ -33,7 +33,8 @@ class _StepperWidgetState extends State<StepperWidget> {
   Widget build(BuildContext context) {
     List<Widget> stepperChildren = [];
 
-    // Construye la lista de widgets basados en las condiciones
+    stepperChildren.add(StepperTitle());
+
     for (final item in itemsList) {
       if (double.parse(item.phaseNumber) <
           double.parse(chosenCrop.phase.phaseNumber)) {
@@ -69,57 +70,88 @@ class _StepperWidgetState extends State<StepperWidget> {
 
       if (item != itemsList.last) {
         stepperChildren.add(
-          stepperDivider(),
+          StepperDivider(),
         );
       }
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            Text(
-              'STEPPER',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ],
+        title: Text(
+          'Go Back',
+          style: TextStyle(fontSize: 16),
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(left: 50, top: 30, bottom: 18),
-        child: Column(
-          children: stepperChildren,
+        padding: EdgeInsets.only(left: 40, top: 30, bottom: 18),
+        child: ListView(
+          children: [
+            ...stepperChildren,
+          ],
         ),
       ),
       bottomNavigationBar: GreenhouseBottomNavigationBar(),
     );
   }
+}
 
-  Widget stepperDivider() {
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(left: 26),
-      child: SizedBox(
-        height: 40,
-        child: CustomPaint(
-          painter: LinePainter(),
+class StepperTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 20, bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildStepperInfo(),
+          SizedBox(height: 20),
+          _buildStartDateInfo(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStepperInfo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          'STEPPER',
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF4C6444)),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 10),
+        Text(
+          'Crop ID: ID - #127',
+          style: TextStyle(color: Color(0xFF444444)),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStartDateInfo() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Start Date: ',
+              style: TextStyle(color: Colors.black),
+            ),
+            TextSpan(
+              text: '22/05/2024',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ],
         ),
       ),
     );
   }
-}
-
-class LinePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint()
-      ..color = Colors.grey
-      ..strokeWidth = 2;
-    canvas.drawLine(Offset(0, 0), Offset(0, size.height), paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
 
 class StepperButton extends StatelessWidget {
@@ -236,4 +268,33 @@ class StepperButton extends StatelessWidget {
       }
     }
   }
+}
+
+class StepperDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.only(left: 26),
+      child: SizedBox(
+        height: 40,
+        child: CustomPaint(
+          painter: _LinePainter(),
+        ),
+      ),
+    );
+  }
+}
+
+class _LinePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 2;
+    canvas.drawLine(Offset(0, 0), Offset(0, size.height), paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
