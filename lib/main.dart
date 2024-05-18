@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:greenhouse/screens/home.dart';
-import 'package:greenhouse/screens/crops_in_progress.dart';
-import 'package:greenhouse/screens/dashboard.dart';
-import 'package:greenhouse/screens/login.dart';
-import 'package:greenhouse/screens/records.dart';
-import 'package:greenhouse/screens/signup.dart';
-import 'package:greenhouse/screens/stepper.dart';
+import 'package:greenhouse/screens/menu/home.dart';
+import 'package:greenhouse/screens/crops/crops_in_progress.dart';
+import 'package:greenhouse/screens/menu/dashboard.dart';
+import 'package:greenhouse/screens/menu/login.dart';
+import 'package:greenhouse/screens/crops/records.dart';
+import 'package:greenhouse/screens/menu/sign_up.dart';
+import 'package:greenhouse/screens/crops/stepper.dart';
 
 void main() {
   runApp(const MyApp());
