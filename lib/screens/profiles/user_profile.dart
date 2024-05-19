@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
+import 'package:greenhouse/widgets/avatar.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -8,37 +10,71 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
+    var name = 'Winston';
+    var lastName = 'Smith';
+    var picture =
+        'https://schoolworkhelper.net/wp-content/uploads/2011/07/Winston-Smith.gif';
+    var fullName = '$name $lastName';
+    var username = 'wsmith';
+    var role = 'Supervising technician';
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Profile'),
+        title: Text('Go back', style: TextStyle(fontSize: 16)),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
-              radius: 80,
-              backgroundImage: AssetImage('assets/mushroom_images/champis.png'),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'John Doe',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Avatar(
+                imageUrl: picture,
+                radius: 80,
               ),
             ),
-            SizedBox(height: 8),
-            Text(
-              'Software Developer',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _userInfo("Name", fullName),
+                    _userInfo("Username", username),
+                    _userInfo("Role within company", role),
+                    SizedBox(height: 20),
+                    SizedBox(height: 20),
+                    Text(
+                      "Settings",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
         ),
       ),
+      bottomNavigationBar: GreenhouseBottomNavigationBar(),
+    );
+  }
+
+  Widget _userInfo(String title, String content) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 20),
+        Text(
+          title,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        Text(
+          content,
+          style: TextStyle(fontSize: 16, color: Color(0xFF444444)),
+        ),
+      ],
     );
   }
 }
