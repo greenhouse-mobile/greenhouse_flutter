@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
+import 'package:greenhouse/widgets/record_card.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -10,6 +11,27 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  List<RecordCard> recordCards = [
+    RecordCard(
+      entryDate: '2021-08-01',
+      recordId: '124234',
+      author: 'Winston Smith',
+      currentPhase: 'Preparation area',
+    ),
+    RecordCard(
+      entryDate: '2021-08-01',
+      recordId: '124235',
+      author: 'Winston Smith',
+      currentPhase: 'Induction',
+    ),
+    RecordCard(
+      entryDate: '2021-08-01',
+      recordId: '124236',
+      author: 'Winston Smith',
+      currentPhase: 'Tunnel',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +54,8 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
         body: Padding(
-            padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -75,8 +98,11 @@ class _DashboardState extends State<Dashboard> {
                   'Recent records',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
+                ...recordCards,
               ],
-            )),
+            ),
+          ),
+        ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }
 }

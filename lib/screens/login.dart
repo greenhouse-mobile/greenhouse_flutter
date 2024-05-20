@@ -3,7 +3,7 @@ import 'package:greenhouse/screens/signup.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +37,10 @@ class LoginScreen extends StatelessWidget {
 
   Widget _buildTop() {
     return Center(
-      child: Container(
-        child: SvgPicture.asset(
-          'assets/logo_white.svg',
-          width: 200,
-          height: 200,
-        ),
+      child: SvgPicture.asset(
+        'assets/logo_white.svg',
+        width: 200,
+        height: 200,
       ),
     );
   }
@@ -78,7 +76,7 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: 20),
           _inputField("Password", Icons.lock),
           SizedBox(height: 315),
-          _button("Login"),
+          _button(context, "Login"),
         ],
       ),
     );
@@ -96,7 +94,10 @@ class LoginScreen extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: Text("LOG IN",
-                  style: TextStyle(color: Color(0xFF7DA257), fontSize: 12)),
+                  style: TextStyle(
+                      color: Color(0xFF7DA257),
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 5),
             Container(
@@ -115,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => SignUpScreen()));
               },
               child: Text("SIGN UP",
-                  style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  style: TextStyle(color: Colors.grey, fontSize: 14)),
             ),
             SizedBox(height: 5),
             Container(
@@ -162,15 +163,18 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _button(String buttonText) {
-    return Container(
+  Widget _button(BuildContext context, String buttonText) {
+    return SizedBox(
       width: double.maxFinite,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/dashboard');
+        },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
         ),
-        child: Text("$buttonText", style: TextStyle(color: Colors.white)),
+        child: Text(buttonText,
+            style: TextStyle(fontSize: 12, color: Colors.white)),
       ),
     );
   }

@@ -15,17 +15,17 @@ class _CropsInProgressState extends State<CropsInProgress> {
   List<CropCard> cropCards = [
     CropCard(
       startDate: '2021-08-01',
-      currentPhase: 'Phase 1',
+      currentPhase: 'Tunnel',
       cropId: '964234',
     ),
     CropCard(
       startDate: '2021-08-01',
-      currentPhase: 'Phase 1',
+      currentPhase: 'Bunker',
       cropId: '123457',
     ),
     CropCard(
       startDate: '2021-08-01',
-      currentPhase: 'Phase 1',
+      currentPhase: 'Harvest',
       cropId: '123458',
     ),
   ];
@@ -34,23 +34,15 @@ class _CropsInProgressState extends State<CropsInProgress> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back), // Arrow pointing to the left
-            onPressed: () {
-              // Add your button tap code here
-            },
-          ),
-          title: Text('Go Back'),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
+          title: Text('Go Back', style: TextStyle(fontSize: 16)),
         ),
         body: ListView(
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'CROPS IN PROGRESS',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                'Crops in Progress',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -83,8 +75,8 @@ class _CropsInProgressState extends State<CropsInProgress> {
                           return Theme(
                             data: ThemeData(
                               colorScheme: ThemeData().colorScheme.copyWith(
-                                primary: Color(0xFF465B3F),
-                              ),
+                                    primary: Color(0xFF465B3F),
+                                  ),
                             ),
                             child: child!,
                           );
@@ -101,8 +93,7 @@ class _CropsInProgressState extends State<CropsInProgress> {
               ),
             ),
             ...cropCards
-                .where((cropCard) => cropCard.cropId.contains(searchQuery))
-                ,
+                .where((cropCard) => cropCard.cropId.contains(searchQuery)),
           ],
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
