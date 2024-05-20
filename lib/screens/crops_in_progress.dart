@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/crop_card.dart';
+import 'package:greenhouse/widgets/message_response.dart';
 
 class CropsInProgress extends StatefulWidget {
   const CropsInProgress({super.key});
@@ -16,19 +17,30 @@ class _CropsInProgressState extends State<CropsInProgress> {
     CropCard(
       startDate: '2021-08-01',
       currentPhase: 'Tunnel',
-      cropId: '964234',
+      cropId: '1',
     ),
     CropCard(
       startDate: '2021-08-01',
       currentPhase: 'Bunker',
-      cropId: '123457',
+      cropId: '2',
     ),
     CropCard(
       startDate: '2021-08-01',
       currentPhase: 'Harvest',
-      cropId: '123458',
+      cropId: '3',
     ),
   ];
+
+  void addNewCrop() {
+    setState(() {
+      cropCards.add(CropCard(
+        startDate: '2024-05-30',
+        currentPhase: 'Stock',
+        cropId: '${cropCards.length + 1}',
+      ));
+      cropCards = cropCards;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +107,17 @@ class _CropsInProgressState extends State<CropsInProgress> {
             ...cropCards
                 .where((cropCard) => cropCard.cropId.contains(searchQuery)),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            messageResponse(
+                context,
+                "Are you sure you want \nto create a crop?",
+                "Confirm",
+                addNewCrop);
+          },
+          backgroundColor: Color(0xFFB07D50),
+          child: Icon(Icons.add, color: Colors.white),
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }
