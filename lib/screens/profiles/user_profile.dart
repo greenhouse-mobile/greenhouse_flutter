@@ -18,6 +18,7 @@ class _UserProfileState extends State<UserProfile> {
     var fullName = '$name $lastName';
     var username = 'wsmith';
     var role = 'Supervising technician';
+    var companyName = 'Peru Agro J&V SAC';
 
     return Scaffold(
       appBar: AppBar(
@@ -57,6 +58,11 @@ class _UserProfileState extends State<UserProfile> {
                             Icon(Icons.arrow_forward, size: 16)
                           ],
                         )),
+                    SizedBox(height: 10),
+                    Text(
+                      companyName,
+                      style: TextStyle(fontSize: 16, color: Color(0xFF444444)),
+                    ),
                     _userInfo("Role within company", role),
                     SizedBox(height: 20),
                     Text(
