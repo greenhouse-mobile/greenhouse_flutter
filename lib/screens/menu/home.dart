@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:greenhouse/widgets/navigation_button.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -82,43 +83,11 @@ class HomeScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 12, color: Color(0xFF000000))),
           SizedBox(height: 50),
-          _outlinedButton(context, "Sign up", "/signup"),
+          NavigationButton(
+              buttonText: "Sign up", route: '/signup', outline: true),
           SizedBox(height: 20),
-          _button(context, "Log in", "/login"),
+          NavigationButton(buttonText: "Log in", route: '/login'),
           SizedBox(height: 150),
         ]));
-  }
-
-  Widget _button(BuildContext context, String buttonText, String route) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, route);
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
-        ),
-        child: Text(buttonText,
-            style: TextStyle(fontSize: 12, color: Colors.white)),
-      ),
-    );
-  }
-
-  Widget _outlinedButton(
-      BuildContext context, String buttonText, String route) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: OutlinedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, route);
-        },
-        style: ButtonStyle(
-          side: MaterialStateProperty.all(BorderSide(color: Color(0xFF67864A))),
-        ),
-        child: Text(buttonText,
-            style: TextStyle(fontSize: 12, color: Color(0xFF67864A))),
-      ),
-    );
   }
 }

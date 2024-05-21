@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/menu/sign_up.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:greenhouse/widgets/navigation_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -76,7 +77,10 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: 20),
           _inputField("Password", Icons.lock),
           SizedBox(height: 315),
-          _button(context, "Login"),
+          NavigationButton(
+            buttonText: "Login",
+            route: '/dashboard',
+          ),
         ],
       ),
     );
@@ -160,22 +164,6 @@ class LoginScreen extends StatelessWidget {
           ),
           prefixIcon: Icon(icon, color: Colors.grey),
           contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
-    );
-  }
-
-  Widget _button(BuildContext context, String buttonText) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/dashboard');
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
-        ),
-        child: Text(buttonText,
-            style: TextStyle(fontSize: 12, color: Colors.white)),
-      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/menu/login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:greenhouse/widgets/navigation_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -85,7 +86,7 @@ class SignUpScreen extends StatelessWidget {
           SizedBox(height: 10),
           _termsAndConditions(),
           SizedBox(height: 10),
-          _button("Sign up"),
+          NavigationButton(buttonText: "Sign up", route: '/login'),
         ],
       ),
     );
@@ -169,20 +170,6 @@ class SignUpScreen extends StatelessWidget {
           ),
           prefixIcon: Icon(icon, color: Colors.grey),
           contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
-    );
-  }
-
-  Widget _button(String buttonText) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
-        ),
-        child: Text(buttonText,
-            style: TextStyle(fontSize: 12, color: Colors.white)),
-      ),
     );
   }
 

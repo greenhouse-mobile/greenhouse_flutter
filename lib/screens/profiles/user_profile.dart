@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/avatar.dart';
+import 'package:greenhouse/widgets/navigation_button.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _UserProfileState extends State<UserProfile> {
             Center(
               child: Avatar(
                 imageUrl: picture,
-                radius: 80,
+                radius: 70,
               ),
             ),
             Align(
@@ -41,14 +42,48 @@ class _UserProfileState extends State<UserProfile> {
                   children: [
                     _userInfo("Name", fullName),
                     _userInfo("Username", username),
-                    _userInfo("Role within company", role),
                     SizedBox(height: 20),
+                    InkWell(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            Text(
+                              'Company',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline),
+                            ),
+                            Icon(Icons.arrow_forward, size: 16)
+                          ],
+                        )),
+                    _userInfo("Role within company", role),
                     SizedBox(height: 20),
                     Text(
                       "Settings",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
+                    SizedBox(height: 20),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        'Forgot your password?',
+                        style:
+                            TextStyle(fontSize: 16, color: Color(0xFF4C6444)),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        'Delete account',
+                        style: TextStyle(fontSize: 16, color: Colors.red),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    NavigationButton(
+                        buttonText: "Log out", route: '/login', outline: true)
                   ],
                 ),
               ),
