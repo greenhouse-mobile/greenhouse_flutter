@@ -37,7 +37,7 @@ class _CropCardState extends State<CropCard> {
                 child: Column(
                   children: [
                     Image.asset(
-                        'assets/crops_in_progress_images/mushroom.jpeg'),
+                        'assets/mushroom_images/mushroom.jpeg'),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
@@ -102,7 +102,7 @@ class _CropCardState extends State<CropCard> {
                                 Row(
                                   children: [
                                     SvgPicture.asset(
-                                        'assets/crops_in_progress_images/plant.svg',
+                                        'assets/icons/plant.svg',
                                         height: 20.0,
                                         width: 12.0),
                                     Padding(

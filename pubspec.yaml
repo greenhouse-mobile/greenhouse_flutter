@@ -31,11 +31,11 @@ flutter:
         - asset: fonts/Nunito-VariableFont_wght.ttf
         - asset: fonts/Nunito-Italic-VariableFont_wght.ttf
   assets:
-    - assets/logo.svg
-    - assets/logo_white.svg
-    - assets/clock.svg
-    - assets/archive.svg
-    - assets/statistics.svg
-    - assets/crops_in_progress_images/mushroom.jpeg
-    - assets/crops_in_progress_images/plant.svg
-    - assets/champis.png
+    - assets/logo/logo.svg
+    - assets/logo/logo_white.svg
+    - assets/icons/clock.svg
+    - assets/icons/archive.svg
+    - assets/icons/statistics.svg
+    - assets/mushroom_images/mushroom.jpeg
+    - assets/icons/plant.svg
+    - assets/mushroom_images/champis.png

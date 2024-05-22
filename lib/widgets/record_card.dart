@@ -72,7 +72,7 @@ class _RecordCardState extends State<RecordCard> {
                   Row(
                     children: [
                       SvgPicture.asset(
-                          'assets/crops_in_progress_images/plant.svg',
+                          'assets/icons/plant.svg',
                           height: 20.0,
                           width: 12.0),
                       Padding(

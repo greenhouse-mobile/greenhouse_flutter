@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:greenhouse/screens/signup.dart';
+import 'package:greenhouse/screens/menu/login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:greenhouse/widgets/navigation_button.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/champis.png'),
+            image: AssetImage('assets/mushroom_images/champis.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
           ),
@@ -37,12 +38,11 @@ class LoginScreen extends StatelessWidget {
 
   Widget _buildTop() {
     return Center(
-      child: SvgPicture.asset(
-        'assets/logo_white.svg',
-        width: 200,
-        height: 200,
-      ),
-    );
+        child: SvgPicture.asset(
+      'assets/logo/logo_white.svg',
+      width: 200,
+      height: 200,
+    ));
   }
 
   Widget _buildBottom(BuildContext context) {
@@ -58,13 +58,13 @@ class LoginScreen extends StatelessWidget {
             ),
             color: Colors.white,
           ),
-          child: _loginForm(context),
+          child: _signUpForm(context),
         ),
       ),
     );
   }
 
-  Widget _loginForm(BuildContext context) {
+  Widget _signUpForm(BuildContext context) {
     return Container(
       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
       padding: const EdgeInsets.all(32.0),
@@ -72,11 +72,21 @@ class LoginScreen extends StatelessWidget {
         children: [
           _loginSignUpButton(context),
           SizedBox(height: 20),
+          _inputField("Business Name", Icons.business),
+          SizedBox(height: 15),
+          _inputField("TIN", Icons.business),
+          SizedBox(height: 15),
+          _inputField("First name of the registrant", Icons.person),
+          SizedBox(height: 15),
+          _inputField("Last name of the registrant", Icons.person),
+          SizedBox(height: 15),
           _inputField("Username", Icons.person),
-          SizedBox(height: 20),
+          SizedBox(height: 15),
           _inputField("Password", Icons.lock),
-          SizedBox(height: 315),
-          _button(context, "Login"),
+          SizedBox(height: 10),
+          _termsAndConditions(),
+          SizedBox(height: 10),
+          NavigationButton(buttonText: "Sign up", route: '/login'),
         ],
       ),
     );
@@ -92,8 +102,27 @@ class LoginScreen extends StatelessWidget {
         Column(
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
               child: Text("LOG IN",
+                  style: TextStyle(color: Colors.grey, fontSize: 14)),
+            ),
+            SizedBox(height: 5),
+            Container(
+              width: containerWidth,
+              margin: EdgeInsets.only(left: 10),
+              height: 2,
+              color: Colors.grey,
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: Text("SIGN UP",
                   style: TextStyle(
                       color: Color(0xFF7DA257),
                       fontSize: 14,
@@ -102,28 +131,9 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 5),
             Container(
               width: containerWidth,
-              margin: EdgeInsets.only(left: 10),
-              height: 2,
-              color: Color(0xFF7DA257),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()));
-              },
-              child: Text("SIGN UP",
-                  style: TextStyle(color: Colors.grey, fontSize: 14)),
-            ),
-            SizedBox(height: 5),
-            Container(
-              width: containerWidth,
               margin: EdgeInsets.only(right: 10),
               height: 2,
-              color: Colors.grey,
+              color: Color(0xFF7DA257),
             ),
           ],
         ),
@@ -163,19 +173,28 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _button(BuildContext context, String buttonText) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/dashboard');
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Color(0xFF67864A)),
-        ),
-        child: Text(buttonText,
-            style: TextStyle(fontSize: 12, color: Colors.white)),
-      ),
+  Widget _termsAndConditions() {
+    return Row(
+      children: [
+        Checkbox(value: false, onChanged: (value) {}),
+        Text.rich(
+          TextSpan(
+            text: "I've read and accept the ",
+            style: TextStyle(fontSize: 12),
+            children: [
+              TextSpan(
+                text: "Terms and \n Conditions",
+                style: TextStyle(color: Color(0xFF67864A)),
+              ),
+              TextSpan(text: " and "),
+              TextSpan(
+                text: "Privacy Policy",
+                style: TextStyle(color: Color(0xFF67864A)),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
