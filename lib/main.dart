@@ -6,6 +6,7 @@ import 'package:greenhouse/screens/menu/login.dart';
 import 'package:greenhouse/screens/crops/records.dart';
 import 'package:greenhouse/screens/menu/sign_up.dart';
 import 'package:greenhouse/screens/crops/stepper.dart';
+import 'package:greenhouse/screens/profiles/company_profile.dart';
 import 'package:greenhouse/screens/profiles/user_profile.dart';
 
 void main() {
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
         '/stepper': (context) => StepperWidget(),
         '/records': (context) => RecordsScreen(),
-        '/user-profile': (context) => UserProfile(),
+        '/user-profile': (context) => UserProfileScreen(),
+        '/company-profile': (context) => CompanyProfileScreen(),
       },
     );
   }

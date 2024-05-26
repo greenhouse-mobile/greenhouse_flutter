@@ -3,12 +3,7 @@ import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/navigation_button.dart';
 
-class UserProfile extends StatefulWidget {
-  @override
-  State<UserProfile> createState() => _UserProfileState();
-}
-
-class _UserProfileState extends State<UserProfile> {
+class UserProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var name = 'Winston';
@@ -45,7 +40,9 @@ class _UserProfileState extends State<UserProfile> {
                     _userInfo("Username", username),
                     SizedBox(height: 20),
                     InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/company-profile');
+                        },
                         child: Row(
                           children: [
                             Text(
