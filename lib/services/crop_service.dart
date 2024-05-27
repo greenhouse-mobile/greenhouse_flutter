@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 
@@ -15,8 +16,8 @@ class CropService {
     }
   }
 
-  Future<List> getCropsByState(String state) async { //should be a boolean
-    final response = await http.get(Uri.parse('${baseUrl}crops?state=$state'));
+  Future<List> getCropsByState(bool state) async { //should be a boolean
+    final response = await http.get(Uri.parse('${baseUrl}crops?active=$state'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
