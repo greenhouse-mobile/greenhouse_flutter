@@ -5,11 +5,13 @@ class Crop {
   final String startDate;
   final CropPhase phase;
   final String state;
+  final String name;
 
   Crop({
     required this.id,
     required this.startDate,
     required this.phase,
     required this.state,
+    required this.name,
   });
 }

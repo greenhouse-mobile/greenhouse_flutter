@@ -27,6 +27,7 @@ class _StepperWidgetState extends State<StepperWidget> {
     startDate: '2021-10-01',
     phase: CropPhase.tunnel,
     state: 'In progress',
+    name: 'Crop 1',
   );
 
   @override

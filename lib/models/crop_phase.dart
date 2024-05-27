@@ -11,7 +11,7 @@ enum CropPhase {
 
 extension CropPhaseExtension on CropPhase {
   static final Map<CropPhase, String> _phaseNames = {
-    CropPhase.stock: "Stock",
+    CropPhase.stock: "Formula",
     CropPhase.preparationArea: "Preparation Area",
     CropPhase.bunker: "Bunker",
     CropPhase.tunnel: "Tunnel",

@@ -5,12 +5,14 @@ class CropCard extends StatefulWidget {
   final String startDate;
   final String currentPhase;
   final String cropId;
+  final String cropName;
 
   const CropCard(
       {super.key,
       required this.startDate,
       required this.currentPhase,
-      required this.cropId});
+      required this.cropId,
+      required this.cropName});
 
   @override
   State<CropCard> createState() => _CropCardState();
@@ -47,7 +49,7 @@ class _CropCardState extends State<CropCard> {
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Crop ID: ${widget.cropId}',
+                                child: Text('Crop Name: ${widget.cropName}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ),
