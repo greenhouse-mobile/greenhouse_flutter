@@ -148,7 +148,7 @@ class _CropsInProgressState extends State<CropsInProgress> {
               ),
             ),
             ...cropCards
-                .where((cropCard) => cropCard.startDate.contains(searchQuery)),
+                .where((cropCard) => cropCard.startDate.contains(searchQuery) || cropCard.cropName.contains(searchQuery)),
           ],
         ),
         floatingActionButton: FloatingActionButton(
