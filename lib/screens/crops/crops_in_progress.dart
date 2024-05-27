@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/models/crop_phase.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/crop_card.dart';
 import 'package:greenhouse/widgets/message_response.dart';
@@ -19,6 +20,16 @@ class _CropsInProgressState extends State<CropsInProgress> {
 
   final _cropService = CropService();
 
+  CropCurrentPhase stringToCropCurrentPhase(String phase) {
+  String phaseCamelCase = phase[0].toLowerCase() + phase.substring(1).replaceAll(' ', '');
+  for (CropCurrentPhase value in CropCurrentPhase.values) {
+    if (value.toString().split('.').last == phaseCamelCase) {
+      return value;
+    }
+  }
+  throw Exception('Invalid phase: $phase');
+}
+
   initialize() async {
     final crops = await _cropService.getCropsByState(true);
     setState(() {
@@ -26,7 +37,7 @@ class _CropsInProgressState extends State<CropsInProgress> {
           .map((crop) => CropCard(
                 cropId: crop['id'],
                 startDate: parseDate(crop['createdDate']),
-                currentPhase: crop['phase'],
+                currentPhase: stringToCropCurrentPhase(crop['phase']),
                 cropName: crop['name'],
               ))
           .toList();
@@ -41,10 +52,11 @@ class _CropsInProgressState extends State<CropsInProgress> {
 
   void addNewCrop() {
     setState(() {
+      var phase = CropCurrentPhase.formula;
       cropCards.add(CropCard(
         cropId: '${cropCards.length + 1}',
         startDate: '2024-05-30',
-        currentPhase: 'Formula',
+        currentPhase: phase,
         cropName: '${cropCards.length + 1}',
       ));
       cropCards = cropCards;

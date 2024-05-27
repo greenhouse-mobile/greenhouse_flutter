@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/crop_card.dart';
 
+import '../../models/crop_phase.dart';
 import '../../services/crop_service.dart';
 
 class CropsArchive extends StatefulWidget {
@@ -18,6 +19,16 @@ class _CropsArchiveState extends State<CropsArchive> {
 
   final _cropService = CropService();
 
+  CropCurrentPhase stringToCropCurrentPhase(String phase) {
+    String phaseCamelCase = phase[0].toLowerCase() + phase.substring(1).replaceAll(' ', '');
+    for (CropCurrentPhase value in CropCurrentPhase.values) {
+      if (value.toString().split('.').last == phaseCamelCase) {
+        return value;
+      }
+    }
+    throw Exception('Invalid phase: $phase');
+  }
+
   initialize() async {
     final crops = await _cropService.getCropsByState(false);
     setState(() {
@@ -25,7 +36,7 @@ class _CropsArchiveState extends State<CropsArchive> {
           .map((crop) => CropCard(
                 cropId: crop['id'],
                 startDate: parseDate(crop['createdDate']),
-                currentPhase: crop['phase'],
+                currentPhase: stringToCropCurrentPhase(crop['phase']),
                 cropName: crop['name'],
               ))
           .toList();

@@ -1,5 +1,5 @@
-enum CropPhase {
-  stock,
+enum CropCurrentPhase {
+  formula,
   preparationArea,
   bunker,
   tunnel,
@@ -9,27 +9,27 @@ enum CropPhase {
   harvest,
 }
 
-extension CropPhaseExtension on CropPhase {
-  static final Map<CropPhase, String> _phaseNames = {
-    CropPhase.stock: "Formula",
-    CropPhase.preparationArea: "Preparation Area",
-    CropPhase.bunker: "Bunker",
-    CropPhase.tunnel: "Tunnel",
-    CropPhase.incubation: "Incubation",
-    CropPhase.casing: "Casing",
-    CropPhase.induction: "Induction",
-    CropPhase.harvest: "Harvest",
+extension CropPhaseExtension on CropCurrentPhase {
+  static final Map<CropCurrentPhase, String> _phaseNames = {
+    CropCurrentPhase.formula: "Formula",
+    CropCurrentPhase.preparationArea: "Preparation Area",
+    CropCurrentPhase.bunker: "Bunker",
+    CropCurrentPhase.tunnel: "Tunnel",
+    CropCurrentPhase.incubation: "Incubation",
+    CropCurrentPhase.casing: "Casing",
+    CropCurrentPhase.induction: "Induction",
+    CropCurrentPhase.harvest: "Harvest",
   };
 
-  static final Map<CropPhase, String> _phaseNumbers = {
-    CropPhase.stock: "0",
-    CropPhase.preparationArea: "1",
-    CropPhase.bunker: "2",
-    CropPhase.tunnel: "3",
-    CropPhase.incubation: "4.1",
-    CropPhase.casing: "4.2",
-    CropPhase.induction: "4.3",
-    CropPhase.harvest: "4.4",
+  static final Map<CropCurrentPhase, String> _phaseNumbers = {
+    CropCurrentPhase.formula: "0",
+    CropCurrentPhase.preparationArea: "1",
+    CropCurrentPhase.bunker: "2",
+    CropCurrentPhase.tunnel: "3",
+    CropCurrentPhase.incubation: "4.1",
+    CropCurrentPhase.casing: "4.2",
+    CropCurrentPhase.induction: "4.3",
+    CropCurrentPhase.harvest: "4.4",
   };
 
   String get phaseName => _phaseNames[this] ?? '';

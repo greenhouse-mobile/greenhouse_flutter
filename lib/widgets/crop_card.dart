@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:greenhouse/models/crop_phase.dart';
 
 class CropCard extends StatefulWidget {
   final String startDate;
-  final String currentPhase;
+  final CropCurrentPhase currentPhase;
   final String cropId;
   final String cropName;
 
@@ -27,7 +28,11 @@ class _CropCardState extends State<CropCard> {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/stepper');
+                if (widget.currentPhase == CropCurrentPhase.harvest) {
+                  Navigator.pushNamed(context, '/stepper', arguments: widget);
+                } else {
+                Navigator.pushNamed(context, '/stepper', arguments: widget);
+                }
               },
               child: Card(
                 color: Color(0xFFFFFFFF),
@@ -111,7 +116,7 @@ class _CropCardState extends State<CropCard> {
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text('Current Phase: '),
                                     ),
-                                    Text(widget.currentPhase),
+                                    Text(widget.currentPhase.phaseName),
                                   ],
                                 ),
                               ],

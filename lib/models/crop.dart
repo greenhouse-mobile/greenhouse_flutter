@@ -3,7 +3,7 @@ import 'crop_phase.dart';
 class Crop {
   final String id;
   final String startDate;
-  final CropPhase phase;
+  final CropCurrentPhase phase;
   final String state;
   final String name;
 

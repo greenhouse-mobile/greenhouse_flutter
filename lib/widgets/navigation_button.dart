@@ -19,9 +19,9 @@ class NavigationButton extends StatelessWidget {
           Navigator.pushNamed(context, route);
         },
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
+          backgroundColor: WidgetStateProperty.all(
               outline ? Colors.white : Color(0xFF67864A)),
-          side: MaterialStateProperty.all(BorderSide(color: Color(0xFF67864A))),
+          side: WidgetStateProperty.all(BorderSide(color: Color(0xFF67864A))),
         ),
         child: Text(buttonText,
             style: TextStyle(
