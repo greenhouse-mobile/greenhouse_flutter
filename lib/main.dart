@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/screens/crops/crops_archive.dart';
 import 'package:greenhouse/screens/menu/home.dart';
 import 'package:greenhouse/screens/crops/crops_in_progress.dart';
 import 'package:greenhouse/screens/menu/dashboard.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUpScreen(),
         '/dashboard': (context) => Dashboard(),
         '/crops-in-progress': (context) => CropsInProgress(key: UniqueKey()),
+        '/crops-archive': (context) => CropsArchive(key: UniqueKey()),
         '/stepper': (context) => StepperWidget(),
         '/records': (context) => RecordsScreen(),
         '/user-profile': (context) => UserProfile(),
