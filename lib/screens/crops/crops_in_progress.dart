@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/crop_card.dart';
-import 'package:greenhouse/widgets/message_response.dart';
 
 class CropsInProgress extends StatefulWidget {
   const CropsInProgress({super.key});
@@ -16,17 +15,17 @@ class _CropsInProgressState extends State<CropsInProgress> {
   List<CropCard> cropCards = [
     CropCard(
       startDate: '2021-08-01',
-      currentPhase: 'Tunnel',
+      phase: 'Tunnel',
       cropId: '1',
     ),
     CropCard(
       startDate: '2021-08-01',
-      currentPhase: 'Bunker',
+      phase: 'Bunker',
       cropId: '2',
     ),
     CropCard(
       startDate: '2021-08-01',
-      currentPhase: 'Harvest',
+      phase: 'Harvest',
       cropId: '3',
     ),
   ];
