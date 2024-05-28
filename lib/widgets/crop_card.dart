@@ -3,13 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CropCard extends StatefulWidget {
   final String startDate;
-  final String currentPhase;
+  final String phase;
   final String cropId;
 
   const CropCard(
       {super.key,
       required this.startDate,
-      required this.currentPhase,
+      required this.phase,
       required this.cropId});
 
   @override
@@ -36,8 +36,7 @@ class _CropCardState extends State<CropCard> {
                 margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
                 child: Column(
                   children: [
-                    Image.asset(
-                        'assets/mushroom_images/mushroom.jpeg'),
+                    Image.asset('assets/mushroom_images/mushroom.jpeg'),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
@@ -101,15 +100,13 @@ class _CropCardState extends State<CropCard> {
                                 ),
                                 Row(
                                   children: [
-                                    SvgPicture.asset(
-                                        'assets/icons/plant.svg',
-                                        height: 20.0,
-                                        width: 12.0),
+                                    SvgPicture.asset('assets/icons/plant.svg',
+                                        height: 20.0, width: 12.0),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text('Current Phase: '),
                                     ),
-                                    Text(widget.currentPhase),
+                                    Text(widget.phase),
                                   ],
                                 ),
                               ],
