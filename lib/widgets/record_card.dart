@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:greenhouse/models/record.dart';
 
 class RecordCard extends StatefulWidget {
-  final String entryDate;
-  final String recordId;
-  final String author;
-  final String currentPhase;
+  final Record record;
 
-  const RecordCard(
-      {super.key,
-      required this.entryDate,
-      required this.recordId,
-      required this.author,
-      required this.currentPhase});
+  const RecordCard({super.key, required this.record});
 
   @override
   State<RecordCard> createState() => _RecordCardState();
 }
 
 class _RecordCardState extends State<RecordCard> {
+  bool _showDetails = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -37,7 +32,7 @@ class _RecordCardState extends State<RecordCard> {
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Record ID: ${widget.recordId}',
+                  child: Text('Record ID: ${widget.record.id}',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                 )
               ],
@@ -49,13 +44,13 @@ class _RecordCardState extends State<RecordCard> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.person_outline,
-                          color: Color(0xFF465B3F)),
+                      Icon(Icons.person_outline, color: Color(0xFF465B3F)),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text('Author: '),
                       ),
-                      Text(widget.author),
+                      Text(widget.record.createdBy,
+                          style: TextStyle(color: Color(0xFF8E8E8E))),
                     ],
                   ),
                   Row(
@@ -66,24 +61,45 @@ class _RecordCardState extends State<RecordCard> {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text('Entry Date: '),
                       ),
-                      Text(widget.entryDate),
+                      Text(widget.record.createdAt,
+                          style: TextStyle(color: Color(0xFF8E8E8E))),
                     ],
                   ),
                   Row(
                     children: [
-                      SvgPicture.asset(
-                          'assets/icons/plant.svg',
-                          height: 20.0,
-                          width: 12.0),
+                      SvgPicture.asset('assets/icons/plant.svg',
+                          height: 20.0, width: 12.0),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text('Current Phase: '),
                       ),
-                      Text(widget.currentPhase),
+                      Text(widget.record.phase,
+                          style: TextStyle(color: Color(0xFF8E8E8E))),
                     ],
                   ),
                 ],
               ),
+            ),
+            SizedBox(height: 20),
+            if (_showDetails)
+              ...widget.record.payload.data.map((payloadData) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(payloadData.name),
+                    Text(payloadData.value,
+                        style: TextStyle(color: Color(0xFF8E8E8E))),
+                  ],
+                );
+              }).toList(),
+            TextButton(
+              child: Text(_showDetails ? 'Hide Details' : 'Show Details',
+                  style: TextStyle(color: Color(0xFF8E8E8E))),
+              onPressed: () {
+                setState(() {
+                  _showDetails = !_showDetails;
+                });
+              },
             ),
           ],
         ),
