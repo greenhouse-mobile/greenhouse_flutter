@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:greenhouse/models/crop_phase.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/message_response.dart';
 import 'package:greenhouse/widgets/record_card.dart';
@@ -14,6 +13,8 @@ class RecordsScreen extends StatefulWidget {
 class _RecordsScreenState extends State<RecordsScreen> {
   var cropId = '1';
   var cropPhase = 'Preparation Area';
+  DateTime selectedDate = DateTime.now();
+  String searchQuery = '';
   List<RecordCard> recordCards = [
     RecordCard(
       entryDate: '2021-08-01',
@@ -74,7 +75,54 @@ class _RecordsScreenState extends State<RecordsScreen> {
                     ),
                   ],
                 )),
-            ...recordCards,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          searchQuery = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Search records...',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.calendar_today),
+                    onPressed: () async {
+                      final DateTime? datetime = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2050),
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                            data: ThemeData(
+                              colorScheme: ThemeData().colorScheme.copyWith(
+                                    primary: Color(0xFF465B3F),
+                                  ),
+                            ),
+                            child: child!,
+                          );
+                        },
+                      );
+                      if (datetime != null) {
+                        setState(() {
+                          selectedDate = datetime;
+                        });
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+            ...recordCards.where(
+                (recordCard) => recordCard.recordId.contains(searchQuery)),
           ],
         ),
         floatingActionButton: FloatingActionButton(
