@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/coworker.dart';
+import 'package:greenhouse/screens/profiles/add_coworker_screen.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/navigation_button.dart';
@@ -153,11 +154,39 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
               Text('Employees',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               SizedBox(width: 50),
-              Expanded(
-                child: NavigationButton(
-                    buttonText: "Invite Employees",
-                    route: "/login",
-                    outline: true),
+              ElevatedButton(
+                style: ButtonStyle(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Color(0xFF4C6444))))),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddCoworkerScreen(
+                        updateList: (String name, String role, String username,
+                            String email) {
+                          coworkers.add(Coworker(
+                            name: name,
+                            role: role,
+                            username: username,
+                            email: email,
+                            image: "https://i.imgur.com/xPyz8mG.png",
+                          ));
+
+                          setState(() {
+                            coworkers = coworkers;
+                          });
+                        },
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Invite Employees",
+                  style: TextStyle(color: Color(0xFF4C6444)),
+                ),
               ),
             ],
           ),
