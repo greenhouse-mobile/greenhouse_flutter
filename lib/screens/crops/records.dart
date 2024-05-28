@@ -36,18 +36,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
     ),
   ];
 
-  void addNewRecord() {
-    setState(() {
-      recordCards.add(RecordCard(
-        entryDate: '2021-08-01',
-        recordId: '${recordCards.length + 1}',
-        author: 'Winston Smith',
-        currentPhase: 'Tunnel',
-      ));
-      recordCards = recordCards;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,17 +112,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
             ...recordCards.where(
                 (recordCard) => recordCard.recordId.contains(searchQuery)),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            messageResponse(
-                context,
-                "Are you sure you want \nto create a record?",
-                "Confirm",
-                addNewRecord);
-          },
-          backgroundColor: Color(0xFFB07D50),
-          child: Icon(Icons.add, color: Colors.white),
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }

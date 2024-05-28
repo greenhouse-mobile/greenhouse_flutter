@@ -31,17 +31,6 @@ class _CropsInProgressState extends State<CropsInProgress> {
     ),
   ];
 
-  void addNewCrop() {
-    setState(() {
-      cropCards.add(CropCard(
-        startDate: '2024-05-30',
-        currentPhase: 'Stock',
-        cropId: '${cropCards.length + 1}',
-      ));
-      cropCards = cropCards;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,17 +96,6 @@ class _CropsInProgressState extends State<CropsInProgress> {
             ...cropCards
                 .where((cropCard) => cropCard.cropId.contains(searchQuery)),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            messageResponse(
-                context,
-                "Are you sure you want \nto create a crop?",
-                "Confirm",
-                addNewCrop);
-          },
-          backgroundColor: Color(0xFFB07D50),
-          child: Icon(Icons.add, color: Colors.white),
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }
