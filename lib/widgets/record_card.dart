@@ -16,6 +16,7 @@ class _RecordCardState extends State<RecordCard> {
 
   @override
   Widget build(BuildContext context) {
+    String currentRoute = ModalRoute.of(context)?.settings.name ?? '';
     return Card(
       color: Color(0xFFFFFFFF),
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -65,18 +66,32 @@ class _RecordCardState extends State<RecordCard> {
                           style: TextStyle(color: Color(0xFF8E8E8E))),
                     ],
                   ),
-                  Row(
-                    children: [
-                      SvgPicture.asset('assets/icons/plant.svg',
-                          height: 20.0, width: 12.0),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text('Current Phase: '),
-                      ),
-                      Text(widget.record.phase,
-                          style: TextStyle(color: Color(0xFF8E8E8E))),
-                    ],
-                  ),
+                  if (currentRoute == '/dashboard')
+                    Row(
+                      children: [
+                        SvgPicture.asset('assets/icons/plant.svg',
+                            height: 20.0, width: 12.0),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text('Current Phase: '),
+                        ),
+                        Text(widget.record.phase,
+                            style: TextStyle(color: Color(0xFF8E8E8E))),
+                      ],
+                    ),
+                  if (currentRoute == '/records')
+                    Row(
+                      children: [
+                        SvgPicture.asset('assets/icons/plant.svg',
+                            height: 20.0, width: 12.0),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text('Day: '),
+                        ),
+                        Text(widget.record.cropDay.toString(),
+                            style: TextStyle(color: Color(0xFF8E8E8E))),
+                      ],
+                    ),
                 ],
               ),
             ),
