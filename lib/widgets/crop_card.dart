@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:greenhouse/models/crop_phase.dart';
+import 'package:greenhouse/widgets/delete_dialog.dart';
 
 class CropCard extends StatefulWidget {
   final String startDate;
   final CropCurrentPhase currentPhase;
   final String cropId;
   final String cropName;
+  final Function(String) onDelete;
 
   const CropCard(
       {super.key,
       required this.startDate,
       required this.currentPhase,
       required this.cropId,
-      required this.cropName});
+      required this.cropName,
+      required this.onDelete});
 
   @override
   State<CropCard> createState() => _CropCardState();
@@ -31,7 +34,7 @@ class _CropCardState extends State<CropCard> {
                 if (widget.currentPhase == CropCurrentPhase.harvest) {
                   Navigator.pushNamed(context, '/stepper', arguments: widget);
                 } else {
-                Navigator.pushNamed(context, '/stepper', arguments: widget);
+                  Navigator.pushNamed(context, '/stepper', arguments: widget);
                 }
               },
               child: Card(
@@ -43,8 +46,7 @@ class _CropCardState extends State<CropCard> {
                 margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
                 child: Column(
                   children: [
-                    Image.asset(
-                        'assets/mushroom_images/mushroom.jpeg'),
+                    Image.asset('assets/mushroom_images/mushroom.jpeg'),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
@@ -75,21 +77,32 @@ class _CropCardState extends State<CropCard> {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: Row(
-                                  children: [
-                                    Text('Delete'),
-                                    Icon(Icons.delete,
-                                        color: Color(0xFF465B3F)),
-                                  ],
+                          if (widget.currentPhase == CropCurrentPhase.harvest)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    deleteDialog(
+                                        context,
+                                        "Are you sure you want to \ndelete crop ${widget.cropId}?",
+                                        "Yes, Delete",
+                                        () => widget.onDelete(widget.cropId));
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Delete',
+                                        style:
+                                            TextStyle(color: Color(0xFFDE4F4F)),
+                                      ),
+                                      Icon(Icons.delete,
+                                          color: Color(0xFFDE4F4F)),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Column(
@@ -108,10 +121,8 @@ class _CropCardState extends State<CropCard> {
                                 ),
                                 Row(
                                   children: [
-                                    SvgPicture.asset(
-                                        'assets/icons/plant.svg',
-                                        height: 20.0,
-                                        width: 12.0),
+                                    SvgPicture.asset('assets/icons/plant.svg',
+                                        height: 20.0, width: 12.0),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text('Current Phase: '),
