@@ -46,7 +46,10 @@ class _StepperWidgetState extends State<StepperWidget> {
             phase: item,
             isComplete: true,
             navigateTo: () {
-              Navigator.pushNamed(context, '/records');
+              Navigator.pushNamed(context, '/records', arguments: {
+                'cropId': chosenCrop?.cropId ?? '',
+                'cropPhase': item.phaseName,
+              });
             },
           ),
         );
@@ -56,7 +59,10 @@ class _StepperWidgetState extends State<StepperWidget> {
             phase: item,
             isCurrent: true,
             navigateTo: () {
-              Navigator.pushNamed(context, '/records');
+              Navigator.pushNamed(context, '/records', arguments: {
+                'cropId': chosenCrop?.cropId ?? '',
+                'cropPhase': item.phaseName,
+              });
             },
           ),
         );
@@ -65,7 +71,10 @@ class _StepperWidgetState extends State<StepperWidget> {
           StepperButton(
             phase: item,
             navigateTo: () {
-              Navigator.pushNamed(context, '/records');
+              Navigator.pushNamed(context, '/records', arguments: {
+                'cropId': chosenCrop?.cropId ?? '',
+                'cropPhase': item.phaseName,
+              });
             },
           ),
         );

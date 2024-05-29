@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:greenhouse/models/crop_phase.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/crop_card.dart';
-import 'package:greenhouse/widgets/message_response.dart';
 
 import '../../services/crop_service.dart';
 
@@ -36,12 +35,12 @@ class _CropsInProgressState extends State<CropsInProgress> {
     setState(() {
       cropCards = crops
           .map((crop) => CropCard(
-                cropId: crop['id'],
-                startDate: parseDate(crop['createdDate']),
-                currentPhase: stringToCropCurrentPhase(crop['phase']),
-                cropName: crop['name'],
-                onDelete: (String id) {},
-              ))
+        cropId: crop.id,
+        startDate: parseDate(crop.createdDate),
+        currentPhase: stringToCropCurrentPhase(crop.phase),
+        cropName: crop.name,
+        onDelete: (String id) {},//its only there as a placeholder it really does nothing as it shouldn't be able to delete from the crops in progress
+      ))
           .toList();
     });
   }
@@ -50,20 +49,6 @@ class _CropsInProgressState extends State<CropsInProgress> {
   void initState() {
     super.initState();
     initialize();
-  }
-
-  void addNewCrop() {
-    setState(() {
-      var phase = CropCurrentPhase.formula;
-      cropCards.add(CropCard(
-        cropId: '${cropCards.length + 1}',
-        startDate: '2024-05-30',
-        currentPhase: phase,
-        cropName: '${cropCards.length + 1}',
-        onDelete: (String id) {},
-      ));
-      cropCards = cropCards;
-    });
   }
 
   String parseDate(String date) {
@@ -165,17 +150,6 @@ class _CropsInProgressState extends State<CropsInProgress> {
                 cropCard.startDate.contains(searchQuery) ||
                 cropCard.cropName.contains(searchQuery)),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            messageResponse(
-                context,
-                "Are you sure you want \nto create a crop?",
-                "Confirm",
-                addNewCrop);
-          },
-          backgroundColor: Color(0xFFB07D50),
-          child: Icon(Icons.add, color: Colors.white),
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }

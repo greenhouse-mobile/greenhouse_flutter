@@ -53,10 +53,15 @@ class MyApp extends StatelessWidget {
             builder = (BuildContext _) => StepperWidget(chosenCrop: settings.arguments as CropCard);
             break;
           case '/records':
-            builder = (BuildContext _) => RecordsScreen();
+            builder = (BuildContext _) => RecordsScreen(
+                cropId: (settings.arguments as Map<String, String>)['cropId']!,
+                cropPhase: (settings.arguments as Map<String, String>)['cropPhase']!);
             break;
           case '/user-profile':
-            builder = (BuildContext _) => UserProfile();
+            builder = (BuildContext _) => UserProfileScreen();
+            break;
+          case '/company-profile':
+            builder = (BuildContext _) => CompanyProfileScreen();
             break;
           default:
             throw Exception('Invalid route: ${settings.name}');
