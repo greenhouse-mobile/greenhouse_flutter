@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:greenhouse/models/crop_phase.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/crop_card.dart';
-import 'package:greenhouse/widgets/message_response.dart';
 
+import '../../models/crop_phase.dart';
 import '../../services/crop_service.dart';
 
-class CropsInProgress extends StatefulWidget {
-  const CropsInProgress({super.key});
+class CropsArchive extends StatefulWidget {
+  const CropsArchive({super.key});
 
   @override
-  State<CropsInProgress> createState() => _CropsInProgressState();
+  State<CropsArchive> createState() => _CropsArchiveState();
 }
 
-class _CropsInProgressState extends State<CropsInProgress> {
+class _CropsArchiveState extends State<CropsArchive> {
   DateTime selectedDate = DateTime.now();
   String searchQuery = '';
   List<CropCard> cropCards = [];
@@ -32,7 +31,7 @@ class _CropsInProgressState extends State<CropsInProgress> {
   }
 
   initialize() async {
-    final crops = await _cropService.getCropsByState(true);
+    final crops = await _cropService.getCropsByState(false);
     setState(() {
       cropCards = crops
           .map((crop) => CropCard(
@@ -40,7 +39,7 @@ class _CropsInProgressState extends State<CropsInProgress> {
                 startDate: parseDate(crop['createdDate']),
                 currentPhase: stringToCropCurrentPhase(crop['phase']),
                 cropName: crop['name'],
-                onDelete: (String id) {},
+                onDelete: deleteCrop,
               ))
           .toList();
     });
@@ -50,20 +49,6 @@ class _CropsInProgressState extends State<CropsInProgress> {
   void initState() {
     super.initState();
     initialize();
-  }
-
-  void addNewCrop() {
-    setState(() {
-      var phase = CropCurrentPhase.formula;
-      cropCards.add(CropCard(
-        cropId: '${cropCards.length + 1}',
-        startDate: '2024-05-30',
-        currentPhase: phase,
-        cropName: '${cropCards.length + 1}',
-        onDelete: (String id) {},
-      ));
-      cropCards = cropCards;
-    });
   }
 
   String parseDate(String date) {
@@ -97,6 +82,12 @@ class _CropsInProgressState extends State<CropsInProgress> {
     return '${parsedDate.year}-${parsedDate.month.toString().padLeft(2, '0')}-${parsedDate.day.toString().padLeft(2, '0')}';
   }
 
+  void deleteCrop(String cropId) {
+    setState(() {
+      cropCards.removeWhere((crop) => crop.cropId == cropId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,7 +99,7 @@ class _CropsInProgressState extends State<CropsInProgress> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Crops in Progress',
+                'Crops Archive',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
@@ -161,21 +152,9 @@ class _CropsInProgressState extends State<CropsInProgress> {
                 ],
               ),
             ),
-            ...cropCards.where((cropCard) =>
-                cropCard.startDate.contains(searchQuery) ||
-                cropCard.cropName.contains(searchQuery)),
+            ...cropCards
+                .where((cropCard) => cropCard.startDate.contains(searchQuery)),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            messageResponse(
-                context,
-                "Are you sure you want \nto create a crop?",
-                "Confirm",
-                addNewCrop);
-          },
-          backgroundColor: Color(0xFFB07D50),
-          child: Icon(Icons.add, color: Colors.white),
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }
