@@ -5,15 +5,15 @@ import 'package:greenhouse/models/record.dart';
 import 'package:greenhouse/services/record_service.dart'; // Import the RecordService
 
 class RecordsScreen extends StatefulWidget {
-  RecordsScreen({super.key});
+  final String cropId;
+  final String cropPhase;
+  RecordsScreen({required this.cropId, required this.cropPhase, super.key});
 
   @override
   State<RecordsScreen> createState() => _RecordsScreenState();
 }
 
 class _RecordsScreenState extends State<RecordsScreen> {
-  var cropId = 'cc7c6c19-c416-453a-a93b-99a02fa136d0';
-  var cropPhase = 'Formula';
   DateTime selectedDate = DateTime.now();
   String searchQuery = '';
   List<Record> records = [];
@@ -27,7 +27,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
 
   void loadRecords() async {
     try {
-      records = await recordService.getRecordsByCropAndPhase(cropId, cropPhase);
+      records = await recordService.getRecordsByCropAndPhase(widget.cropId, widget.cropPhase);
       //records = await recordService.getRecords(); // Call the getRecords method
       setState(() {});
     } catch (e) {
@@ -48,7 +48,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
             child: Column(
               children: [
                 Text(
-                  'Crop ID: $cropId',
+                  'Crop ID: ${widget.cropId}',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  cropPhase,
+                  widget.cropPhase,
                   style: TextStyle(fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
