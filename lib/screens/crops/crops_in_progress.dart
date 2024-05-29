@@ -35,12 +35,12 @@ class _CropsInProgressState extends State<CropsInProgress> {
     setState(() {
       cropCards = crops
           .map((crop) => CropCard(
-                cropId: crop['id'],
-                startDate: parseDate(crop['createdDate']),
-                currentPhase: stringToCropCurrentPhase(crop['phase']),
-                cropName: crop['name'],
-                onDelete: (String id) {},
-              ))
+        cropId: crop.id,
+        startDate: parseDate(crop.createdDate),
+        currentPhase: stringToCropCurrentPhase(crop.phase),
+        cropName: crop.name,
+        onDelete: (String id) {},//its only there as a placeholder it really does nothing as it shouldn't be able to delete from the crops in progress
+      ))
           .toList();
     });
   }
@@ -49,20 +49,6 @@ class _CropsInProgressState extends State<CropsInProgress> {
   void initState() {
     super.initState();
     initialize();
-  }
-
-  void addNewCrop() {
-    setState(() {
-      var phase = CropCurrentPhase.formula;
-      cropCards.add(CropCard(
-        cropId: '${cropCards.length + 1}',
-        startDate: '2024-05-30',
-        currentPhase: phase,
-        cropName: '${cropCards.length + 1}',
-        onDelete: (String id) {},
-      ));
-      cropCards = cropCards;
-    });
   }
 
   String parseDate(String date) {

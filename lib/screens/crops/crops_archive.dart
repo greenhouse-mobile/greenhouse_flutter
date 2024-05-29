@@ -34,14 +34,18 @@ class _CropsArchiveState extends State<CropsArchive> {
     final crops = await _cropService.getCropsByState(false);
     setState(() {
       cropCards = crops
-          .map((crop) => CropCard(
-                cropId: crop['id'],
-                startDate: parseDate(crop['createdDate']),
-                currentPhase: stringToCropCurrentPhase(crop['phase']),
-                cropName: crop['name'],
-                onDelete: deleteCrop,
-              ))
-          .toList();
+    .map((crop) => CropCard(
+        cropId: crop.id,
+        startDate: parseDate(crop.createdDate),
+        currentPhase: stringToCropCurrentPhase(crop.phase),
+        cropName: crop.name,
+        onDelete: (String id) {
+          setState(() {
+            cropCards.removeWhere((card) => card.cropId == id);
+          });
+        },
+      ))
+    .toList();
     });
   }
 
