@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:greenhouse/models/crop_phase.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/crop_card.dart';
-import 'package:greenhouse/widgets/message_response.dart';
 
 import '../../services/crop_service.dart';
 
@@ -165,17 +164,6 @@ class _CropsInProgressState extends State<CropsInProgress> {
                 cropCard.startDate.contains(searchQuery) ||
                 cropCard.cropName.contains(searchQuery)),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            messageResponse(
-                context,
-                "Are you sure you want \nto create a crop?",
-                "Confirm",
-                addNewCrop);
-          },
-          backgroundColor: Color(0xFFB07D50),
-          child: Icon(Icons.add, color: Colors.white),
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());
   }
