@@ -56,7 +56,10 @@ class MyApp extends StatelessWidget {
             builder = (BuildContext _) => RecordsScreen();
             break;
           case '/user-profile':
-            builder = (BuildContext _) => UserProfile();
+            builder = (BuildContext _) => UserProfileScreen();
+            break;
+          case '/company-profile':
+            builder = (BuildContext _) => CompanyProfileScreen();
             break;
           default:
             throw Exception('Invalid route: ${settings.name}');
