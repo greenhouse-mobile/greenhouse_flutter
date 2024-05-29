@@ -1,23 +1,23 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/record_card.dart';
 import 'package:greenhouse/models/record.dart';
+import 'package:greenhouse/services/record_service.dart'; // Import the RecordService
 
 class RecordsScreen extends StatefulWidget {
-  RecordsScreen({super.key});
+  final String cropId;
+  final String cropPhase;
+  RecordsScreen({required this.cropId, required this.cropPhase, super.key});
 
   @override
   State<RecordsScreen> createState() => _RecordsScreenState();
 }
 
 class _RecordsScreenState extends State<RecordsScreen> {
-  var cropId = '1';
-  var cropPhase = 'Preparation Area';
   DateTime selectedDate = DateTime.now();
   String searchQuery = '';
   List<Record> records = [];
+  final RecordService recordService = RecordService(); // Create an instance of the RecordService class
 
   @override
   void initState() {
@@ -25,58 +25,14 @@ class _RecordsScreenState extends State<RecordsScreen> {
     loadRecords();
   }
 
-  void loadRecords() {
-    String jsonString = '''{
-      "records": [
-          {
-          "id": "cc2c4c87-c511-243a-a45c-99a02fa112d1",
-          "created_by": "Alan Galavis",
-          "crop_day": 1,
-          "created_at": "Mon May 27 2024",
-          "updated_at": "Mon May 27 2024",
-          "phase": "Formula",
-          "crop_id": "cc7c6c19-c416-453a-a93b-99a02fa136d0",
-          "payload": {
-            "data": [
-              {"name": "Hay", "value": "128"},
-              {"name": "Corn", "value": "300"},
-              {"name": "Guano", "value": "100"},
-              {"name": "Cotton seed cake", "value": "400"},
-              {"name": "Soybean meal", "value": "356"},
-              {"name": "Urea", "value": "356"},
-              {"name": "Ammonium sulfate", "value": "125"}
-            ]
-          }
-        },
-        {
-          "id": "cc2c4c87-c511-243a-a45c-99a02fa112d1",
-          "created_by": "Winston Smith",
-          "crop_day": 2,
-          "created_at": "Tue May 28 2024",
-          "updated_at": "Tue May 28 2024",
-          "phase": "Formula",
-          "crop_id": "cc8b6c19-b816-323a-c93b-99a02fa126d0",
-          "payload": {
-            "data": [
-              {"name": "Hay", "value": "129"},
-              {"name": "Corn", "value": "299"},
-              {"name": "Guano", "value": "102"},
-              {"name": "Cotton seed cake", "value": "425"},
-              {"name": "Soybean meal", "value": "357"},
-              {"name": "Urea", "value": "359"},
-              {"name": "Ammonium sulfate", "value": "123"}
-            ]
-          }
-        }
-      ]
-    }''';
-
-    Map<String, dynamic> jsonData = jsonDecode(jsonString);
-    records = (jsonData['records'] as List)
-        .map((recordJson) => Record.fromJson(recordJson))
-        .toList();
-
-    setState(() {});
+  void loadRecords() async {
+    try {
+      records = await recordService.getRecordsByCropAndPhase(widget.cropId, widget.cropPhase);
+      //records = await recordService.getRecords(); // Call the getRecords method
+      setState(() {});
+    } catch (e) {
+      print('Failed to load records: $e');
+    }
   }
 
   @override
@@ -92,7 +48,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
             child: Column(
               children: [
                 Text(
-                  'Crop ID: $cropId',
+                  'Crop ID: ${widget.cropId}',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -100,7 +56,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  cropPhase,
+                  widget.cropPhase,
                   style: TextStyle(fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
