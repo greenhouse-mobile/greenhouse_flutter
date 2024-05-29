@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:greenhouse/models/coworker.dart';
+import 'package:greenhouse/models/profile.dart';
 import 'package:greenhouse/screens/profiles/add_coworker_screen.dart';
+import 'package:greenhouse/services/profile_service.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/navigation_button.dart';
@@ -14,61 +15,31 @@ class CompanyProfileScreen extends StatefulWidget {
 
 class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   String searchQuery = '';
-  var companyName = 'Pero Agro J&V SAC';
+  var companyName = 'Peru Agro J&V S.A.C';
   var tin = '8767123131';
   var picture =
       'https://plazavea.vteximg.com.br/arquivos/ids/429454-450-450/20181533.jpg?v=637382855570500000';
 
-  List<Coworker> coworkers = [
-    Coworker(
-        name: "Alan",
-        role: "Supervising technician",
-        username: "alan",
-        email: "alan@gmail.com",
-        image: "https://i.imgur.com/xPyz8mG.png"),
-    Coworker(
-        name: "Eric",
-        role: "Supervising technician",
-        username: "eric",
-        email: "eric@gmail.com",
-        image: "https://i.imgur.com/xPyz8mG.png"),
-    Coworker(
-        name: "Nicolas",
-        role: "Supervising technician",
-        username: "nicolas",
-        email: "nicolas@gmail.com",
-        image: "https://i.imgur.com/xPyz8mG.png"),
-    Coworker(
-        name: "Carlo",
-        role: "Supervising technician",
-        username: "carlo",
-        email: "carlo@gmail.com",
-        image: "https://i.imgur.com/xPyz8mG.png"),
-    Coworker(
-        name: "Lucero",
-        role: "Supervising technician",
-        username: "lucero",
-        email: "lucero@gmail.com",
-        image: "https://i.imgur.com/xPyz8mG.png"),
-    Coworker(
-        name: "Soto",
-        role: "Supervising technician",
-        username: "soto",
-        email: "soto@gmail.com",
-        image: "https://i.imgur.com/xPyz8mG.png"),
-    Coworker(
-        name: "Dobby",
-        role: "Supervising technician",
-        username: "dobby",
-        email: "dobby@gmail.com",
-        image: "https://i.imgur.com/xPyz8mG.png"),
-    Coworker(
-        name: "Max",
-        role: "Supervising technician",
-        username: "max",
-        email: "max@gmail.com",
-        image: "https://i.imgur.com/xPyz8mG.png"),
-  ];
+  List<Profile> profiles = [];
+  final ProfileService profileService = ProfileService();
+
+  @override
+  void initState() {
+    super.initState();
+    loadProfiles();
+  }
+
+  void loadProfiles() async {
+    try {
+      List<Profile> fetchedProfiles =
+          await profileService.getProfilesByCompany(companyName);
+      setState(() {
+        profiles = fetchedProfiles;
+      });
+    } catch (e) {
+      print('Failed to load profiles: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,9 +110,9 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   }
 
   Widget _employeesSection(BuildContext context) {
-    List<Coworker> filteredCoworkers = coworkers
-        .where((coworker) =>
-            coworker.name.toLowerCase().contains(searchQuery.toLowerCase()))
+    List<Profile> filteredCoworkers = profiles
+        .where((profile) =>
+            profile.firstName.toLowerCase().contains(searchQuery.toLowerCase()))
         .toList();
 
     return Container(
@@ -156,7 +127,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
               SizedBox(width: 50),
               ElevatedButton(
                 style: ButtonStyle(
-                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Color(0xFF4C6444))))),
@@ -167,16 +138,18 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                       builder: (context) => AddCoworkerScreen(
                         updateList: (String name, String role, String username,
                             String email) {
-                          coworkers.add(Coworker(
-                            name: name,
+                          profiles.add(Profile(
+                            id: profiles.length.toString(),
+                            userId: profiles.length.toString(),
+                            firstName: name,
+                            lastName: name,
+                            company: companyName,
+                            iconUrl: "https://i.imgur.com/xPyz8mG.png",
                             role: role,
-                            username: username,
-                            email: email,
-                            image: "https://i.imgur.com/xPyz8mG.png",
                           ));
 
                           setState(() {
-                            coworkers = coworkers;
+                            profiles = profiles;
                           });
                         },
                       ),
@@ -205,9 +178,9 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
           Column(
             children: filteredCoworkers
                 .map((coworker) => CoworkerCard(
-                      name: coworker.name,
+                      name: '${coworker.firstName} ${coworker.lastName}',
                       role: coworker.role,
-                      image: coworker.image,
+                      image: coworker.iconUrl,
                     ))
                 .toList(),
           ),
