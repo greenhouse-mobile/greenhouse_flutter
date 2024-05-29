@@ -1,6 +1,6 @@
 <p align="center">
   <a>
-    <img alt="Greenhouse logo" src="assets/images/logo/logo.svg" width="200" />
+    <img alt="Greenhouse logo" src="assets/logo/logo.svg" width="200" />
   </a>
 </p>
 
@@ -31,6 +31,7 @@ flutter pub get
 ```
 
 4. Run the project with:
+
 ```
 flutter run
 ```

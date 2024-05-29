@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:greenhouse/models/crop_phase.dart';
+import 'package:greenhouse/widgets/delete_dialog.dart';
 
 class CropCard extends StatefulWidget {
   final String startDate;
-  final String phase;
+  final CropCurrentPhase currentPhase;
   final String cropId;
+  final String cropName;
+  final Function(String) onDelete;
 
   const CropCard(
       {super.key,
       required this.startDate,
-      required this.phase,
-      required this.cropId});
+      required this.currentPhase,
+      required this.cropId,
+      required this.cropName,
+      required this.onDelete});
 
   @override
   State<CropCard> createState() => _CropCardState();
@@ -25,7 +31,11 @@ class _CropCardState extends State<CropCard> {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/stepper');
+                if (widget.currentPhase == CropCurrentPhase.harvest) {
+                  Navigator.pushNamed(context, '/stepper', arguments: widget);
+                } else {
+                  Navigator.pushNamed(context, '/stepper', arguments: widget);
+                }
               },
               child: Card(
                 color: Color(0xFFFFFFFF),
@@ -46,7 +56,7 @@ class _CropCardState extends State<CropCard> {
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Crop ID: ${widget.cropId}',
+                                child: Text('Crop Name: ${widget.cropName}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ),
@@ -67,21 +77,32 @@ class _CropCardState extends State<CropCard> {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: Row(
-                                  children: [
-                                    Text('Delete'),
-                                    Icon(Icons.delete,
-                                        color: Color(0xFF465B3F)),
-                                  ],
+                          if (widget.currentPhase == CropCurrentPhase.harvest)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    deleteDialog(
+                                        context,
+                                        "Are you sure you want to \ndelete crop ${widget.cropId}?",
+                                        "Yes, Delete",
+                                        () => widget.onDelete(widget.cropId));
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Delete',
+                                        style:
+                                            TextStyle(color: Color(0xFFDE4F4F)),
+                                      ),
+                                      Icon(Icons.delete,
+                                          color: Color(0xFFDE4F4F)),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Column(
@@ -106,7 +127,7 @@ class _CropCardState extends State<CropCard> {
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text('Current Phase: '),
                                     ),
-                                    Text(widget.phase),
+                                    Text(widget.currentPhase.phaseName),
                                   ],
                                 ),
                               ],

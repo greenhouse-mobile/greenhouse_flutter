@@ -1,43 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:greenhouse/models/crop.dart';
 import 'package:greenhouse/models/crop_phase.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
+import '../../widgets/crop_card.dart';
 
 class StepperWidget extends StatefulWidget {
-  const StepperWidget({super.key});
+  final CropCard chosenCrop;
+
+  const StepperWidget({super.key, required this.chosenCrop});
 
   @override
   State<StepperWidget> createState() => _StepperWidgetState();
 }
 
 class _StepperWidgetState extends State<StepperWidget> {
-  final List<CropPhase> itemsList = [
-    CropPhase.stock,
-    CropPhase.preparationArea,
-    CropPhase.bunker,
-    CropPhase.tunnel,
-    CropPhase.incubation,
-    CropPhase.casing,
-    CropPhase.induction,
-    CropPhase.harvest,
+  final List<CropCurrentPhase> itemsList = [
+    CropCurrentPhase.formula,
+    CropCurrentPhase.preparationArea,
+    CropCurrentPhase.bunker,
+    CropCurrentPhase.tunnel,
+    CropCurrentPhase.incubation,
+    CropCurrentPhase.casing,
+    CropCurrentPhase.induction,
+    CropCurrentPhase.harvest,
   ];
 
-  final Crop chosenCrop = Crop(
-    id: '1',
-    startDate: '2021-10-01',
-    phase: CropPhase.tunnel,
-    state: 'In progress',
-  );
+  CropCard? chosenCrop;
+
+  @override
+  void initState(){
+    super.initState();
+    chosenCrop = widget.chosenCrop;
+  }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> stepperChildren = [];
 
-    stepperChildren.add(StepperTitle());
+    stepperChildren.add(StepperTitle(name: widget.chosenCrop.cropName, date: widget.chosenCrop.startDate));
 
     for (final item in itemsList) {
       if (double.parse(item.phaseNumber) <
-          double.parse(chosenCrop.phase.phaseNumber)) {
+          double.parse(chosenCrop?.currentPhase.phaseNumber ?? '0')) {
         stepperChildren.add(
           StepperButton(
             phase: item,
@@ -47,7 +50,7 @@ class _StepperWidgetState extends State<StepperWidget> {
             },
           ),
         );
-      } else if (item == chosenCrop.phase) {
+      } else if (item == chosenCrop?.currentPhase) {
         stepperChildren.add(
           StepperButton(
             phase: item,
@@ -57,7 +60,7 @@ class _StepperWidgetState extends State<StepperWidget> {
             },
           ),
         );
-      } else if (item != chosenCrop.phase) {
+      } else if (item != chosenCrop?.currentPhase) {
         stepperChildren.add(
           StepperButton(
             phase: item,
@@ -96,6 +99,11 @@ class _StepperWidgetState extends State<StepperWidget> {
 }
 
 class StepperTitle extends StatelessWidget {
+  final String name;
+  final String date;
+
+  StepperTitle({required this.name, required this.date});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -125,7 +133,7 @@ class StepperTitle extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          'Crop ID: ID - #127',
+          'Crop Name: $name',
           style: TextStyle(color: Color(0xFF444444)),
           textAlign: TextAlign.center,
         ),
@@ -144,7 +152,7 @@ class StepperTitle extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             TextSpan(
-              text: '22/05/2024',
+              text: date,
               style: TextStyle(color: Colors.grey),
             ),
           ],
@@ -155,7 +163,7 @@ class StepperTitle extends StatelessWidget {
 }
 
 class StepperButton extends StatelessWidget {
-  final CropPhase phase;
+  final CropCurrentPhase phase;
   final bool isComplete;
   final bool isCurrent;
   final VoidCallback navigateTo;
