@@ -50,12 +50,14 @@ class MyApp extends StatelessWidget {
             builder = (BuildContext _) => CropsArchive(key: UniqueKey());
             break;
           case '/stepper':
-            builder = (BuildContext _) => StepperWidget(chosenCrop: settings.arguments as CropCard);
+            builder = (BuildContext _) =>
+                StepperWidget(chosenCrop: settings.arguments as CropCard);
             break;
           case '/records':
             builder = (BuildContext _) => RecordsScreen(
                 cropId: (settings.arguments as Map<String, String>)['cropId']!,
-                cropPhase: (settings.arguments as Map<String, String>)['cropPhase']!);
+                cropPhase:
+                    (settings.arguments as Map<String, String>)['cropPhase']!);
             break;
           case '/user-profile':
             builder = (BuildContext _) => UserProfileScreen();
