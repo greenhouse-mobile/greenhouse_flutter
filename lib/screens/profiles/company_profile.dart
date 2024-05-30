@@ -5,6 +5,7 @@ import 'package:greenhouse/services/profile_service.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/navigation_button.dart';
+import 'package:uuid/uuid.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
   const CompanyProfileScreen({super.key});
@@ -31,10 +32,16 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
 
   void loadProfiles() async {
     try {
+      // Obtener perfiles del servidor
       List<Profile> fetchedProfiles =
           await profileService.getProfilesByCompany(companyName);
+
+      // Combinar perfiles del servidor con los perfiles locales
+      List<Profile> allProfiles = List.from(profiles);
+      allProfiles.addAll(fetchedProfiles);
+
       setState(() {
-        profiles = fetchedProfiles;
+        profiles = allProfiles;
       });
     } catch (e) {
       print('Failed to load profiles: $e');
@@ -112,7 +119,13 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   Widget _employeesSection(BuildContext context) {
     List<Profile> filteredCoworkers = profiles
         .where((profile) =>
-            profile.firstName.toLowerCase().contains(searchQuery.toLowerCase()))
+            profile.firstName
+                .toLowerCase()
+                .contains(searchQuery.toLowerCase()) ||
+            profile.lastName
+                .toLowerCase()
+                .contains(searchQuery.toLowerCase()) ||
+            profile.role.toLowerCase().contains(searchQuery.toLowerCase()))
         .toList();
 
     return Container(
@@ -127,7 +140,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
               SizedBox(width: 50),
               ElevatedButton(
                 style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Color(0xFF4C6444))))),
@@ -136,21 +149,29 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => AddCoworkerScreen(
-                        updateList: (String name, String role, String username,
-                            String email) {
-                          profiles.add(Profile(
-                            id: profiles.length.toString(),
-                            userId: profiles.length.toString(),
-                            firstName: name,
-                            lastName: name,
-                            company: companyName,
-                            iconUrl: "https://i.imgur.com/xPyz8mG.png",
-                            role: role,
-                          ));
+                        updateList: (String firstName, String lastName,
+                            String role, String username) async {
+                          try {
+                            String newId = Uuid().v4();
+                            Profile newProfile = Profile(
+                              id: newId,
+                              userId: username,
+                              firstName: firstName,
+                              lastName: lastName,
+                              company: companyName,
+                              iconUrl:
+                                  "https://icons.veryicon.com/png/o/education-technology/test-website-linear-icon/user-147.png",
+                              role: role,
+                            );
 
-                          setState(() {
-                            profiles = profiles;
-                          });
+                            setState(() {
+                              profiles.add(newProfile);
+                            });
+
+                            await profileService.addProfile(newProfile);
+                          } catch (e) {
+                            print('Failed to add profile: $e');
+                          }
                         },
                       ),
                     ),

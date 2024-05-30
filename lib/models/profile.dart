@@ -28,4 +28,16 @@ class Profile {
       role: json['role'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'userId': userId,
+      'firstName': firstName,
+      'lastName': lastName,
+      'company': company,
+      'iconUrl': iconUrl,
+      'role': role,
+    };
+  }
 }
