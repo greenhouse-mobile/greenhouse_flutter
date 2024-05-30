@@ -19,7 +19,7 @@ class UserProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Go back', style: TextStyle(fontSize: 16)),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
