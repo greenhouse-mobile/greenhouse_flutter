@@ -31,11 +31,16 @@ class _RecordCardState extends State<RecordCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Record ID: ${widget.record.id}',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                )
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Record ID: ${widget.record.id}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      softWrap: true,
+                    ),
+                  ),
+                ),
               ],
             ),
             Align(
