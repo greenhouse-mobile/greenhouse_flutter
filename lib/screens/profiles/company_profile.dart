@@ -127,6 +127,23 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             profile.role.toLowerCase().contains(searchQuery.toLowerCase()))
         .toList();
 
+    void updateCoworkerProfile(Profile updatedProfile) {
+      setState(() {
+        int index =
+            profiles.indexWhere((profile) => profile.id == updatedProfile.id);
+        if (index != -1) {
+          profiles[index] = updatedProfile;
+        }
+      });
+    }
+
+    void deleteCoworkerProfile(String id) {
+      setState(() {
+        profiles.removeWhere((profile) => profile.id == id);
+      });
+      Navigator.pop(context);
+    }
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView.builder(
@@ -218,15 +235,8 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   MaterialPageRoute(
                     builder: (context) => EditCoworkerScreen(
                       profile: coworker,
-                      updateProfile: (Profile updatedProfile) {
-                        setState(() {
-                          int index = profiles.indexWhere(
-                              (profile) => profile.id == coworker.id);
-                          if (index != -1) {
-                            profiles[index] = updatedProfile;
-                          }
-                        });
-                      },
+                      updateProfile: updateCoworkerProfile,
+                      deleteProfile: deleteCoworkerProfile,
                     ),
                   ),
                 );

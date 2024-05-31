@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/profile.dart';
+import 'package:greenhouse/widgets/delete_dialog.dart';
 import 'package:greenhouse/widgets/message_response.dart';
 
 class EditCoworkerScreen extends StatefulWidget {
@@ -7,10 +8,12 @@ class EditCoworkerScreen extends StatefulWidget {
     super.key,
     required this.profile,
     required this.updateProfile,
+    required this.deleteProfile,
   });
 
   final Profile profile;
   final Function(Profile) updateProfile;
+  final Function(String) deleteProfile;
 
   @override
   State<EditCoworkerScreen> createState() => _EditCoworkerScreen();
@@ -138,7 +141,22 @@ class _EditCoworkerScreen extends State<EditCoworkerScreen> {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
-                      )
+                      ),
+                      const SizedBox(height: 20),
+                      InkWell(
+                        onTap: () {
+                          deleteDialog(
+                            context,
+                            "Are you sure you want to \ndelete ${widget.profile.firstName} ${widget.profile.lastName} employee?",
+                            "Yes, Delete",
+                            () => widget.deleteProfile(widget.profile.id),
+                          );
+                        },
+                        child: Text(
+                          'Delete employee',
+                          style: TextStyle(fontSize: 16, color: Colors.red),
+                        ),
+                      ),
                     ],
                   ),
                 ),
