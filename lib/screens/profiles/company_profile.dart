@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/profile.dart';
 import 'package:greenhouse/screens/profiles/add_coworker_screen.dart';
+import 'package:greenhouse/screens/profiles/edit_coworker_screen.dart';
 import 'package:greenhouse/services/profile_service.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
@@ -32,11 +33,9 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
 
   void loadProfiles() async {
     try {
-      // Obtener perfiles del servidor
       List<Profile> fetchedProfiles =
           await profileService.getProfilesByCompany(companyName);
 
-      // Combinar perfiles del servidor con los perfiles locales
       List<Profile> allProfiles = List.from(profiles);
       allProfiles.addAll(fetchedProfiles);
 
@@ -128,84 +127,118 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             profile.role.toLowerCase().contains(searchQuery.toLowerCase()))
         .toList();
 
-    return Container(
-      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
-      padding: const EdgeInsets.all(32.0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text('Employees',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              SizedBox(width: 50),
-              ElevatedButton(
-                style: ButtonStyle(
-                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Color(0xFF4C6444))))),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddCoworkerScreen(
-                        updateList: (String firstName, String lastName,
-                            String role, String username) async {
-                          try {
-                            String newId = Uuid().v4();
-                            Profile newProfile = Profile(
-                              id: newId,
-                              userId: username,
-                              firstName: firstName,
-                              lastName: lastName,
-                              company: companyName,
-                              iconUrl:
-                                  "https://icons.veryicon.com/png/o/education-technology/test-website-linear-icon/user-147.png",
-                              role: role,
-                            );
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: filteredCoworkers.length + 2,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text('Employees',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Color(0xFF4C6444))))),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddCoworkerScreen(
+                            updateList: (String firstName, String lastName,
+                                String role, String username) async {
+                              try {
+                                String newId = Uuid().v4();
+                                Profile newProfile = Profile(
+                                  id: newId,
+                                  userId: username,
+                                  firstName: firstName,
+                                  lastName: lastName,
+                                  company: "CompanyName",
+                                  iconUrl:
+                                      "https://icons.veryicon.com/png/o/education-technology/test-website-linear-icon/user-147.png",
+                                  role: role,
+                                );
 
-                            setState(() {
-                              profiles.add(newProfile);
-                            });
+                                setState(() {
+                                  profiles.add(newProfile);
+                                });
 
-                            await profileService.addProfile(newProfile);
-                          } catch (e) {
-                            print('Failed to add profile: $e');
-                          }
-                        },
-                      ),
+                                await ProfileService().addProfile(newProfile);
+                              } catch (e) {
+                                print('Failed to add profile: $e');
+                              }
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Invite Employees",
+                      style: TextStyle(color: Color(0xFF4C6444)),
                     ),
-                  );
+                  ),
+                ],
+              ),
+            );
+          } else if (index == 1) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    searchQuery = value;
+                  });
                 },
-                child: Text(
-                  "Invite Employees",
-                  style: TextStyle(color: Color(0xFF4C6444)),
+                decoration: InputDecoration(
+                  hintText: 'Search employees...',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
                 ),
               ),
-            ],
-          ),
-          SizedBox(height: 20),
-          TextField(
-            onChanged: (value) {
-              setState(() {
-                searchQuery = value;
-              });
-            },
-            decoration: InputDecoration(
-              hintText: 'Search employees...',
-            ),
-          ),
-          SizedBox(height: 20),
-          Column(
-            children: filteredCoworkers
-                .map((coworker) => CoworkerCard(
-                      name: '${coworker.firstName} ${coworker.lastName}',
-                      role: coworker.role,
-                      image: coworker.iconUrl,
-                    ))
-                .toList(),
-          ),
-        ],
+            );
+          } else {
+            Profile coworker = filteredCoworkers[index - 2];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditCoworkerScreen(
+                      profile: coworker,
+                      updateProfile: (Profile updatedProfile) {
+                        setState(() {
+                          int index = profiles.indexWhere(
+                              (profile) => profile.id == coworker.id);
+                          if (index != -1) {
+                            profiles[index] = updatedProfile;
+                          }
+                        });
+                      },
+                    ),
+                  ),
+                );
+              },
+              child: CoworkerCard(
+                name: '${coworker.firstName} ${coworker.lastName}',
+                role: coworker.role,
+                image: coworker.iconUrl,
+              ),
+            );
+          }
+        },
       ),
     );
   }
