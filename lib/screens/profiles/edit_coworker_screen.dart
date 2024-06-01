@@ -17,10 +17,10 @@ class EditCoworkerScreen extends StatefulWidget {
   final Function(String) deleteProfile;
 
   @override
-  State<EditCoworkerScreen> createState() => _EditCoworkerScreen();
+  State<EditCoworkerScreen> createState() => _EditCoworkerScreenState();
 }
 
-class _EditCoworkerScreen extends State<EditCoworkerScreen> {
+class _EditCoworkerScreenState extends State<EditCoworkerScreen> {
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
   late TextEditingController _roleController;
@@ -29,12 +29,11 @@ class _EditCoworkerScreen extends State<EditCoworkerScreen> {
 
   @override
   void initState() {
-    _firstNameController =
-        TextEditingController(text: widget.profile.firstName);
-    _lastNameController = TextEditingController(text: widget.profile.lastName);
-    _roleController = TextEditingController(text: widget.profile.role);
-    _iconUrlController = TextEditingController(text: widget.profile.iconUrl);
-    _userIdController = TextEditingController(text: widget.profile.userId);
+    _firstNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _roleController = TextEditingController();
+    _iconUrlController = TextEditingController();
+    _userIdController = TextEditingController();
     super.initState();
   }
 
@@ -74,44 +73,64 @@ class _EditCoworkerScreen extends State<EditCoworkerScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       EditingTextForm(
-                          hintText: "First name",
-                          valueController: _firstNameController,
-                          placeholderText: widget.profile.firstName),
+                        hintText: "First name",
+                        valueController: _firstNameController,
+                        placeholderText: widget.profile.firstName,
+                      ),
                       EditingTextForm(
-                          hintText: "Last name",
-                          valueController: _lastNameController,
-                          placeholderText: widget.profile.lastName),
+                        hintText: "Last name",
+                        valueController: _lastNameController,
+                        placeholderText: widget.profile.lastName,
+                      ),
                       EditingTextForm(
-                          hintText: "Role within the company",
-                          valueController: _roleController,
-                          placeholderText: widget.profile.role),
+                        hintText: "Role within the company",
+                        valueController: _roleController,
+                        placeholderText: widget.profile.role,
+                      ),
                       EditingTextForm(
-                          hintText: "Username",
-                          valueController: _userIdController,
-                          placeholderText: widget.profile.userId),
+                        hintText: "Username",
+                        valueController: _userIdController,
+                        placeholderText: widget.profile.userId,
+                      ),
                       EditingTextForm(
-                          hintText: "Image",
-                          valueController: _iconUrlController,
-                          placeholderText: widget.profile.iconUrl),
-                      const SizedBox(height: 40),
+                        hintText: "Image",
+                        valueController: _iconUrlController,
+                        placeholderText: widget.profile.iconUrl,
+                      ),
+                      SizedBox(height: 40),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor: WidgetStateProperty.all<Color>(
-                                  Color(0xFF67864A)),
-                              shape: WidgetStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(
-                                          color: Color(0xFF4C6444))))),
+                            backgroundColor: WidgetStateProperty.all<Color>(
+                              Color(0xFF67864A),
+                            ),
+                            shape:
+                                WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(
+                                  color: Color(0xFF4C6444),
+                                ),
+                              ),
+                            ),
+                          ),
                           onPressed: () async {
-                            String firstName = _firstNameController.text;
-                            String lastName = _lastNameController.text;
-                            String role = _roleController.text;
-                            String iconUrl = _iconUrlController.text;
-                            String userId = _userIdController.text;
+                            String firstName = _firstNameController.text.isEmpty
+                                ? widget.profile.firstName
+                                : _firstNameController.text;
+                            String lastName = _lastNameController.text.isEmpty
+                                ? widget.profile.lastName
+                                : _lastNameController.text;
+                            String role = _roleController.text.isEmpty
+                                ? widget.profile.role
+                                : _roleController.text;
+                            String iconUrl = _iconUrlController.text.isEmpty
+                                ? widget.profile.iconUrl
+                                : _iconUrlController.text;
+                            String userId = _userIdController.text.isEmpty
+                                ? widget.profile.userId
+                                : _userIdController.text;
                             String id = widget.profile.id;
                             String company = widget.profile.company;
 
@@ -153,7 +172,7 @@ class _EditCoworkerScreen extends State<EditCoworkerScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                       InkWell(
                         onTap: () {
                           deleteDialog(

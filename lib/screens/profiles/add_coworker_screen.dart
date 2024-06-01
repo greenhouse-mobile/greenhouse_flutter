@@ -106,7 +106,7 @@ class AddCoworkerScreen extends StatelessWidget {
                               }
                             },
                             child: const Text(
-                              "Invite Employee",
+                              "Add employee",
                               style: TextStyle(color: Colors.white),
                             ),
                           ))

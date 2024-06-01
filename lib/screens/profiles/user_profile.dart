@@ -1,9 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/models/user.dart';
+import 'package:greenhouse/screens/profiles/edit_password_screen.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/avatar.dart';
+import 'package:greenhouse/widgets/delete_dialog.dart';
 import 'package:greenhouse/widgets/navigation_button.dart';
 
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends StatefulWidget {
+  @override
+  State<UserProfileScreen> createState() => _UserProfileScreenState();
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  User user =
+      User(id: "1", username: "TheAdmin", password: "admin123", role: "admin");
+
+  void updateUserProfile(User updatedUser) {
+    setState(() {
+      user = updatedUser;
+    });
+  }
+
+  void deleteUser(String id) {
+    //Todo: Delete user
+    Navigator.pop(context);
+    Future.delayed(Duration(milliseconds: 5), () {
+      Navigator.pushReplacementNamed(context, '/login');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var name = 'Winston';
@@ -69,16 +94,35 @@ class UserProfileScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditPasswordScreen(
+                              user: user,
+                              updateUser: updateUserProfile,
+                            ),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Forgot your password?',
                         style:
-                            TextStyle(fontSize: 16, color: Color(0xFF4C6444)),
+                            TextStyle(fontSize: 16, color: Color(0xFF67864A)),
                       ),
                     ),
                     SizedBox(height: 20),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        deleteDialog(
+                          context,
+                          "Are you sure you want to \ndelete your account?",
+                          "Yes, Delete",
+                          () {
+                            deleteUser(user.id);
+                          },
+                        );
+                      },
                       child: Text(
                         'Delete account',
                         style: TextStyle(fontSize: 16, color: Colors.red),
