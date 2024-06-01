@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/company.dart';
 import 'package:greenhouse/models/profile.dart';
-import 'package:greenhouse/screens/profiles/add_coworker_screen.dart';
-import 'package:greenhouse/screens/profiles/edit_company_screen.dart';
-import 'package:greenhouse/screens/profiles/edit_coworker_screen.dart';
+import 'package:greenhouse/screens/profiles/add_coworker.dart';
+import 'package:greenhouse/screens/profiles/edit_company.dart';
+import 'package:greenhouse/screens/profiles/edit_coworker.dart';
 import 'package:greenhouse/services/profile_service.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';

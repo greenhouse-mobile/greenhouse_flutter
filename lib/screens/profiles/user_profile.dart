@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/user.dart';
-import 'package:greenhouse/screens/profiles/edit_password_screen.dart';
+import 'package:greenhouse/screens/profiles/edit_password.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/delete_dialog.dart';
