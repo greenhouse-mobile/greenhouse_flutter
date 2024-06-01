@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:greenhouse/models/record.dart';
+import 'package:greenhouse/screens/crops/edit_record.dart';
+import 'package:greenhouse/widgets/delete_dialog.dart';
 
 class RecordCard extends StatefulWidget {
   final Record record;
@@ -41,6 +43,32 @@ class _RecordCardState extends State<RecordCard> {
                     ),
                   ),
                 ),
+                IconButton(
+                    icon: Icon(Icons.delete, color: Color(0xFFDE4F4F)),
+                    onPressed: () {
+                      //Todo: Delete function
+                      deleteDialog(
+                        context,
+                        "Are you sure you want to \ndelete record ${widget.record.id}?",
+                        "Yes, Delete",
+                        () => {},
+                      );
+                    },
+                    padding: EdgeInsets.all(0.0)),
+                IconButton(
+                    icon: Icon(Icons.edit, color: Color(0xFF67864A)),
+                    onPressed: () {
+                      //Todo: Edit function
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditRecordScreen(
+                              record: widget.record,
+                              updateRecord: (Record record) {}),
+                        ),
+                      );
+                    },
+                    padding: EdgeInsets.all(0.0)),
               ],
             ),
             Align(
