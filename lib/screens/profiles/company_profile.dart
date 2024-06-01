@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/models/company.dart';
 import 'package:greenhouse/models/profile.dart';
 import 'package:greenhouse/screens/profiles/add_coworker_screen.dart';
+import 'package:greenhouse/screens/profiles/edit_company_screen.dart';
 import 'package:greenhouse/screens/profiles/edit_coworker_screen.dart';
 import 'package:greenhouse/services/profile_service.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
-import 'package:greenhouse/widgets/navigation_button.dart';
 import 'package:uuid/uuid.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
@@ -17,10 +18,12 @@ class CompanyProfileScreen extends StatefulWidget {
 
 class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   String searchQuery = '';
-  var companyName = 'Peru Agro J&V S.A.C';
-  var tin = '8767123131';
-  var picture =
-      'https://plazavea.vteximg.com.br/arquivos/ids/429454-450-450/20181533.jpg?v=637382855570500000';
+  Company company = Company(
+    name: 'Peru Agro J&V S.A.C',
+    tin: '8767123131',
+    iconUrl:
+        'https://plazavea.vteximg.com.br/arquivos/ids/429454-450-450/20181533.jpg?v=637382855570500000',
+  );
 
   List<Profile> profiles = [];
   final ProfileService profileService = ProfileService();
@@ -34,7 +37,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   void loadProfiles() async {
     try {
       List<Profile> fetchedProfiles =
-          await profileService.getProfilesByCompany(companyName);
+          await profileService.getProfilesByCompany(company.name);
 
       List<Profile> allProfiles = List.from(profiles);
       allProfiles.addAll(fetchedProfiles);
@@ -45,6 +48,29 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
     } catch (e) {
       print('Failed to load profiles: $e');
     }
+  }
+
+  void updateCompanyProfile(Company updatedCompany) {
+    setState(() {
+      company = updatedCompany;
+    });
+  }
+
+  void updateCoworkerProfile(Profile updatedProfile) {
+    setState(() {
+      int index =
+          profiles.indexWhere((profile) => profile.id == updatedProfile.id);
+      if (index != -1) {
+        profiles[index] = updatedProfile;
+      }
+    });
+  }
+
+  void deleteCoworkerProfile(String id) {
+    setState(() {
+      profiles.removeWhere((profile) => profile.id == id);
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -60,7 +86,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             children: [
               Center(
                 child: Avatar(
-                  imageUrl: picture,
+                  imageUrl: company.iconUrl,
                   radius: 70,
                 ),
               ),
@@ -71,8 +97,8 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _companyInfo("Company name", companyName),
-                      _companyInfo("TIN", tin),
+                      _companyInfo("Company name", company.name),
+                      _companyInfo("TIN", company.tin),
                       SizedBox(height: 20),
                       Text(
                         "Settings",
@@ -88,10 +114,35 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      NavigationButton(
-                        buttonText: "Edit company profile",
-                        route: '/login',
-                      ),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    Color(0xFF67864A)),
+                                shape: WidgetStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
+                                        side: BorderSide(
+                                            color: Color(0xFF4C6444))))),
+                            onPressed: () async {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditCompanyScreen(
+                                    company: company,
+                                    updateCompany: updateCompanyProfile,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Edit company profile',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )),
                       SizedBox(height: 40),
                     ],
                   ),
@@ -126,23 +177,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 .contains(searchQuery.toLowerCase()) ||
             profile.role.toLowerCase().contains(searchQuery.toLowerCase()))
         .toList();
-
-    void updateCoworkerProfile(Profile updatedProfile) {
-      setState(() {
-        int index =
-            profiles.indexWhere((profile) => profile.id == updatedProfile.id);
-        if (index != -1) {
-          profiles[index] = updatedProfile;
-        }
-      });
-    }
-
-    void deleteCoworkerProfile(String id) {
-      setState(() {
-        profiles.removeWhere((profile) => profile.id == id);
-      });
-      Navigator.pop(context);
-    }
 
     return Padding(
       padding: const EdgeInsets.all(16.0),

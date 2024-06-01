@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/profile.dart';
 import 'package:greenhouse/widgets/delete_dialog.dart';
+import 'package:greenhouse/widgets/editing_textForm.dart';
 import 'package:greenhouse/widgets/message_response.dart';
 
 class EditCoworkerScreen extends StatefulWidget {
@@ -72,16 +73,26 @@ class _EditCoworkerScreen extends State<EditCoworkerScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _coworkerInfo("First name", _firstNameController,
-                          widget.profile.firstName),
-                      _coworkerInfo("Last name", _lastNameController,
-                          widget.profile.lastName),
-                      _coworkerInfo("Role within the company", _roleController,
-                          widget.profile.role),
-                      _coworkerInfo(
-                          "Username", _userIdController, widget.profile.userId),
-                      _coworkerInfo(
-                          "Image", _iconUrlController, widget.profile.iconUrl),
+                      EditingTextForm(
+                          hintText: "First name",
+                          valueController: _firstNameController,
+                          placeholderText: widget.profile.firstName),
+                      EditingTextForm(
+                          hintText: "Last name",
+                          valueController: _lastNameController,
+                          placeholderText: widget.profile.lastName),
+                      EditingTextForm(
+                          hintText: "Role within the company",
+                          valueController: _roleController,
+                          placeholderText: widget.profile.role),
+                      EditingTextForm(
+                          hintText: "Username",
+                          valueController: _userIdController,
+                          placeholderText: widget.profile.userId),
+                      EditingTextForm(
+                          hintText: "Image",
+                          valueController: _iconUrlController,
+                          placeholderText: widget.profile.iconUrl),
                       const SizedBox(height: 40),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
@@ -137,7 +148,7 @@ class _EditCoworkerScreen extends State<EditCoworkerScreen> {
                             }
                           },
                           child: const Text(
-                            "Edit Employee's profile",
+                            "Edit employee profile",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -165,49 +176,6 @@ class _EditCoworkerScreen extends State<EditCoworkerScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _coworkerInfo(String hintText, TextEditingController valueController,
-      String placeholderText) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 20),
-        Text(
-          hintText,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
-        TextFormField(
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter your $hintText';
-            }
-            return null;
-          },
-          controller: valueController,
-          decoration: InputDecoration(
-            hintText: placeholderText,
-            hintStyle: TextStyle(color: Color(0xFF727272), fontSize: 16),
-            fillColor: Color(0xFFECECEC),
-            filled: true,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.transparent),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.transparent),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Color(0xFF67864A)),
-            ),
-            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          ),
-        ),
-      ],
     );
   }
 }

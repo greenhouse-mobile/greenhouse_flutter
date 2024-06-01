@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/widgets/editing_textForm.dart';
 import 'package:greenhouse/widgets/message_response.dart';
 
 class AddCoworkerScreen extends StatelessWidget {
@@ -41,12 +42,31 @@ class AddCoworkerScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _coworkerInfo("First name", _controllerFirstName),
-                      _coworkerInfo("Last name", _controllerLastName),
-                      _coworkerInfo(
-                          "Role withing the company", _controllerRole),
-                      _coworkerInfo("Username", _controllerUserId),
-                      _coworkerInfo("Email", _controllerEmail),
+                      EditingTextForm(
+                        hintText: "First name",
+                        valueController: _controllerFirstName,
+                        placeholderText: "Enter first name",
+                      ),
+                      EditingTextForm(
+                        hintText: "Last name",
+                        valueController: _controllerLastName,
+                        placeholderText: "Enter last name",
+                      ),
+                      EditingTextForm(
+                        hintText: "Role withing the company",
+                        valueController: _controllerRole,
+                        placeholderText: "Enter role",
+                      ),
+                      EditingTextForm(
+                        hintText: "Username",
+                        valueController: _controllerUserId,
+                        placeholderText: "Enter username",
+                      ),
+                      EditingTextForm(
+                        hintText: "Email",
+                        valueController: _controllerEmail,
+                        placeholderText: "Enter email",
+                      ),
                       const SizedBox(height: 40),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * 0.7,
@@ -98,48 +118,6 @@ class AddCoworkerScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _coworkerInfo(String hintText, TextEditingController valueController) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 20),
-        Text(
-          hintText,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
-        TextFormField(
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter your $hintText';
-            }
-            return null;
-          },
-          controller: valueController,
-          decoration: InputDecoration(
-            hintText: 'Enter $hintText',
-            hintStyle: TextStyle(color: Color(0xFF727272), fontSize: 16),
-            fillColor: Color(0xFFECECEC),
-            filled: true,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.transparent),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.transparent),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Color(0xFF67864A)),
-            ),
-            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          ),
-        ),
-      ],
     );
   }
 }
