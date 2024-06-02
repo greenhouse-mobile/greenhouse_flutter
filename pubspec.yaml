@@ -11,9 +11,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.2.1
+  uuid: ^3.0.5
   
   english_words: ^4.0.0
   provider: ^6.0.0
+  flutter_svg: ^0.22.0
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +27,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: fonts/Nunito-VariableFont_wght.ttf
+        - asset: fonts/Nunito-Italic-VariableFont_wght.ttf
+  assets:
+    - assets/logo/logo.svg
+    - assets/logo/logo_white.svg
+    - assets/icons/clock.svg
+    - assets/icons/archive.svg
+    - assets/icons/statistics.svg
+    - assets/mushroom_images/mushroom.jpeg
+    - assets/icons/plant.svg
+    - assets/mushroom_images/champis.png
