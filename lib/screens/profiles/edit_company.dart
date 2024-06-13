@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/company.dart';
+import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/editing_textForm.dart';
 import 'package:greenhouse/widgets/message_response.dart';
 
@@ -139,6 +140,7 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: GreenhouseBottomNavigationBar(),
     );
   }
 }
