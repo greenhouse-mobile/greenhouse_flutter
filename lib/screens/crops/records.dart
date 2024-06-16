@@ -113,8 +113,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
               .where((record) =>
                   record.id.contains(searchQuery) ||
                   record.createdBy.contains(searchQuery))
-              .map((record) => RecordCard(record: record))
-              .toList(),
+              .map((record) => RecordCard(record: record)),
         ],
       ),
       bottomNavigationBar: GreenhouseBottomNavigationBar(),
