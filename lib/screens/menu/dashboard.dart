@@ -109,12 +109,6 @@ class _DashboardState extends State<Dashboard> {
           Text('Greenhouse',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         ]),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
