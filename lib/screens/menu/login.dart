@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:greenhouse/screens/menu/sign_up.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:greenhouse/widgets/navigation_button.dart';
+import 'package:greenhouse/services/auth_service.dart';
+import 'package:greenhouse/models/signin.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key});
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -12,6 +14,30 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final AuthService _authService = AuthService();
+
+  void _login() async {
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text.trim();
+    if (username.isNotEmpty && password.isNotEmpty) {
+      try {
+        String profileId = await _authService
+            .signIn(SignIn(username: username, password: password));
+        Navigator.pushNamed(context, '/dashboard');
+      } catch (e) {
+        // Show an error message
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Failed to sign in: $e'),
+        ));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Please enter both username and password'),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +114,15 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 32),
             _loginSignUpButton(context),
             SizedBox(height: 20),
-            _inputField("Username", Icons.person),
+            _inputField("Username", Icons.person, _usernameController),
             SizedBox(height: 20),
-            _inputField("Password", Icons.lock),
+            _inputField("Password", Icons.lock, _passwordController),
             SizedBox(height: 315),
             NavigationButton(
               buttonText: "Login",
-              route: '/dashboard',
+              route:
+                  '/dashboard', // This is the route you want to navigate to after successful login
+              onPressed: _login, // Call the login function when pressed
             ),
           ],
         ),
@@ -151,10 +179,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _inputField(String hintText, IconData icon) {
+  Widget _inputField(
+      String hintText, IconData icon, TextEditingController controller) {
     bool isPassword = hintText == "Password";
 
     return TextField(
+      controller: controller,
       obscureText: isPassword ? _obscureText : false,
       decoration: InputDecoration(
         labelText: hintText,

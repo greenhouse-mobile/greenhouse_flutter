@@ -4,7 +4,7 @@ import 'package:greenhouse/models/signin.dart';
 import 'package:greenhouse/services/user_preferences.dart';
 import 'package:http/http.dart' as http;
 
-class AuthService{
+class AuthService {
   final String baseUrl = "http://10.0.2.2:3000/api/v1/";
 
   AuthService() {
@@ -24,7 +24,8 @@ class AuthService{
     );
     if (response.statusCode == 201) {
       // After successful sign-up, immediately sign-in
-      SignIn signIn = SignIn(username: signUp.username, password: signUp.password);
+      SignIn signIn =
+          SignIn(username: signUp.username, password: signUp.password);
       return await signInCompany(signIn, signUp);
     } else {
       throw Exception('Failed to sign up');

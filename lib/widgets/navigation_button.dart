@@ -4,20 +4,26 @@ class NavigationButton extends StatelessWidget {
   const NavigationButton(
       {super.key,
       required this.buttonText,
-      required this.route,
-      this.outline = false});
+      this.route,
+      this.outline = false,
+      this.onPressed});
+
   final String buttonText;
-  final String route;
+  final String? route;
   final bool outline;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, route);
-        },
+        onPressed: onPressed ??
+            () {
+              if (route != null) {
+                Navigator.pushReplacementNamed(context, route!);
+              }
+            },
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all(
               outline ? Colors.white : Color(0xFF67864A)),
