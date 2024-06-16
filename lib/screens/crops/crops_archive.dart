@@ -34,18 +34,18 @@ class _CropsArchiveState extends State<CropsArchive> {
     final crops = await _cropService.getCropsByState(false);
     setState(() {
       cropCards = crops
-    .map((crop) => CropCard(
-        cropId: crop.id,
-        startDate: parseDate(crop.createdDate),
-        currentPhase: stringToCropCurrentPhase(crop.phase),
-        cropName: crop.name,
-        onDelete: (String id) {
-          setState(() {
-            cropCards.removeWhere((card) => card.cropId == id);
-          });
-        },
-      ))
-    .toList();
+          .map((crop) => CropCard(
+                cropId: crop.id,
+                startDate: parseDate(crop.createdDate),
+                currentPhase: stringToCropCurrentPhase(crop.phase),
+                cropName: crop.name,
+                onDelete: (String id) {
+                  setState(() {
+                    cropCards.removeWhere((card) => card.cropId == id);
+                  });
+                },
+              ))
+          .toList();
     });
   }
 
@@ -75,10 +75,11 @@ class _CropsArchiveState extends State<CropsArchive> {
       'Dec': '12'
     };
     String monthNumber = months[components[1]]!;
-    String day =
-        int.parse(components[2]) < 10 ? '0${components[2]}' : components[2];
+    String day = int.parse(components[2]).toString().padLeft(2, '0');
+
     // Reconstruct the date string in a format that DateTime.parse can understand
     String reconstructedDate = '${components[3]}-$monthNumber-$day';
+
     // Parse the reconstructed string into a DateTime object
     DateTime parsedDate = DateTime.parse(reconstructedDate);
 
