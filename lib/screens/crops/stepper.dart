@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/crop_phase.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
+import 'package:greenhouse/widgets/message_response.dart';
 import '../../widgets/crop_card.dart';
 
 class StepperWidget extends StatefulWidget {
@@ -27,7 +28,7 @@ class _StepperWidgetState extends State<StepperWidget> {
   CropCard? chosenCrop;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     chosenCrop = widget.chosenCrop;
   }
@@ -36,7 +37,7 @@ class _StepperWidgetState extends State<StepperWidget> {
   Widget build(BuildContext context) {
     List<Widget> stepperChildren = [];
 
-    stepperChildren.add(StepperTitle(name: widget.chosenCrop.cropName, date: widget.chosenCrop.startDate));
+    //stepperChildren.add(StepperTitle(crop: widget.chosenCrop, context: context));
 
     for (final item in itemsList) {
       if (double.parse(item.phaseNumber) <
@@ -95,11 +96,14 @@ class _StepperWidgetState extends State<StepperWidget> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(left: 40, top: 30, bottom: 18),
-        child: ListView(
-          children: [
-            ...stepperChildren,
-          ],
+        padding: EdgeInsets.symmetric(horizontal: 60),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              StepperTitle(crop: widget.chosenCrop, context: context),
+              Column(children: [...stepperChildren]),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: GreenhouseBottomNavigationBar(),
@@ -108,10 +112,10 @@ class _StepperWidgetState extends State<StepperWidget> {
 }
 
 class StepperTitle extends StatelessWidget {
-  final String name;
-  final String date;
+  final CropCard crop;
+  final BuildContext context;
 
-  StepperTitle({required this.name, required this.date});
+  StepperTitle({required this.crop, required this.context});
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +127,8 @@ class StepperTitle extends StatelessWidget {
           _buildStepperInfo(),
           SizedBox(height: 20),
           _buildStartDateInfo(),
+          if (crop.currentPhase.phaseName != "Formula")
+            _buildMoveToPreviousCropPhase(context),
         ],
       ),
     );
@@ -142,8 +148,11 @@ class StepperTitle extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          'Crop Name: $name',
-          style: TextStyle(color: Color(0xFF444444)),
+          'Crop Name: ${crop.cropId}',
+          style: TextStyle(
+            color: Color(0xFF444444),
+            fontSize: 16,
+          ),
           textAlign: TextAlign.center,
         ),
       ],
@@ -158,13 +167,53 @@ class StepperTitle extends StatelessWidget {
           children: [
             TextSpan(
               text: 'Start Date: ',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
             ),
             TextSpan(
-              text: date,
-              style: TextStyle(color: Colors.grey),
+              text: crop.startDate,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+              ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMoveToPreviousCropPhase(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, bottom: 20),
+      child: OutlinedButton(
+        onPressed: () {
+          messageResponse(
+            context,
+            "Are you sure you want to\nmove to previous crop phase? \n\nAll records from ${crop.currentPhase.phaseName} \nphase will be lost.",
+            "Yes, Go Back",
+            () {
+              //TODO: Delete all records from current phase and move to previous phase
+              Navigator.of(context).pop();
+            },
+          );
+        },
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: Color(0xFFB07D50)),
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        child: Text(
+          "Move to previous phase",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFB07D50),
+          ),
         ),
       ),
     );
@@ -292,7 +341,7 @@ class StepperDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(left: 26),
+      padding: EdgeInsets.only(left: 25),
       child: SizedBox(
         height: 40,
         child: CustomPaint(

@@ -139,7 +139,7 @@ class _RecordCardState extends State<RecordCard> {
                         style: TextStyle(color: Color(0xFF8E8E8E))),
                   ],
                 );
-              }).toList(),
+              }),
             TextButton(
               child: Text(_showDetails ? 'Hide Details' : 'Show Details',
                   style: TextStyle(color: Color(0xFF8E8E8E))),
