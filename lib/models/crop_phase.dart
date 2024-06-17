@@ -1,5 +1,5 @@
 enum CropCurrentPhase {
-  formula,
+  stock,
   preparationArea,
   bunker,
   tunnel,
@@ -11,7 +11,7 @@ enum CropCurrentPhase {
 
 extension CropPhaseExtension on CropCurrentPhase {
   static final Map<CropCurrentPhase, String> _phaseNames = {
-    CropCurrentPhase.formula: "Formula",
+    CropCurrentPhase.stock: "Stock",
     CropCurrentPhase.preparationArea: "Preparation Area",
     CropCurrentPhase.bunker: "Bunker",
     CropCurrentPhase.tunnel: "Tunnel",
@@ -22,7 +22,7 @@ extension CropPhaseExtension on CropCurrentPhase {
   };
 
   static final Map<CropCurrentPhase, String> _phaseNumbers = {
-    CropCurrentPhase.formula: "0",
+    CropCurrentPhase.stock: "0",
     CropCurrentPhase.preparationArea: "1",
     CropCurrentPhase.bunker: "2",
     CropCurrentPhase.tunnel: "3",

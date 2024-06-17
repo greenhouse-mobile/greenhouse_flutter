@@ -35,10 +35,10 @@ class _CropsInProgressState extends State<CropsInProgress> {
     setState(() {
       cropCards = crops
           .map((crop) => CropCard(
-        cropId: crop.id,
+        id: crop.id,
         startDate: parseDate(crop.createdDate),
-        currentPhase: stringToCropCurrentPhase(crop.phase),
-        cropName: crop.name,
+        phase: stringToCropCurrentPhase(crop.phase),
+        name: crop.name,
         onDelete: (String id) {},//its only there as a placeholder it really does nothing as it shouldn't be able to delete from the crops in progress
       ))
           .toList();
@@ -53,28 +53,16 @@ class _CropsInProgressState extends State<CropsInProgress> {
 
   String parseDate(String date) {
     // Split the string by spaces
-    List<String> components = date.split(' ');
-
-    // Convert the month name to a month number
-    Map<String, String> months = {
-      'Jan': '01',
-      'Feb': '02',
-      'Mar': '03',
-      'Apr': '04',
-      'May': '05',
-      'Jun': '06',
-      'Jul': '07',
-      'Aug': '08',
-      'Sep': '09',
-      'Oct': '10',
-      'Nov': '11',
-      'Dec': '12'
-    };
-    String monthNumber = months[components[1]]!;
+    List<String> components = date.split(',');
+    // Split the date by slashes
+    components = components[0].split('/');
+    String month =
+    int.parse(components[0]) < 10 ? '0${components[0]}' : components[0];
     String day =
-        int.parse(components[2]) < 10 ? '0${components[2]}' : components[2];
+    int.parse(components[1]) < 10 ? '0${components[1]}' : components[1];
+    String year = components[2];
     // Reconstruct the date string in a format that DateTime.parse can understand
-    String reconstructedDate = '${components[3]}-$monthNumber-$day';
+    String reconstructedDate = '$year-$month-$day';
     // Parse the reconstructed string into a DateTime object
     DateTime parsedDate = DateTime.parse(reconstructedDate);
 
@@ -148,7 +136,7 @@ class _CropsInProgressState extends State<CropsInProgress> {
             ),
             ...cropCards.where((cropCard) =>
                 cropCard.startDate.contains(searchQuery) ||
-                cropCard.cropName.contains(searchQuery)),
+                cropCard.name.contains(searchQuery)),
           ],
         ),
         bottomNavigationBar: GreenhouseBottomNavigationBar());

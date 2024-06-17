@@ -3,7 +3,7 @@ class Crop {
   final String createdDate;
   final String name;
   final String author;
-  final bool active;
+  final bool state;
   final String phase;
 
   Crop({
@@ -11,17 +11,17 @@ class Crop {
     required this.createdDate,
     required this.name,
     required this.author,
-    required this.active,
+    required this.state,
     required this.phase,
   });
 
   factory Crop.fromJson(Map<String, dynamic> json) {
     return Crop(
       id: json['id'],
-      createdDate: json['createdDate'],
+      createdDate: json['startDate'],
       name: json['name'],
       author: json['author'],
-      active: json['active'],
+      state: json['state'],
       phase: json['phase'],
     );
   }

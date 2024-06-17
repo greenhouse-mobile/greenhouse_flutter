@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class AuthService {
   final String baseUrl =
-      "http://ip172-18-0-126-cpnl46gl2o9000av3g6g-3000.direct.labs.play-with-docker.com/api/v1/";
+      "http://10.0.2.2:3000/api/v1/";
 
   AuthService() {
     _printProfileId();

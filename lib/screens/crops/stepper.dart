@@ -15,7 +15,7 @@ class StepperWidget extends StatefulWidget {
 
 class _StepperWidgetState extends State<StepperWidget> {
   final List<CropCurrentPhase> itemsList = [
-    CropCurrentPhase.formula,
+    CropCurrentPhase.stock,
     CropCurrentPhase.preparationArea,
     CropCurrentPhase.bunker,
     CropCurrentPhase.tunnel,
@@ -41,39 +41,39 @@ class _StepperWidgetState extends State<StepperWidget> {
 
     for (final item in itemsList) {
       if (double.parse(item.phaseNumber) <
-          double.parse(chosenCrop?.currentPhase.phaseNumber ?? '0')) {
+          double.parse(chosenCrop?.phase.phaseNumber ?? '0')) {
         stepperChildren.add(
           StepperButton(
             phase: item,
             isComplete: true,
             navigateTo: () {
               Navigator.pushNamed(context, '/records', arguments: {
-                'cropId': chosenCrop?.cropId ?? '',
+                'cropId': chosenCrop?.id ?? '',
                 'cropPhase': item.phaseName,
               });
             },
           ),
         );
-      } else if (item == chosenCrop?.currentPhase) {
+      } else if (item == chosenCrop?.phase) {
         stepperChildren.add(
           StepperButton(
             phase: item,
             isCurrent: true,
             navigateTo: () {
               Navigator.pushNamed(context, '/records', arguments: {
-                'cropId': chosenCrop?.cropId ?? '',
+                'cropId': chosenCrop?.id ?? '',
                 'cropPhase': item.phaseName,
               });
             },
           ),
         );
-      } else if (item != chosenCrop?.currentPhase) {
+      } else if (item != chosenCrop?.phase) {
         stepperChildren.add(
           StepperButton(
             phase: item,
             navigateTo: () {
               Navigator.pushNamed(context, '/records', arguments: {
-                'cropId': chosenCrop?.cropId ?? '',
+                'cropId': chosenCrop?.id ?? '',
                 'cropPhase': item.phaseName,
               });
             },
@@ -127,7 +127,7 @@ class StepperTitle extends StatelessWidget {
           _buildStepperInfo(),
           SizedBox(height: 20),
           _buildStartDateInfo(),
-          if (crop.currentPhase.phaseName != "Formula")
+          if (crop.phase.phaseName != "Stock")
             _buildMoveToPreviousCropPhase(context),
         ],
       ),
@@ -148,7 +148,7 @@ class StepperTitle extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          'Crop Name: ${crop.cropId}',
+          'Crop Name: ${crop.id}',
           style: TextStyle(
             color: Color(0xFF444444),
             fontSize: 16,
@@ -192,7 +192,7 @@ class StepperTitle extends StatelessWidget {
         onPressed: () {
           messageResponse(
             context,
-            "Are you sure you want to\nmove to previous crop phase? \n\nAll records from ${crop.currentPhase.phaseName} \nphase will be lost.",
+            "Are you sure you want to\nmove to previous crop phase? \n\nAll records from ${crop.phase.phaseName} \nphase will be lost.",
             "Yes, Go Back",
             () {
               //TODO: Delete all records from current phase and move to previous phase
