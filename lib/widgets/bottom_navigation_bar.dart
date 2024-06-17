@@ -19,13 +19,13 @@ class _GreenhouseBottomNavigationBarState
 
     switch (index) {
       case 0:
-        Navigator.pushNamed(context, '/user-profile');
+        Navigator.pushReplacementNamed(context, '/user-profile');
         break;
       case 1:
-        Navigator.pushNamed(context, '/dashboard');
+        Navigator.pushReplacementNamed(context, '/dashboard');
         break;
       case 2:
-        Navigator.pushNamed(context, '/crops-in-progress');
+        Navigator.pushReplacementNamed(context, '/crops-in-progress');
         break;
     }
   }

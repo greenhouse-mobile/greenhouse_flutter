@@ -21,7 +21,7 @@ class NavigationButton extends StatelessWidget {
         onPressed: onPressed ??
             () {
               if (route != null) {
-                Navigator.pushReplacementNamed(context, route!);
+                Navigator.pushNamed(context, route!);
               }
             },
         style: ButtonStyle(

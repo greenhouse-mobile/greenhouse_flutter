@@ -141,7 +141,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   DashboardButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/statistics');
+                      Navigator.pushNamed(context, '/dashboard');
                     },
                     svgAsset: 'assets/icons/statistics.svg',
                     buttonText: 'Statistical\nReports',
