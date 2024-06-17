@@ -46,11 +46,10 @@ class _EditRecordScreenState extends State<EditRecordScreen> {
 
     final updatedRecord = Record(
       id: widget.record.id,
+      author: widget.record.author,
       cropId: widget.record.cropId,
-      createdAt: widget.record.createdAt,
-      createdBy: widget.record.createdBy,
-      cropDay: widget.record.cropDay,
-      updatedAt: widget.record.updatedAt,
+      createdDate: widget.record.createdDate,
+      updatedDate: widget.record.updatedDate,
       phase: widget.record.phase,
       payload: Payload(data: updatedPayloadData),
     );
