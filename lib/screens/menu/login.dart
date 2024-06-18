@@ -25,7 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         String profileId = await _authService
             .signIn(SignIn(username: username, password: password));
-        Navigator.pushNamed(context, '/dashboard');
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/dashboard', (route) => false);
       } catch (e) {
         // Show an error message
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

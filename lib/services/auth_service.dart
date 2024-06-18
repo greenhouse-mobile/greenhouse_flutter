@@ -1,12 +1,12 @@
 import 'dart:convert';
+import 'package:greenhouse/config.dart';
 import 'package:greenhouse/models/signup.dart';
 import 'package:greenhouse/models/signin.dart';
 import 'package:greenhouse/services/user_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  final String baseUrl =
-      "http://10.0.2.2:3000/api/v1/";
+  final String baseUrl = Config.baseUrl;
 
   AuthService() {
     _printProfileId();
