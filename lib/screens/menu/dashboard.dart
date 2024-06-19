@@ -26,12 +26,11 @@ class _DashboardState extends State<Dashboard> {
       "records": [
         {
           "id": "124234",
-          "created_by": "Winston Smith",
-          "crop_day": 1,
-          "created_at": "2021-08-01",
-          "updated_at": "2021-08-01",
+          "author": "Winston Smith",
+          "createdDate": "2021-08-01",
+          "updatedDate": "2021-08-01",
           "phase": "Preparation area",
-          "crop_id": "1",
+          "cropId": "1",
           "payload": {
             "data": [
               {"name": "Hay", "value": "128"},
@@ -46,12 +45,11 @@ class _DashboardState extends State<Dashboard> {
         },
         {
           "id": "124235",
-          "created_by": "Winston Smith",
-          "crop_day": 1,
-          "created_at": "2021-08-01",
-          "updated_at": "2021-08-01",
+          "author": "Winston Smith",
+          "createdDate": "2021-08-01",
+          "updatedDate": "2021-08-01",
           "phase": "Induction",
-          "crop_id": "1",
+          "cropId": "1",
           "payload": {
             "data": [
               {"name": "Hay", "value": "128"},
@@ -66,12 +64,11 @@ class _DashboardState extends State<Dashboard> {
         },
         {
           "id": "124236",
-          "created_by": "Winston Smith",
-          "crop_day": 1,
-          "created_at": "2021-08-01",
-          "updated_at": "2021-08-01",
+          "author": "Winston Smith",
+          "createdDate": "2021-08-01",
+          "updatedDate": "2021-08-01",
           "phase": "Tunnel",
-          "crop_id": "1",
+          "cropId": "1",
           "payload": {
             "data": [
               {"name": "Hay", "value": "128"},
@@ -109,12 +106,6 @@ class _DashboardState extends State<Dashboard> {
           Text('Greenhouse',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         ]),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -147,7 +138,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   DashboardButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/statistics');
+                      Navigator.pushNamed(context, '/dashboard');
                     },
                     svgAsset: 'assets/icons/statistics.svg',
                     buttonText: 'Statistical\nReports',

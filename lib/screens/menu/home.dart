@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 20),
           Text("To use the application, please log in or sign up",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: Color(0xFF000000))),
+              style: TextStyle(fontSize: 16, color: Color(0xFF000000))),
           SizedBox(height: 50),
           NavigationButton(
               buttonText: "Sign up", route: '/signup', outline: true),

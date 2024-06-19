@@ -5,17 +5,17 @@ import 'package:greenhouse/widgets/delete_dialog.dart';
 
 class CropCard extends StatefulWidget {
   final String startDate;
-  final CropCurrentPhase currentPhase;
-  final String cropId;
-  final String cropName;
+  final CropCurrentPhase phase;
+  final String id;
+  final String name;
   final Function(String) onDelete;
 
   const CropCard(
       {super.key,
       required this.startDate,
-      required this.currentPhase,
-      required this.cropId,
-      required this.cropName,
+      required this.phase,
+      required this.id,
+      required this.name,
       required this.onDelete});
 
   @override
@@ -31,7 +31,7 @@ class _CropCardState extends State<CropCard> {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                if (widget.currentPhase == CropCurrentPhase.harvest) {
+                if (widget.phase == CropCurrentPhase.harvest) {
                   Navigator.pushNamed(context, '/stepper', arguments: widget);
                 } else {
                   Navigator.pushNamed(context, '/stepper', arguments: widget);
@@ -56,7 +56,7 @@ class _CropCardState extends State<CropCard> {
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Crop Name: ${widget.cropName}',
+                                child: Text('Crop Name: ${widget.name}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ),
@@ -77,7 +77,7 @@ class _CropCardState extends State<CropCard> {
                               ),
                             ],
                           ),
-                          if (widget.currentPhase == CropCurrentPhase.harvest)
+                          if (widget.phase == CropCurrentPhase.harvest)
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -85,9 +85,9 @@ class _CropCardState extends State<CropCard> {
                                   onTap: () {
                                     deleteDialog(
                                         context,
-                                        "Are you sure you want to \ndelete crop ${widget.cropId}?",
+                                        "Are you sure you want to \ndelete crop ${widget.id}?",
                                         "Yes, Delete",
-                                        () => widget.onDelete(widget.cropId));
+                                        () => widget.onDelete(widget.id));
                                   },
                                   child: Row(
                                     children: [
@@ -127,7 +127,7 @@ class _CropCardState extends State<CropCard> {
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text('Current Phase: '),
                                     ),
-                                    Text(widget.currentPhase.phaseName),
+                                    Text(widget.phase.phaseName),
                                   ],
                                 ),
                               ],

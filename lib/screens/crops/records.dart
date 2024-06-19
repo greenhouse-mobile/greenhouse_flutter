@@ -28,6 +28,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
   void loadRecords() async {
     try {
       records = await recordService.getRecordsByCropAndPhase(widget.cropId, widget.cropPhase);
+      print("Records loaded: $records");
       //records = await recordService.getRecords(); // Call the getRecords method
       setState(() {});
     } catch (e) {
@@ -112,9 +113,8 @@ class _RecordsScreenState extends State<RecordsScreen> {
           ...records
               .where((record) =>
                   record.id.contains(searchQuery) ||
-                  record.createdBy.contains(searchQuery))
-              .map((record) => RecordCard(record: record))
-              .toList(),
+                  record.createdDate.contains(searchQuery))
+              .map((record) => RecordCard(record: record)),
         ],
       ),
       bottomNavigationBar: GreenhouseBottomNavigationBar(),

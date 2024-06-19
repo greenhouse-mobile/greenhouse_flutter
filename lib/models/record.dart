@@ -27,20 +27,18 @@ class Payload {
 
 class Record {
   final String id;
-  final String createdBy;
-  final int cropDay;
-  final String createdAt;
-  final String updatedAt;
+  final String author;
+  final String createdDate;
+  final String updatedDate;
   final String phase;
   final String cropId;
   final Payload payload;
 
   Record({
     required this.id,
-    required this.createdBy,
-    required this.cropDay,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.author,
+    required this.createdDate,
+    required this.updatedDate,
     required this.phase,
     required this.cropId,
     required this.payload,
@@ -49,12 +47,13 @@ class Record {
   factory Record.fromJson(Map<String, dynamic> json) {
     return Record(
       id: json['id'],
-      createdBy: json['created_by'],
-      cropDay: json['crop_day'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      createdDate: json['createdDate'],
+      author: json['author'],
+      updatedDate: json['updatedDate'],
       phase: json['phase'],
-      cropId: json['crop_id'],
+      //Hardcode cropId
+      cropId: 'f629f63c-3e96-4527-be6f-c1bddc1af552',
+      //cropId: json['cropId'],
       payload: Payload.fromJson(json['payload']),
     );
   }

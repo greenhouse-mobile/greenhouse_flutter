@@ -83,7 +83,7 @@ class _RecordCardState extends State<RecordCard> {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text('Author: '),
                       ),
-                      Text(widget.record.createdBy,
+                      Text(widget.record.author,
                           style: TextStyle(color: Color(0xFF8E8E8E))),
                     ],
                   ),
@@ -95,7 +95,7 @@ class _RecordCardState extends State<RecordCard> {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text('Entry Date: '),
                       ),
-                      Text(widget.record.createdAt,
+                      Text(widget.record.createdDate,
                           style: TextStyle(color: Color(0xFF8E8E8E))),
                     ],
                   ),
@@ -112,7 +112,7 @@ class _RecordCardState extends State<RecordCard> {
                             style: TextStyle(color: Color(0xFF8E8E8E))),
                       ],
                     ),
-                  if (currentRoute == '/records')
+                  /*if (currentRoute == '/records')
                     Row(
                       children: [
                         SvgPicture.asset('assets/icons/plant.svg',
@@ -124,7 +124,7 @@ class _RecordCardState extends State<RecordCard> {
                         Text(widget.record.cropDay.toString(),
                             style: TextStyle(color: Color(0xFF8E8E8E))),
                       ],
-                    ),
+                    ),*/
                 ],
               ),
             ),
@@ -139,7 +139,7 @@ class _RecordCardState extends State<RecordCard> {
                         style: TextStyle(color: Color(0xFF8E8E8E))),
                   ],
                 );
-              }).toList(),
+              }),
             TextButton(
               child: Text(_showDetails ? 'Hide Details' : 'Show Details',
                   style: TextStyle(color: Color(0xFF8E8E8E))),
