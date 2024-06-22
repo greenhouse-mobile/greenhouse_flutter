@@ -23,7 +23,7 @@ class RecordService {
       String cropId, String phase) async {
     final token = await UserPreferences.getToken();
     final response = await http.get(
-      Uri.parse('${baseUrl}records'),
+      Uri.parse('${baseUrl}records/$cropId/${phase.toLowerCase()}'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token', // Use token for authentication
@@ -35,12 +35,7 @@ class RecordService {
       List<dynamic> recordsList = body[
           'records']; // Adjust this line based on the actual structure of your JSON response
       print("Records List: $recordsList");
-      List<Record> records =
-          recordsList.map((dynamic item) => Record.fromJson(item)).toList();
-      return records
-          .where((record) =>
-              record.cropId == cropId && record.phase == phase.toLowerCase())
-          .toList();
+      return recordsList.map((dynamic item) => Record.fromJson(item)).toList();
     } else {
       throw Exception('Failed to load records');
     }

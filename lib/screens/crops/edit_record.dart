@@ -47,7 +47,6 @@ class _EditRecordScreenState extends State<EditRecordScreen> {
     final updatedRecord = Record(
       id: widget.record.id,
       author: widget.record.author,
-      cropId: widget.record.cropId,
       createdDate: widget.record.createdDate,
       updatedDate: widget.record.updatedDate,
       phase: widget.record.phase,
@@ -73,14 +72,6 @@ class _EditRecordScreenState extends State<EditRecordScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    Text(
-                      'Crop ID: ${widget.record.cropId}',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF4C6444)),
-                      textAlign: TextAlign.center,
-                    ),
                     Text(
                       widget.record.phase,
                       style: TextStyle(fontSize: 16),

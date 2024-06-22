@@ -31,7 +31,6 @@ class Record {
   final String createdDate;
   final String updatedDate;
   final String phase;
-  final String cropId;
   final Payload payload;
 
   Record({
@@ -40,7 +39,6 @@ class Record {
     required this.createdDate,
     required this.updatedDate,
     required this.phase,
-    required this.cropId,
     required this.payload,
   });
 
@@ -52,7 +50,6 @@ class Record {
       updatedDate: json['updatedDate'],
       phase: json['phase'],
       //Hardcode cropId
-      cropId: 'f629f63c-3e96-4527-be6f-c1bddc1af552',
       //cropId: json['cropId'],
       payload: Payload.fromJson(json['payload']),
     );
