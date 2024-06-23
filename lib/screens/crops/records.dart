@@ -17,8 +17,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
   DateTime selectedDate = DateTime.now();
   String searchQuery = '';
   List<Record> records = [];
-  final RecordService recordService =
-      RecordService(); // Create an instance of the RecordService class
+  final RecordService recordService = RecordService();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
       records = await recordService.getRecordsByCropAndPhase(
           widget.cropId, widget.cropPhase);
       print("Records loaded: $records");
-      //records = await recordService.getRecords(); // Call the getRecords method
       setState(() {});
     } catch (e) {
       print('Failed to load records: $e');

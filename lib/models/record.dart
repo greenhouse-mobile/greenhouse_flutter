@@ -29,7 +29,7 @@ class Record {
   final String id;
   final String author;
   final String createdDate;
-  final String updatedDate;
+  String updatedDate;
   final String phase;
   final Payload payload;
 
@@ -49,8 +49,6 @@ class Record {
       author: json['author'],
       updatedDate: json['updatedDate'],
       phase: json['phase'],
-      //Hardcode cropId
-      //cropId: json['cropId'],
       payload: Payload.fromJson(json['payload']),
     );
   }
