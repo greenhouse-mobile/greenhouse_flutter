@@ -215,7 +215,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                                   userId: username,
                                   firstName: firstName,
                                   lastName: lastName,
-                                  company: "CompanyName",
                                   iconUrl:
                                       "https://icons.veryicon.com/png/o/education-technology/test-website-linear-icon/user-147.png",
                                   role: role,

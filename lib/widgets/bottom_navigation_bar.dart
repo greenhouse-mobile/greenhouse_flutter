@@ -19,13 +19,16 @@ class _GreenhouseBottomNavigationBarState
 
     switch (index) {
       case 0:
-        Navigator.pushReplacementNamed(context, '/user-profile');
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/user-profile', (route) => false);
         break;
       case 1:
-        Navigator.pushReplacementNamed(context, '/dashboard');
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/dashboard', (route) => false);
         break;
       case 2:
-        Navigator.pushReplacementNamed(context, '/crops-in-progress');
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/crops-in-progress', (route) => false);
         break;
     }
   }

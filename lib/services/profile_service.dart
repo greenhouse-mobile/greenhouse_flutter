@@ -1,32 +1,45 @@
 import 'dart:convert';
+import 'package:greenhouse/config.dart';
+import 'package:greenhouse/services/user_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../models/profile.dart';
 
 class ProfileService {
-  final String baseUrl = "https://json-server-greenhouse.vercel.app/";
+  final String baseUrl = Config.baseUrl;
   List<Profile> profilesList = [];
 
-  Future<List<Profile>> getProfiles() async {
-    final response = await http.get(Uri.parse('${baseUrl}profiles'));
+  Future<Profile> getUserProfile() async {
+    final token = await UserPreferences.getToken();
+    final response = await http.get(
+      Uri.parse('${baseUrl}profiles/users/me'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
     if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-      profilesList = (jsonResponse['profiles'] as List)
-          .map((profileJson) => Profile.fromJson(profileJson))
-          .toList();
-      return profilesList;
+      return Profile.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load profiles');
+      throw Exception('Failed to load profile');
     }
   }
 
   Future<List<Profile>> getProfilesByCompany(String companyName) async {
-    final response = await http.get(Uri.parse('${baseUrl}profiles'));
+    final token = await UserPreferences.getToken();
+    final response = await http.get(
+      Uri.parse('${baseUrl}profiles'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       profilesList = (jsonResponse['profiles'] as List)
           .map((profileJson) => Profile.fromJson(profileJson))
-          .where((profile) => profile.company == companyName)
+          /*.where((profile) => profile.company == companyName)*/
           .toList();
+      print(profilesList);
       return profilesList;
     } else {
       throw Exception('Failed to load profiles for company: $companyName');

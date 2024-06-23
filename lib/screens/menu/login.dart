@@ -121,9 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 315),
             NavigationButton(
               buttonText: "Login",
-              route:
-                  '/dashboard', // This is the route you want to navigate to after successful login
-              onPressed: _login, // Call the login function when pressed
+              route: '/dashboard',
+              onPressed: _login,
             ),
           ],
         ),

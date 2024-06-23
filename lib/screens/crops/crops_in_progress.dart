@@ -35,12 +35,13 @@ class _CropsInProgressState extends State<CropsInProgress> {
     setState(() {
       cropCards = crops
           .map((crop) => CropCard(
-        id: crop.id,
-        startDate: parseDate(crop.createdDate),
-        phase: stringToCropCurrentPhase(crop.phase),
-        name: crop.name,
-        onDelete: (String id) {},//its only there as a placeholder it really does nothing as it shouldn't be able to delete from the crops in progress
-      ))
+                id: crop.id,
+                startDate: parseDate(crop.createdDate),
+                phase: stringToCropCurrentPhase(crop.phase),
+                name: crop.name,
+                onDelete: (String
+                    id) {}, //its only there as a placeholder it really does nothing as it shouldn't be able to delete from the crops in progress
+              ))
           .toList();
     });
   }
@@ -52,30 +53,22 @@ class _CropsInProgressState extends State<CropsInProgress> {
   }
 
   String parseDate(String date) {
-    // Split the string by spaces
     List<String> components = date.split(',');
-    // Split the date by slashes
     components = components[0].split('/');
     String month =
-    int.parse(components[0]) < 10 ? '0${components[0]}' : components[0];
+        int.parse(components[0]) < 10 ? '0${components[0]}' : components[0];
     String day =
-    int.parse(components[1]) < 10 ? '0${components[1]}' : components[1];
+        int.parse(components[1]) < 10 ? '0${components[1]}' : components[1];
     String year = components[2];
-    // Reconstruct the date string in a format that DateTime.parse can understand
     String reconstructedDate = '$year-$month-$day';
-    // Parse the reconstructed string into a DateTime object
     DateTime parsedDate = DateTime.parse(reconstructedDate);
-
-    // Format the DateTime object into a string
     return '${parsedDate.year}-${parsedDate.month.toString().padLeft(2, '0')}-${parsedDate.day.toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Go Back', style: TextStyle(fontSize: 16)),
-        ),
+        appBar: AppBar(),
         body: ListView(
           children: <Widget>[
             Padding(

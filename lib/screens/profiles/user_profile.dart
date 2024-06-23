@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/models/profile.dart';
 import 'package:greenhouse/models/user.dart';
 import 'package:greenhouse/screens/profiles/edit_password.dart';
+import 'package:greenhouse/services/profile_service.dart';
+import 'package:greenhouse/services/user_preferences.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/delete_dialog.dart';
@@ -12,6 +15,22 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  final _profileService = ProfileService();
+  Profile? profile;
+  String? username = "";
+
+  Future<void> initialize() async {
+    profile = await _profileService.getUserProfile();
+    username = await UserPreferences.getUsername();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initialize();
+  }
+
   User user =
       User(id: "1", username: "TheAdmin", password: "admin123", role: "admin");
 
@@ -31,26 +50,15 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var name = 'Winston';
-    var lastName = 'Smith';
-    var picture =
-        'https://schoolworkhelper.net/wp-content/uploads/2011/07/Winston-Smith.gif';
-    var fullName = '$name $lastName';
-    var username = 'wsmith';
-    var role = 'Supervising technician';
-    var companyName = 'Peru Agro J&V SAC';
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Go back', style: TextStyle(fontSize: 16)),
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             Center(
               child: Avatar(
-                imageUrl: picture,
+                imageUrl: profile?.iconUrl ?? "default_profile_image.jpg",
                 radius: 70,
               ),
             ),
@@ -61,8 +69,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _userInfo("Name", fullName),
-                    _userInfo("Username", username),
+                    _userInfo(
+                        "Name",
+                        "${profile?.firstName ?? ""} ${profile?.lastName ?? ""}"
+                            .trim()),
+                    _userInfo("Username", username ?? ""),
                     SizedBox(height: 20),
                     InkWell(
                         onTap: () {
@@ -82,10 +93,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         )),
                     SizedBox(height: 10),
                     Text(
-                      companyName,
+                      "companyName",
                       style: TextStyle(fontSize: 16, color: Color(0xFF444444)),
                     ),
-                    _userInfo("Role within company", role),
+                    _userInfo("Role within company", profile?.role ?? ""),
                     SizedBox(height: 20),
                     Text(
                       "Settings",

@@ -13,8 +13,7 @@ class CropService {
       Uri.parse('${baseUrl}crops'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization':
-            'Bearer ${UserPreferences.getToken()}', // Use token for authentication
+        'Authorization': 'Bearer ${UserPreferences.getToken()}',
       },
     );
     if (response.statusCode == 200) {

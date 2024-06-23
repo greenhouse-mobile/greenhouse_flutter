@@ -133,7 +133,6 @@ class _EditCoworkerScreenState extends State<EditCoworkerScreen> {
                                 ? widget.profile.userId
                                 : _userIdController.text;
                             String id = widget.profile.id;
-                            String company = widget.profile.company;
 
                             if (firstName.isNotEmpty ||
                                 lastName.isNotEmpty ||
@@ -145,7 +144,6 @@ class _EditCoworkerScreenState extends State<EditCoworkerScreen> {
                                 userId: userId,
                                 firstName: firstName,
                                 lastName: lastName,
-                                company: company,
                                 iconUrl: iconUrl,
                                 role: role,
                               );
