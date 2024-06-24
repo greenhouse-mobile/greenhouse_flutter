@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:greenhouse/models/user.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/editing_textForm.dart';
 import 'package:greenhouse/widgets/message_response.dart';
 
 class EditPasswordScreen extends StatefulWidget {
-  const EditPasswordScreen({
-    super.key,
-    required this.user,
-    required this.updateUser,
-  });
-
-  final User user;
-  final Function(User) updateUser;
+  const EditPasswordScreen({super.key});
 
   @override
   State<EditPasswordScreen> createState() => _EditPasswordScreen();
@@ -97,17 +89,8 @@ class _EditPasswordScreen extends State<EditPasswordScreen> {
                               if ((password.isNotEmpty) &&
                                   (confirmPassword.isNotEmpty) &&
                                   (password == confirmPassword)) {
-                                User updatedUser = User(
-                                    id: widget.user.id,
-                                    username: widget.user.username,
-                                    password: password,
-                                    role: widget.user.role);
-
                                 void editUser() {
-                                  try {
-                                    widget.updateUser(updatedUser);
-                                    Navigator.pop(context, updatedUser);
-                                  } catch (e) {
+                                  try {} catch (e) {
                                     print('Failed to update your profile: $e');
                                   }
                                 }

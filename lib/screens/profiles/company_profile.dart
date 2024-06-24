@@ -4,10 +4,10 @@ import 'package:greenhouse/models/profile.dart';
 import 'package:greenhouse/screens/profiles/add_coworker.dart';
 import 'package:greenhouse/screens/profiles/edit_company.dart';
 import 'package:greenhouse/screens/profiles/edit_coworker.dart';
+import 'package:greenhouse/services/company_service.dart';
 import 'package:greenhouse/services/profile_service.dart';
 import 'package:greenhouse/widgets/avatar.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
-import 'package:uuid/uuid.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
   const CompanyProfileScreen({super.key});
@@ -17,60 +17,25 @@ class CompanyProfileScreen extends StatefulWidget {
 }
 
 class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
-  String searchQuery = '';
-  Company company = Company(
-    name: 'Peru Agro J&V S.A.C',
-    tin: '8767123131',
-    iconUrl:
-        'https://plazavea.vteximg.com.br/arquivos/ids/429454-450-450/20181533.jpg?v=637382855570500000',
-  );
+  final _companyService = CompanyService();
+  final _profileService = ProfileService();
 
+  Company? company;
   List<Profile> profiles = [];
-  final ProfileService profileService = ProfileService();
+
+  String searchQuery = '';
+
+  Future<void> initialize() async {
+    company = await _companyService.getCompanyByProfileId();
+    profiles = await _profileService.getProfilesByCompany(company?.id ?? '');
+    print(profiles);
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
-    loadProfiles();
-  }
-
-  void loadProfiles() async {
-    try {
-      List<Profile> fetchedProfiles =
-          await profileService.getProfilesByCompany(company.name);
-
-      List<Profile> allProfiles = List.from(profiles);
-      allProfiles.addAll(fetchedProfiles);
-
-      setState(() {
-        profiles = allProfiles;
-      });
-    } catch (e) {
-      print('Failed to load profiles: $e');
-    }
-  }
-
-  void updateCompanyProfile(Company updatedCompany) {
-    setState(() {
-      company = updatedCompany;
-    });
-  }
-
-  void updateCoworkerProfile(Profile updatedProfile) {
-    setState(() {
-      int index =
-          profiles.indexWhere((profile) => profile.id == updatedProfile.id);
-      if (index != -1) {
-        profiles[index] = updatedProfile;
-      }
-    });
-  }
-
-  void deleteCoworkerProfile(String id) {
-    setState(() {
-      profiles.removeWhere((profile) => profile.id == id);
-    });
-    Navigator.pop(context);
+    initialize();
   }
 
   @override
@@ -86,7 +51,8 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             children: [
               Center(
                 child: Avatar(
-                  imageUrl: company.iconUrl,
+                  imageUrl: company?.logoUrl ??
+                      'https://miro.medium.com/v2/resize:fit:1260/1*ngNzwrRBDElDnf2CLF_Rbg.gif',
                   radius: 70,
                 ),
               ),
@@ -97,8 +63,8 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _companyInfo("Company name", company.name),
-                      _companyInfo("TIN", company.tin),
+                      _companyInfo("Company name", company?.name ?? ''),
+                      _companyInfo("TIN", company?.tin ?? ''),
                       SizedBox(height: 20),
                       Text(
                         "Settings",
@@ -131,10 +97,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => EditCompanyScreen(
-                                    company: company,
-                                    updateCompany: updateCompanyProfile,
-                                  ),
+                                  builder: (context) => EditCompanyScreen(),
                                 ),
                               );
                             },
@@ -205,31 +168,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AddCoworkerScreen(
-                            updateList: (String firstName, String lastName,
-                                String role, String username) async {
-                              try {
-                                String newId = Uuid().v4();
-                                Profile newProfile = Profile(
-                                  id: newId,
-                                  userId: username,
-                                  firstName: firstName,
-                                  lastName: lastName,
-                                  iconUrl:
-                                      "https://icons.veryicon.com/png/o/education-technology/test-website-linear-icon/user-147.png",
-                                  role: role,
-                                );
-
-                                setState(() {
-                                  profiles.add(newProfile);
-                                });
-
-                                await ProfileService().addProfile(newProfile);
-                              } catch (e) {
-                                print('Failed to add profile: $e');
-                              }
-                            },
-                          ),
+                          builder: (context) => AddCoworkerScreen(),
                         ),
                       );
                     },
@@ -266,11 +205,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EditCoworkerScreen(
-                      profile: coworker,
-                      updateProfile: updateCoworkerProfile,
-                      deleteProfile: deleteCoworkerProfile,
-                    ),
+                    builder: (context) => EditCoworkerScreen(),
                   ),
                 );
               },

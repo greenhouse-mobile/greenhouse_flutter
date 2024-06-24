@@ -4,15 +4,13 @@ import 'package:greenhouse/widgets/editing_textForm.dart';
 import 'package:greenhouse/widgets/message_response.dart';
 
 class AddCoworkerScreen extends StatelessWidget {
-  AddCoworkerScreen({super.key, required this.updateList});
+  AddCoworkerScreen({super.key});
 
   final TextEditingController _controllerFirstName = TextEditingController();
   final TextEditingController _controllerLastName = TextEditingController();
   final TextEditingController _controllerRole = TextEditingController();
   final TextEditingController _controllerUserId = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
-
-  final Function updateList;
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +97,6 @@ class AddCoworkerScreen extends StatelessWidget {
                                   "Are you sure you want to\nadd a new employee?",
                                   "Yes, Add",
                                   () {
-                                    updateList(
-                                        firstName, lastName, role, username);
                                     Navigator.of(context).pop();
                                   },
                                 );

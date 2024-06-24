@@ -1,19 +1,22 @@
 class Company {
+  final String id;
   final String name;
   final String tin;
-  final String iconUrl;
+  final String logoUrl;
 
   Company({
+    required this.id,
     required this.name,
     required this.tin,
-    required this.iconUrl,
+    required this.logoUrl,
   });
 
   factory Company.fromJson(Map<String, dynamic> json) {
     return Company(
+      id: json['id'],
       name: json['name'],
       tin: json['tin'],
-      iconUrl: json['iconUrl'],
+      logoUrl: json['logoUrl'],
     );
   }
 }

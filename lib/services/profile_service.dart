@@ -24,25 +24,22 @@ class ProfileService {
     }
   }
 
-  Future<List<Profile>> getProfilesByCompany(String companyName) async {
+  Future<List<Profile>> getProfilesByCompany(String companyId) async {
     final token = await UserPreferences.getToken();
     final response = await http.get(
-      Uri.parse('${baseUrl}profiles'),
+      Uri.parse('${baseUrl}profiles/companies/$companyId'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
       },
     );
     if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-      profilesList = (jsonResponse['profiles'] as List)
-          .map((profileJson) => Profile.fromJson(profileJson))
-          /*.where((profile) => profile.company == companyName)*/
+      final jsonResponse = json.decode(response.body) as Map<String, dynamic>;
+      return jsonResponse['profiles']
+          .map<Profile>((profile) => Profile.fromJson(profile))
           .toList();
-      print(profilesList);
-      return profilesList;
     } else {
-      throw Exception('Failed to load profiles for company: $companyName');
+      throw Exception('Failed to load profiles for company: $companyId');
     }
   }
 

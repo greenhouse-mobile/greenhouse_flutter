@@ -41,6 +41,7 @@ flutter:
         - asset: fonts/Nunito-VariableFont_wght.ttf
         - asset: fonts/Nunito-Italic-VariableFont_wght.ttf
   assets:
+    - assets/profile/
     - assets/logo/logo.svg
     - assets/logo/logo_white.svg
     - assets/icons/clock.svg
@@ -49,3 +50,4 @@ flutter:
     - assets/mushroom_images/mushroom.jpeg
     - assets/icons/plant.svg
     - assets/mushroom_images/champis.png
+    - assets/profile/default_profile_image.jpg

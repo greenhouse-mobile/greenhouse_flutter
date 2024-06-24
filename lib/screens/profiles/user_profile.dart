@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/models/company.dart';
 import 'package:greenhouse/models/profile.dart';
-import 'package:greenhouse/models/user.dart';
 import 'package:greenhouse/screens/profiles/edit_password.dart';
+import 'package:greenhouse/services/company_service.dart';
 import 'package:greenhouse/services/profile_service.dart';
 import 'package:greenhouse/services/user_preferences.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
@@ -16,11 +17,15 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
   final _profileService = ProfileService();
+  final _companyService = CompanyService();
+
   Profile? profile;
+  Company? company;
   String? username = "";
 
   Future<void> initialize() async {
     profile = await _profileService.getUserProfile();
+    company = await _companyService.getCompanyByProfileId();
     username = await UserPreferences.getUsername();
     setState(() {});
   }
@@ -29,23 +34,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   void initState() {
     super.initState();
     initialize();
-  }
-
-  User user =
-      User(id: "1", username: "TheAdmin", password: "admin123", role: "admin");
-
-  void updateUserProfile(User updatedUser) {
-    setState(() {
-      user = updatedUser;
-    });
-  }
-
-  void deleteUser(String id) {
-    //Todo: Delete user
-    Navigator.pop(context);
-    Future.delayed(Duration(milliseconds: 5), () {
-      Navigator.pushReplacementNamed(context, '/login');
-    });
   }
 
   @override
@@ -58,7 +46,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           children: [
             Center(
               child: Avatar(
-                imageUrl: profile?.iconUrl ?? "default_profile_image.jpg",
+                imageUrl: profile?.iconUrl ??
+                    'https://miro.medium.com/v2/resize:fit:1260/1*ngNzwrRBDElDnf2CLF_Rbg.gif',
                 radius: 70,
               ),
             ),
@@ -93,7 +82,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         )),
                     SizedBox(height: 10),
                     Text(
-                      "companyName",
+                      company?.name ?? "",
                       style: TextStyle(fontSize: 16, color: Color(0xFF444444)),
                     ),
                     _userInfo("Role within company", profile?.role ?? ""),
@@ -109,10 +98,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EditPasswordScreen(
-                              user: user,
-                              updateUser: updateUserProfile,
-                            ),
+                            builder: (context) => EditPasswordScreen(),
                           ),
                         );
                       },
@@ -129,9 +115,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           context,
                           "Are you sure you want to \ndelete your account?",
                           "Yes, Delete",
-                          () {
-                            deleteUser(user.id);
-                          },
+                          () {},
                         );
                       },
                       child: Text(
