@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
-import 'package:greenhouse/widgets/editing_textForm.dart';
+import 'package:greenhouse/widgets/editing_text_form.dart';
 
 class EditCoworkerScreen extends StatefulWidget {
   const EditCoworkerScreen({
