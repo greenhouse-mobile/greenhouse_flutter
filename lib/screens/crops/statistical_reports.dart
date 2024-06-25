@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/models/crop.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
+import 'package:greenhouse/widgets/line_chart.dart';
 
 class StatisticalReports extends StatefulWidget {
   final Crop crop;
@@ -29,6 +30,7 @@ class _StatisticalReportsState extends State<StatisticalReports> {
                 textAlign: TextAlign.center,
               ),
             ),
+            LineChartSample4(),
           ],
         ),
       ),
