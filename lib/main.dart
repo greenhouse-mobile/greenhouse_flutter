@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/models/crop.dart';
 import 'package:greenhouse/screens/crops/crops_archive.dart';
+import 'package:greenhouse/screens/crops/crops_graphics.dart';
+import 'package:greenhouse/screens/crops/statistical_reports.dart';
 import 'package:greenhouse/screens/menu/home.dart';
 import 'package:greenhouse/screens/crops/crops_in_progress.dart';
 import 'package:greenhouse/screens/menu/dashboard.dart';
@@ -65,6 +68,11 @@ class MyApp extends StatelessWidget {
           case '/company-profile':
             builder = (BuildContext _) => CompanyProfileScreen();
             break;
+          case '/crops-graphics':
+            builder = (BuildContext _) => CropsGraphics(key: UniqueKey());
+          case '/statics':
+            builder = (BuildContext _) => StatisticalReports(
+                key: UniqueKey(), crop: settings.arguments as Crop);
           default:
             throw Exception('Invalid route: ${settings.name}');
         }
