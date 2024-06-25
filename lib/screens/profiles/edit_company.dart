@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:greenhouse/models/company.dart';
+import 'package:greenhouse/services/company_service.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/editing_text_form.dart';
 import 'package:greenhouse/widgets/message_response.dart';
@@ -13,16 +15,24 @@ class EditCompanyScreen extends StatefulWidget {
 }
 
 class _EditCompanyScreenState extends State<EditCompanyScreen> {
+  final _companyService = CompanyService();
+  Company? company;
+
   late TextEditingController _nameController;
   late TextEditingController _tinController;
   late TextEditingController _iconUrlController;
+
+  Future<void> initialize() async {
+    company = await _companyService.getCompanyByProfileId();
+    setState(() {});
+  }
 
   @override
   void initState() {
     _nameController = TextEditingController();
     _tinController = TextEditingController();
     _iconUrlController = TextEditingController();
-
+    initialize();
     super.initState();
   }
 
@@ -40,7 +50,7 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
               Center(
                 child: CircleAvatar(
                   radius: 70,
-                  backgroundImage: NetworkImage(
+                  backgroundImage: NetworkImage(company?.logoUrl ??
                       'https://miro.medium.com/v2/resize:fit:1260/1*ngNzwrRBDElDnf2CLF_Rbg.gif'),
                 ),
               ),
@@ -54,17 +64,18 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
                       EditingTextForm(
                         hintText: "Name",
                         valueController: _nameController,
-                        placeholderText: 'Company name',
+                        placeholderText: company?.name ?? 'Company name',
                       ),
                       EditingTextForm(
                         hintText: "Tin",
                         valueController: _tinController,
-                        placeholderText: 'Tin number',
+                        placeholderText: company?.tin ?? 'TIN',
                       ),
                       EditingTextForm(
                         hintText: "Image",
                         valueController: _iconUrlController,
-                        placeholderText: 'Company logo url',
+                        placeholderText: company?.logoUrl ??
+                            'https://miro.medium.com/v2/resize:fit:1260/1*ngNzwrRBDElDnf2CLF_Rbg.gif',
                       ),
                       SizedBox(height: 40),
                       SizedBox(
@@ -86,7 +97,17 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
                           ),
                           onPressed: () async {
                             void editCompany() {
-                              try {} catch (e) {
+                              try {
+                                _companyService.updateCompany(
+                                  Company(
+                                    id: company?.id ?? '',
+                                    name: _nameController.text,
+                                    tin: _tinController.text,
+                                    logoUrl: _iconUrlController.text,
+                                  ),
+                                );
+                                Navigator.pop(context);
+                              } catch (e) {
                                 print('Failed to update company: $e');
                               }
                             }

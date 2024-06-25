@@ -92,10 +92,9 @@ class _AddCoworkerScreenState extends State<AddCoworkerScreen> {
                           width: MediaQuery.of(context).size.width * 0.7,
                           child: ElevatedButton(
                             style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Color(0xFF67864A)),
-                                shape: MaterialStateProperty.all<
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    Color(0xFF67864A)),
+                                shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius:

@@ -59,4 +59,21 @@ class CompanyService {
       throw Exception('Failed to create employee: ${response.body}');
     }
   }
+
+  Future<String> updateCompany(Company company) async {
+    final token = await UserPreferences.getToken();
+    final response = await http.patch(
+      Uri.parse('${baseUrl}companies/${company.id}'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(company.toJson()),
+    );
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to update company: ${response.body}');
+    }
+  }
 }

@@ -19,4 +19,8 @@ class Company {
       logoUrl: json['logoUrl'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {'name': name, 'tin': tin, 'logoUrl': logoUrl};
+  }
 }
