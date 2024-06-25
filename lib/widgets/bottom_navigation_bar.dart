@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GreenhouseBottomNavigationBar extends StatefulWidget {
-  const GreenhouseBottomNavigationBar({super.key});
+  GreenhouseBottomNavigationBar({super.key});
 
   @override
   State<GreenhouseBottomNavigationBar> createState() =>
@@ -50,7 +51,7 @@ class _GreenhouseBottomNavigationBarState
           showUnselectedLabels: false,
           onTap: _onItemTapped,
           currentIndex: _selectedIndex,
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'User profile',
@@ -60,7 +61,8 @@ class _GreenhouseBottomNavigationBarState
               label: 'Dashboard',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
+              icon: SvgPicture.asset('assets/icons/clock.svg',
+                  width: 20, height: 20),
               label: 'Settings',
             ),
           ],
