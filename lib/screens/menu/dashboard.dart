@@ -78,7 +78,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   DashboardButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/dashboard');
+                      Navigator.pushNamed(context, '/crops-graphics');
                     },
                     svgAsset: 'assets/icons/statistics.svg',
                     buttonText: 'Statistical\nReports',
