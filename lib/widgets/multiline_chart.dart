@@ -210,7 +210,7 @@ class _LineChart extends StatelessWidget {
   LineChartBarData get lineChartBarData1_1 => LineChartBarData(
         isCurved: true,
         color: const Color.fromARGB(255, 168, 243, 170),
-        barWidth: 4, // Grosor más delgado
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
@@ -220,16 +220,16 @@ class _LineChart extends StatelessWidget {
           FlSpot(5, 1.4),
           FlSpot(7, 3.4),
           FlSpot(10, 2),
-          FlSpot(12, 1.5), // Punto hacia abajo
-          FlSpot(13, 1), // Punto hacia abajo
-          FlSpot(14, 0.5), // Punto hacia abajo
+          FlSpot(12, 1.5),
+          FlSpot(13, 1),
+          FlSpot(14, 0.5),
         ],
       );
 
   LineChartBarData get lineChartBarData1_2 => LineChartBarData(
         isCurved: true,
         color: Color.fromARGB(255, 227, 255, 18),
-        barWidth: 4, // Grosor más delgado
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(
@@ -241,16 +241,16 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 2.8),
           FlSpot(7, 1.2),
           FlSpot(10, 2.8),
-          FlSpot(12, 2.0), // Punto hacia abajo
-          FlSpot(13, 1.5), // Punto hacia abajo
-          FlSpot(14, 1), // Punto hacia abajo
+          FlSpot(12, 2.0),
+          FlSpot(13, 1.5),
+          FlSpot(14, 1),
         ],
       );
 
   LineChartBarData get lineChartBarData1_3 => LineChartBarData(
         isCurved: true,
         color: Color.fromRGBO(84, 235, 255, 1),
-        barWidth: 4, // Grosor más delgado
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
@@ -259,16 +259,16 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 1.9),
           FlSpot(6, 3),
           FlSpot(10, 1.3),
-          FlSpot(12, 1.0), // Punto hacia abajo
-          FlSpot(13, 0.8), // Punto hacia abajo
-          FlSpot(14, 0.5), // Punto hacia abajo
+          FlSpot(12, 1.0),
+          FlSpot(13, 0.8),
+          FlSpot(14, 0.5),
         ],
       );
 
   LineChartBarData get lineChartBarData1_4 => LineChartBarData(
         isCurved: true,
-        color: Color.fromRGBO(255, 0, 0, 1), // Rojo
-        barWidth: 4, // Grosor más delgado
+        color: Color.fromRGBO(255, 0, 0, 1),
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
@@ -277,16 +277,16 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 2.5),
           FlSpot(5, 3.2),
           FlSpot(7, 2.8),
-          FlSpot(10, 1.5), // Punto hacia abajo
-          FlSpot(12, 1.2), // Punto hacia abajo
-          FlSpot(13, 0.8), // Punto hacia abajo
+          FlSpot(10, 1.5),
+          FlSpot(12, 1.2),
+          FlSpot(13, 0.8),
         ],
       );
 
   LineChartBarData get lineChartBarData1_5 => LineChartBarData(
         isCurved: true,
-        color: Color.fromRGBO(0, 0, 255, 1), // Azul
-        barWidth: 4, // Grosor más delgado
+        color: Color.fromRGBO(0, 0, 255, 1),
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
@@ -295,16 +295,16 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 3.2),
           FlSpot(5, 2.2),
           FlSpot(7, 3.6),
-          FlSpot(10, 1.8), // Punto hacia abajo
-          FlSpot(12, 1.4), // Punto hacia abajo
-          FlSpot(13, 1), // Punto hacia abajo
+          FlSpot(10, 1.8),
+          FlSpot(12, 1.4),
+          FlSpot(13, 1),
         ],
       );
 
   LineChartBarData get lineChartBarData1_6 => LineChartBarData(
         isCurved: true,
-        color: Color.fromRGBO(255, 165, 0, 1), // Naranja
-        barWidth: 4, // Grosor más delgado
+        color: Color.fromRGBO(255, 165, 0, 1),
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
@@ -313,9 +313,9 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 2.7),
           FlSpot(5, 3.1),
           FlSpot(7, 2.9),
-          FlSpot(10, 2.0), // Punto hacia abajo
-          FlSpot(12, 1.5), // Punto hacia abajo
-          FlSpot(13, 1), // Punto hacia abajo
+          FlSpot(10, 2.0),
+          FlSpot(12, 1.5),
+          FlSpot(13, 1),
         ],
       );
 
@@ -323,7 +323,7 @@ class _LineChart extends StatelessWidget {
         isCurved: true,
         curveSmoothness: 0,
         color: Colors.green.withOpacity(0.5),
-        barWidth: 2, // Grosor más delgado
+        barWidth: 2,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
@@ -332,16 +332,16 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 4),
           FlSpot(5, 1.8),
           FlSpot(7, 5),
-          FlSpot(10, 1.8), // Punto hacia abajo
-          FlSpot(12, 1.4), // Punto hacia abajo
-          FlSpot(13, 1), // Punto hacia abajo
+          FlSpot(10, 1.8),
+          FlSpot(12, 1.4),
+          FlSpot(13, 1),
         ],
       );
 
   LineChartBarData get lineChartBarData2_2 => LineChartBarData(
         isCurved: true,
         color: Color.fromARGB(255, 227, 255, 18).withOpacity(0.5),
-        barWidth: 2, // Grosor más delgado
+        barWidth: 2,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(
@@ -353,9 +353,9 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 2.8),
           FlSpot(7, 1.2),
           FlSpot(10, 2.8),
-          FlSpot(12, 1.5), // Punto hacia abajo
-          FlSpot(13, 1), // Punto hacia abajo
-          FlSpot(14, 0.5), // Punto hacia abajo
+          FlSpot(12, 1.5),
+          FlSpot(13, 1),
+          FlSpot(14, 0.5),
         ],
       );
 
@@ -363,7 +363,7 @@ class _LineChart extends StatelessWidget {
         isCurved: true,
         curveSmoothness: 0,
         color: Colors.cyan.withOpacity(0.5),
-        barWidth: 2, // Grosor más delgado
+        barWidth: 2,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: true),
         belowBarData: BarAreaData(show: false),
@@ -371,17 +371,17 @@ class _LineChart extends StatelessWidget {
           FlSpot(1, 3.8),
           FlSpot(3, 1.9),
           FlSpot(6, 5),
-          FlSpot(10, 1.4), // Punto hacia abajo
-          FlSpot(12, 1), // Punto hacia abajo
-          FlSpot(13, 0.5), // Punto hacia abajo
+          FlSpot(10, 1.4),
+          FlSpot(12, 1),
+          FlSpot(13, 0.5),
         ],
       );
 
   LineChartBarData get lineChartBarData2_4 => LineChartBarData(
         isCurved: true,
         curveSmoothness: 0,
-        color: Color.fromRGBO(255, 0, 0, 0.5), // Rojo con opacidad
-        barWidth: 2, // Grosor más delgado
+        color: Color.fromRGBO(255, 0, 0, 0.5),
+        barWidth: 2,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: true),
         belowBarData: BarAreaData(show: false),
@@ -390,17 +390,17 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 2.5),
           FlSpot(5, 3.2),
           FlSpot(7, 2.8),
-          FlSpot(10, 1.4), // Punto hacia abajo
-          FlSpot(12, 1.0), // Punto hacia abajo
-          FlSpot(13, 0.5), // Punto hacia abajo
+          FlSpot(10, 1.4),
+          FlSpot(12, 1.0),
+          FlSpot(13, 0.5),
         ],
       );
 
   LineChartBarData get lineChartBarData2_5 => LineChartBarData(
         isCurved: true,
         curveSmoothness: 0,
-        color: Color.fromRGBO(0, 0, 255, 0.5), // Azul con opacidad
-        barWidth: 2, // Grosor más delgado
+        color: Color.fromRGBO(0, 0, 255, 0.5),
+        barWidth: 2,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: true),
         belowBarData: BarAreaData(show: false),
@@ -409,17 +409,17 @@ class _LineChart extends StatelessWidget {
           FlSpot(3, 3.2),
           FlSpot(5, 2.2),
           FlSpot(7, 3.6),
-          FlSpot(10, 1.8), // Punto hacia abajo
-          FlSpot(12, 1.4), // Punto hacia abajo
-          FlSpot(13, 1), // Punto hacia abajo
+          FlSpot(10, 1.8),
+          FlSpot(12, 1.4),
+          FlSpot(13, 1),
         ],
       );
 
   LineChartBarData get lineChartBarData2_6 => LineChartBarData(
         isCurved: true,
         curveSmoothness: 0,
-        color: Color.fromRGBO(255, 165, 0, 0.5), // Naranja con opacidad
-        barWidth: 2, // Grosor más delgado
+        color: Color.fromRGBO(255, 165, 0, 0.5),
+        barWidth: 2,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: true),
         belowBarData: BarAreaData(show: false),

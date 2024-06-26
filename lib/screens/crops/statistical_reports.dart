@@ -3,6 +3,7 @@ import 'package:greenhouse/models/crop.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/line_chart.dart';
 import 'package:greenhouse/widgets/multiline_chart.dart';
+import 'package:greenhouse/widgets/multiple_axes_chart.dart';
 
 class StatisticalReports extends StatefulWidget {
   final Crop crop;
@@ -54,19 +55,44 @@ class _StatisticalReportsState extends State<StatisticalReports> {
                   ),
                 ),
               ),
-              legendItem(),
+              legendItemGraphic2(),
               LineChartSample1(),
+              Center(
+                child: Text(
+                  'Time after filling the tunnel (hours)',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF4C6444),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
               SizedBox(height: 50),
               Padding(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Phase 3: ',
+                    'Process during phase III',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
+              legendItemGraphic3(),
+              Center(
+                child: Text(
+                  'Time after spawning (days)',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF4C6444),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              LineChartSample6(),
+              SizedBox(height: 50),
             ],
           ),
         ),
@@ -76,7 +102,7 @@ class _StatisticalReportsState extends State<StatisticalReports> {
   }
 }
 
-Widget legendItem() {
+Widget legendItemGraphic2() {
   return Padding(
     padding: const EdgeInsets.all(15.0),
     child: Row(
@@ -160,6 +186,40 @@ Widget legendItem() {
             ),
           ],
         ),
+      ],
+    ),
+  );
+}
+
+Widget legendItemGraphic3() {
+  return Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              width: 20,
+              height: 20,
+              color: Colors.green,
+            ),
+            const SizedBox(width: 5),
+            const Text('Average compost temperature °C'),
+          ],
+        ),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            Container(
+              width: 20,
+              height: 20,
+              color: Color.fromRGBO(84, 235, 255, 1),
+            ),
+            const SizedBox(width: 5),
+            const Text('Fan %'),
+          ],
+        ),
+        const SizedBox(height: 5),
       ],
     ),
   );
