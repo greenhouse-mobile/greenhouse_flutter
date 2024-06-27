@@ -45,6 +45,9 @@ class RecordService {
   Future<List<Record>> getRecordsByCropAndPhase(
       String cropId, String phase) async {
     final token = await UserPreferences.getToken();
+    if(phase == 'Preparation Area'){
+      phase = 'preparation_area';
+    }
     final response = await http.get(
       Uri.parse('${baseUrl}records/$cropId/${phase.toLowerCase()}'),
       headers: {
