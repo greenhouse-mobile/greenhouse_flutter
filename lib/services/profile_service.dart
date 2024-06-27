@@ -8,6 +8,8 @@ class ProfileService {
   final String baseUrl = Config.baseUrl;
   List<Profile> profilesList = [];
 
+  get superKeyword => null;
+
   Future<Profile> getUserProfile() async {
     final token = await UserPreferences.getToken();
     final response = await http.get(
