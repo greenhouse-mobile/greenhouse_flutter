@@ -20,6 +20,9 @@ class _CropsInProgressState extends State<CropsInProgress> {
   final _cropService = CropService();
 
   CropCurrentPhase stringToCropCurrentPhase(String phase) {
+    if (phase == 'preparation_area') {
+      phase = 'preparationArea';
+    }
     String phaseCamelCase =
         phase[0].toLowerCase() + phase.substring(1).replaceAll(' ', '');
     for (CropCurrentPhase value in CropCurrentPhase.values) {
