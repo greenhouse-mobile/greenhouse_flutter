@@ -54,11 +54,13 @@ class _CropCardState extends State<CropCard> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Align(
+                              Flexible(
+                                child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text('Crop Name: ${widget.name}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
+                              ),
                               ),
                               Align(
                                 alignment: Alignment.centerRight,

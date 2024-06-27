@@ -93,8 +93,10 @@ class _RecordCardState extends State<RecordCard> {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text('Entry Date: '),
                       ),
-                      Text(widget.record.updatedDate,
-                          style: TextStyle(color: Color(0xFF8E8E8E))),
+                      Flexible(
+                        child: Text(widget.record.updatedDate,
+                            style: TextStyle(color: Color(0xFF8E8E8E))),
+                      ),
                     ],
                   ),
                   if (currentRoute == '/dashboard')
