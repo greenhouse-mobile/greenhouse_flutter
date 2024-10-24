@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:greenhouse/services/record_service.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
 import 'package:greenhouse/widgets/record_card.dart';
 import 'package:greenhouse/models/record.dart';
@@ -14,6 +14,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   List<Record> records = [];
+  final RecordService recordService = RecordService();
 
   @override
   void initState() {
@@ -21,75 +22,14 @@ class _DashboardState extends State<Dashboard> {
     loadRecords();
   }
 
-  void loadRecords() {
-    String jsonString = '''{
-      "records": [
-        {
-          "id": "124234",
-          "author": "Winston Smith",
-          "createdDate": "2021-08-01",
-          "updatedDate": "2021-08-01",
-          "phase": "Preparation area",
-          "cropId": "1",
-          "payload": {
-            "data": [
-              {"name": "Hay", "value": "128"},
-              {"name": "Corn", "value": "300"},
-              {"name": "Guano", "value": "100"},
-              {"name": "Cotton seed cake", "value": "400"},
-              {"name": "Soybean meal", "value": "356"},
-              {"name": "Urea", "value": "356"},
-              {"name": "Ammonium sulfate", "value": "125"}
-            ]
-          }
-        },
-        {
-          "id": "124235",
-          "author": "Winston Smith",
-          "createdDate": "2021-08-01",
-          "updatedDate": "2021-08-01",
-          "phase": "Induction",
-          "cropId": "1",
-          "payload": {
-            "data": [
-              {"name": "Hay", "value": "128"},
-              {"name": "Corn", "value": "300"},
-              {"name": "Guano", "value": "100"},
-              {"name": "Cotton seed cake", "value": "400"},
-              {"name": "Soybean meal", "value": "356"},
-              {"name": "Urea", "value": "356"},
-              {"name": "Ammonium sulfate", "value": "125"}
-            ]
-          }
-        },
-        {
-          "id": "124236",
-          "author": "Winston Smith",
-          "createdDate": "2021-08-01",
-          "updatedDate": "2021-08-01",
-          "phase": "Tunnel",
-          "cropId": "1",
-          "payload": {
-            "data": [
-              {"name": "Hay", "value": "128"},
-              {"name": "Corn", "value": "300"},
-              {"name": "Guano", "value": "100"},
-              {"name": "Cotton seed cake", "value": "400"},
-              {"name": "Soybean meal", "value": "356"},
-              {"name": "Urea", "value": "356"},
-              {"name": "Ammonium sulfate", "value": "125"}
-            ]
-          }
-        }
-      ]
-    }''';
-
-    Map<String, dynamic> jsonData = jsonDecode(jsonString);
-    records = (jsonData['records'] as List)
-        .map((recordJson) => Record.fromJson(recordJson))
-        .toList();
-
-    setState(() {});
+  Future<void> loadRecords() async {
+    try {
+      records = await recordService.getRecords();
+      print("Records loaded: $records");
+      setState(() {});
+    } catch (e) {
+      print('Failed to load records: $e');
+    }
   }
 
   @override
@@ -138,7 +78,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   DashboardButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/dashboard');
+                      Navigator.pushNamed(context, '/crops-graphics');
                     },
                     svgAsset: 'assets/icons/statistics.svg',
                     buttonText: 'Statistical\nReports',

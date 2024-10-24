@@ -24,12 +24,11 @@ class AuthService {
       body: jsonEncode(signUp.toJsonSignUp()),
     );
     if (response.statusCode == 201) {
-      // After successful sign-up, immediately sign-in
       SignIn signIn =
           SignIn(username: signUp.username, password: signUp.password);
       return await signInCompany(signIn, signUp);
     } else {
-      throw Exception('Failed to sign up');
+      throw Exception('Failed to sign up: ${response.body}');
     }
   }
 
@@ -48,6 +47,7 @@ class AuthService {
       // Save token and profile id
       await UserPreferences.saveToken(token);
       await UserPreferences.saveProfileId(profileId);
+      await UserPreferences.saveUsername(signIn.username);
 
       return profileId;
     } else {
@@ -69,6 +69,7 @@ class AuthService {
       // Save token and profile id
       await UserPreferences.saveToken(token);
       await UserPreferences.saveProfileId(profileId);
+      await UserPreferences.saveUsername(signIn.username);
 
       return await createCompany(s, token);
     } else {

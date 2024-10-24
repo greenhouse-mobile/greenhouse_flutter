@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenhouse/widgets/bottom_navigation_bar.dart';
-import 'package:greenhouse/widgets/editing_textForm.dart';
+import 'package:greenhouse/widgets/editing_text_form.dart';
 import 'package:greenhouse/models/record.dart';
 import 'package:greenhouse/widgets/message_response.dart';
 
@@ -47,7 +47,6 @@ class _EditRecordScreenState extends State<EditRecordScreen> {
     final updatedRecord = Record(
       id: widget.record.id,
       author: widget.record.author,
-      cropId: widget.record.cropId,
       createdDate: widget.record.createdDate,
       updatedDate: widget.record.updatedDate,
       phase: widget.record.phase,
@@ -73,14 +72,6 @@ class _EditRecordScreenState extends State<EditRecordScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    Text(
-                      'Crop ID: ${widget.record.cropId}',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF4C6444)),
-                      textAlign: TextAlign.center,
-                    ),
                     Text(
                       widget.record.phase,
                       style: TextStyle(fontSize: 16),
@@ -108,6 +99,7 @@ class _EditRecordScreenState extends State<EditRecordScreen> {
                         hintText: payloadData.name,
                         valueController: _controllers[payloadData.name]!,
                         placeholderText: payloadData.value,
+                        obscureText: false,
                       );
                     }).toList(),
                   ),

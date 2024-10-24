@@ -46,7 +46,6 @@ class _RecordCardState extends State<RecordCard> {
                 IconButton(
                     icon: Icon(Icons.delete, color: Color(0xFFDE4F4F)),
                     onPressed: () {
-                      //Todo: Delete function
                       deleteDialog(
                         context,
                         "Are you sure you want to \ndelete record ${widget.record.id}?",
@@ -58,7 +57,6 @@ class _RecordCardState extends State<RecordCard> {
                 IconButton(
                     icon: Icon(Icons.edit, color: Color(0xFF67864A)),
                     onPressed: () {
-                      //Todo: Edit function
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -95,8 +93,10 @@ class _RecordCardState extends State<RecordCard> {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text('Entry Date: '),
                       ),
-                      Text(widget.record.createdDate,
-                          style: TextStyle(color: Color(0xFF8E8E8E))),
+                      Flexible(
+                        child: Text(widget.record.updatedDate,
+                            style: TextStyle(color: Color(0xFF8E8E8E))),
+                      ),
                     ],
                   ),
                   if (currentRoute == '/dashboard')
@@ -112,19 +112,6 @@ class _RecordCardState extends State<RecordCard> {
                             style: TextStyle(color: Color(0xFF8E8E8E))),
                       ],
                     ),
-                  /*if (currentRoute == '/records')
-                    Row(
-                      children: [
-                        SvgPicture.asset('assets/icons/plant.svg',
-                            height: 20.0, width: 12.0),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text('Day: '),
-                        ),
-                        Text(widget.record.cropDay.toString(),
-                            style: TextStyle(color: Color(0xFF8E8E8E))),
-                      ],
-                    ),*/
                 ],
               ),
             ),

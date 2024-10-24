@@ -10,6 +10,7 @@ class EditingTextForm extends StatelessWidget {
     required this.hintText,
     required this.valueController,
     required this.placeholderText,
+    bool? obscureText = false,
   });
 
   @override

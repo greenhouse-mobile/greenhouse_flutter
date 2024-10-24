@@ -6,7 +6,7 @@ import 'package:greenhouse/services/auth_service.dart';
 import 'package:greenhouse/models/signin.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -121,9 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 315),
             NavigationButton(
               buttonText: "Login",
-              route:
-                  '/dashboard', // This is the route you want to navigate to after successful login
-              onPressed: _login, // Call the login function when pressed
+              route: '/dashboard',
+              onPressed: _login,
             ),
           ],
         ),

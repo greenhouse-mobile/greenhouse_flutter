@@ -15,7 +15,7 @@ class StepperWidget extends StatefulWidget {
 
 class _StepperWidgetState extends State<StepperWidget> {
   final List<CropCurrentPhase> itemsList = [
-    CropCurrentPhase.stock,
+    CropCurrentPhase.formula,
     CropCurrentPhase.preparationArea,
     CropCurrentPhase.bunker,
     CropCurrentPhase.tunnel,
@@ -127,7 +127,7 @@ class StepperTitle extends StatelessWidget {
           _buildStepperInfo(),
           SizedBox(height: 20),
           _buildStartDateInfo(),
-          if (crop.phase.phaseName != "Stock")
+          if (crop.phase.phaseName != "Formula")
             _buildMoveToPreviousCropPhase(context),
         ],
       ),
